@@ -1,0 +1,156 @@
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+if (flutterRoot == null) {
+    throw GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+def developmentKeystoreProperties = new Properties()
+def developmentKeystorePropertiesFile = rootProject.file('development.properties')
+if(developmentKeystorePropertiesFile.exists()){
+    developmentKeystoreProperties.load(new FileInputStream(developmentKeystorePropertiesFile))
+}
+
+def productionKeystoreProperties = new Properties()
+def productionKeystorePropertiesFile = rootProject.file('key.properties')
+if(productionKeystorePropertiesFile.exists()){
+    productionKeystoreProperties.load(new FileInputStream(productionKeystorePropertiesFile))
+} else {
+    // Use development keystore properties as fallback.
+    productionKeystoreProperties = developmentKeystoreProperties
+}
+
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    compileSdkVersion 31
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId "com.lpdp.ebeasiswa"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
+        minSdkVersion 23
+        targetSdkVersion 31
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        debug {
+            keyAlias developmentKeystoreProperties['keyAlias']
+            keyPassword developmentKeystoreProperties['keyPassword']
+            storeFile developmentKeystoreProperties['storeFile'] ? file(developmentKeystoreProperties['storeFile']) : null
+            storePassword developmentKeystoreProperties['storePassword']
+        }
+        release {
+            keyAlias productionKeystoreProperties['keyAlias']
+            keyPassword productionKeystoreProperties['keyPassword']
+            storeFile productionKeystoreProperties['storeFile'] ? file(productionKeystoreProperties['storeFile']) : null
+            storePassword productionKeystoreProperties['storePassword']
+        }
+    }
+
+    flavorDimensions "app"
+    productFlavors {
+        development {
+            dimension "app"
+            applicationIdSuffix ".android.development"
+            versionNameSuffix "-dev"
+            manifestPlaceholders = [
+                appName: "ebeasiswa-dev",
+                appScheme:"ebeasiswa-app",
+               // socialMediaConnectScheme: "internpos-connect-dev"
+            ]
+            // NOTE: Enabling the following option may fix some build issues.
+            lintOptions {
+                checkReleaseBuilds false
+            }
+        }
+
+        production {
+            dimension "app"
+            applicationIdSuffix ".android"
+            manifestPlaceholders = [
+                appName: "ebeasiswa",
+                appScheme:"ebeasiswa-app",
+                // socialMediaConnectScheme: "internpos-connect"
+
+            ]
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    buildTypes {
+        debug {
+            resValue("bool", "firebase_analytics_collection_deactivated", "true")
+            signingConfig signingConfigs.debug
+        }
+        release {
+            resValue("bool", "firebase_analytics_collection_deactivated", "false")
+            // TODO: Change the config as follows if you need to do a production deployment to Google Play Store:
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            // shrinkResources true
+            // signingConfig signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        pickFirst '**/libyuv.so'
+    }
+
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation platform('com.google.firebase:firebase-bom:31.0.0')
+}

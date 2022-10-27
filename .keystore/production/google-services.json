@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "448890812073",
+    "project_id": "ebeasiswa-3ee0f",
+    "storage_bucket": "ebeasiswa-3ee0f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448890812073:android:855c1627692ce2b1eb5bb8",
+        "android_client_info": {
+          "package_name": "com.lpdp.ebeasiswa.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "448890812073-so2p97ssp0ljsf77dt5b3g6usq4n0rtu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lpdp.ebeasiswa.android",
+            "certificate_hash": "44f756a7254766f419565834278984ed799afa38"
+          }
+        },
+        {
+          "client_id": "448890812073-k7kg423ve5rin5bmq7qmctu78lo0sd4q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0Sy4jplqB6DEE_VlaG71B4A035xvLovs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "448890812073-k7kg423ve5rin5bmq7qmctu78lo0sd4q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
