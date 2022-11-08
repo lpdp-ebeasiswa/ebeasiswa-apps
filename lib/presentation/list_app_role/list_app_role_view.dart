@@ -1,3 +1,4 @@
+import 'package:ebeasiswa/presentation/dana/dana_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,25 +16,28 @@ class _ListAppRoleViewState extends State<ListAppRoleView> {
     "Pendaftaran",
     "e-Beasiswa",
     "e-Beasiswa",
-    "e-Beasiswa"
+    "e-Beasiswa",
+    "Dana"
   ];
   List<String> subjudul = [
     "Calon Penerima Beasiswa",
     "Calon Penerima Beasiswa",
     "Calon Penerima Beasiswa",
-    "Calon Penerima Beasiswa"
+    "Calon Penerima Beasiswa",
+    "Pencarian Dana"
   ];
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: judul.length,
-        itemBuilder: (BuildContext ctxt, int index) {
-          return Column(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: judul.length,
+      itemBuilder: (BuildContext ctxt, int index) {
+        return InkWell(
+          onTap: () => Get.to(DanaView()),
+          child: Column(
             children: [
-             
               Center(
                 child: Stack(
                   children: [
@@ -55,7 +59,8 @@ class _ListAppRoleViewState extends State<ListAppRoleView> {
                               height: 120,
                               color: Colors.black.withOpacity(0.2),
                               child: Padding(
-                                padding: const EdgeInsets.only(left: 20.0, top: 25.0),
+                                padding: const EdgeInsets.only(
+                                    left: 20.0, top: 25.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -77,9 +82,13 @@ class _ListAppRoleViewState extends State<ListAppRoleView> {
                   ],
                 ),
               ),
-              const SizedBox(height: 50,),
+              const SizedBox(
+                height: 50,
+              ),
             ],
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }
