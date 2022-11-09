@@ -23,8 +23,3 @@ class PathWheather {
 class AuthUrl {
   String get getAuth => "http://103.176.78.112:8080/Login";
 }
-
-class BaseUrlMock {
-  String get mockListDana =>
-      "https://dityadeveloper.github.io/mock/ebeasiswa/spending/expenditure_list.json";
-}
