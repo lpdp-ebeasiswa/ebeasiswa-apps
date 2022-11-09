@@ -1,30 +1,40 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:ebeasiswa/presentation/dana/dana_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
+
+import '../../app/constant/baseurl.dart';
 
 class ServicesDana {
-  final fullUrl =
-      "https://dityadeveloper.github.io/mock/ebeasiswa/spending/expenditure_list.json";
+  String urlMockListDana = BaseUrlMock().mockListDana;
 
   Future<List<PostModelDana>?> getAllPosts() async {
     try {
-      var respons = await http
-          .get(Uri.parse(fullUrl))
+      var response = await http
+          .get(Uri.parse(urlMockListDana))
           .timeout(const Duration(seconds: 10), onTimeout: () {
         throw TimeoutException("Connection Time Out Try Again");
       });
 
-      debugPrint('respons ---> ${respons.statusCode}');
+      debugPrint('response code---> ${response.statusCode}');
+      debugPrint('response body data---> ${jsonDecode(response.body)['data']}');
 
-      if (respons.statusCode == 200) {
-        List jsonrespon = convert.jsonDecode(respons.body)['data'];
+      if (response.statusCode == 200) {
+        debugPrint('respons body---> ${json.decode(response.body)}');
 
-        debugPrint('jsonrespon====> $jsonrespon');
+        dynamic jsonrespon =
+            PostModelDana.fromJson(jsonDecode(response.body)['data']);
 
-        return jsonrespon.map((e) => PostModelDana.fromJson(e)).toList();
+        debugPrint('jsonrespon ====> $jsonrespon');
+
+        List<PostModelDana> model =
+            jsonrespon.map((e) => PostModelDana.fromJson(e)).toList();
+
+        debugPrint('jsonrespon list ====> $jsonrespon');
+
+        return model;
       } else {
         return null;
       }
@@ -32,13 +42,5 @@ class ServicesDana {
       print("Respon Time Out");
     }
     return null;
-  }
-
-  List? data1;
-
-  Future<String> getData() async {
-    http.Response response = await http
-        .get(Uri.parse(fullUrl), headers: {"Accept": "json.decode/json"});
-    return convert.jsonDecode(response.body);
   }
 }
