@@ -2,6 +2,7 @@
 
 import 'package:ebeasiswa/presentation/dana/dana_model.dart';
 import 'package:ebeasiswa/presentation/dana/dana_services.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/state_manager.dart';
 
 class DanaController extends GetxController {
@@ -12,12 +13,11 @@ class DanaController extends GetxController {
   @override
   void onInit() {
     callpostmethod();
-    print("Kepanggil Otomatis di Dana");
     super.onInit();
   }
 
   callpostmethod() async {
     var result = await servicesDana.getAllPosts();
-    print('ini isinya apa =====> $result');
+    debugPrint('result ini isinya apa =====> $result');
   }
 }

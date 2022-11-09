@@ -4,15 +4,15 @@ import 'package:ebeasiswa/presentation/dana/dana_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
+import '../../app/constant/baseurl.dart';
 
 class ServicesDana {
-  final fullUrl =
-      "https://dityadeveloper.github.io/mock/ebeasiswa/spending/expenditure_list.json";
+  String urlMockListDana = BaseUrlMock().mockListDana;
 
   Future<List<PostModelDana>?> getAllPosts() async {
     try {
       var respons = await http
-          .get(Uri.parse(fullUrl))
+          .get(Uri.parse(urlMockListDana))
           .timeout(const Duration(seconds: 10), onTimeout: () {
         throw TimeoutException("Connection Time Out Try Again");
       });
@@ -20,11 +20,13 @@ class ServicesDana {
       debugPrint('respons ---> ${respons.statusCode}');
 
       if (respons.statusCode == 200) {
-        List jsonrespon = convert.jsonDecode(respons.body)['data'];
+        dynamic jsonrespon = convert.jsonDecode(respons.body)['data'];
 
         debugPrint('jsonrespon====> $jsonrespon');
 
-        return jsonrespon.map((e) => PostModelDana.fromJson(e)).toList();
+        List<PostModelDana> model =
+            jsonrespon.map((e) => PostModelDana.fromJson(e)).toList();
+        return model;
       } else {
         return null;
       }
@@ -32,13 +34,5 @@ class ServicesDana {
       print("Respon Time Out");
     }
     return null;
-  }
-
-  List? data1;
-
-  Future<String> getData() async {
-    http.Response response = await http
-        .get(Uri.parse(fullUrl), headers: {"Accept": "json.decode/json"});
-    return convert.jsonDecode(response.body);
   }
 }
