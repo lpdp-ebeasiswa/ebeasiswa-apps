@@ -1,5 +1,4 @@
 import 'package:ebeasiswa/presentation/login/login_controller.dart';
-import 'package:ebeasiswa/presentation/login/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

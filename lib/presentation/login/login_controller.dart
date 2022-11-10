@@ -13,18 +13,17 @@ import '../../app/constant/baseurl.dart';
 import '../home/home_view.dart';
 
 class LoginController extends GetxController {
-  var count = 0.obs;
-  increment() => count++;
 
   final box = GetStorage();
 
-  String authUrl = MasterUri.authUrl.getAuth;
+  String baseurl = MasterUri.baseurl.baseAuth;
+  String pathLogin = MasterUri.pathAuth.authLogin;
   var isLoggedin = false.obs;
   String token = '';
 
   Future<void> getAuth(String username, String password) async {
     try {
-      final fullUrl = authUrl;
+      final fullUrl = baseurl+pathLogin;
       Map data = {
         'username': username,
         'password': password,
@@ -45,13 +44,13 @@ class LoginController extends GetxController {
            onLoginUser();
         break;
         case 500:
-           Get.snackbar('Login Failed', 'Data not found', colorText : Colors.white, backgroundColor: const Color(0xFFFF6C06));
+           Get.snackbar('Login Failed', 'Data not found');
         break;
 
       }
     } on SocketException {
       isLoggedin.value = false;
-      Get.snackbar('Login Failed', 'Data not found', colorText : Colors.white, backgroundColor: const Color(0xFFFF6C06));
+      Get.snackbar('Login Failed', 'Data not found');
     }
      http.Client().close();
   }
@@ -59,7 +58,7 @@ class LoginController extends GetxController {
 
    onLoginUser() {
     if (isLoggedin.value == true) {
-      Get.snackbar('Login Success', 'Your Token : $token', colorText : Colors.white, backgroundColor: const Color(0xFFFF6C06));
+      Get.snackbar('Login Success', 'Your Token : $token');
       Get.off(() => const HomeView());
     } else {
       Get.off(() => const LoginView());
