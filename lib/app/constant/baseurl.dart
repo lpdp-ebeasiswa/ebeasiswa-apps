@@ -1,27 +1,20 @@
 class MasterUri {
-  static BaseUrl get baseUrl => BaseUrl();
-  static StorageUri get storageUrl => StorageUri();
-  static PathWheather get pathWeather => PathWheather();
-  static AuthUrl get authUrl => AuthUrl();
+  static Baseuri get baseurl => Baseuri();
+  static PathAuth get pathAuth => PathAuth();
+  static PathMock get pathMock => PathMock();
+}
+class Baseuri {
+  String get baseAuth => "http://103.176.78.112:8080/";
+
+  String get baseMock => "https://dityadeveloper.github.io/";
 }
 
-class BaseUrl {
-  String get prodUrl => "https://aerisweather1.p.rapidapi.com";
+class PathAuth{
+   String get authLogin => "Login";
 }
 
-class StorageUri {
-  String get storage => "https://cdn.aerisapi.com/wxicons/v2/";
-}
-
-class PathWheather {
-  String get dailyforecast => "forecasts";
-  String get daily => "conditions";
-  String get observation => "observations";
-  String get jkt => "jakarta,id";
-}
-
-class AuthUrl {
-  String get getAuth => "http://103.176.78.112:8080/Login";
+class PathMock{
+    String get mockExpenditureList => "mock/ebeasiswa/spending/expenditure_list.json";
 }
 
 class patchMockApi {}

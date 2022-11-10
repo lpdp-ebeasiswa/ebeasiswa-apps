@@ -16,25 +16,28 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       body: SafeArea(
           child: ListView(
-            shrinkWrap: true,
-        children:  [
-         ProfileHeaderView(),
+        shrinkWrap: true,
+        children: [
+          ProfileHeaderView(),
           Column(
             children: [
               Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-               children: [
-                const  Padding(
-                    padding:  EdgeInsets.only(left: 20.0, bottom: 30.0),
-                    child:  Text("List App Role", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 20.0, bottom: 30.0),
+                    child: Text(
+                      "List App Role",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
                   ),
                   Container(),
-               ],
-             ),
+                ],
+              ),
               const ListAppRoleView(),
             ],
           ),
-          //SizedBox(height: 100, child: ListAppRoleView()),
         ],
       )),
     );

@@ -5,9 +5,10 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/url_strategy.dart';
-import 'app/utilities/catcher_setup.dart';
 import 'package:get_storage/get_storage.dart';
-const appName = 'Klix Agent';
+import 'app/utilities/catcher_setup.dart';
+
+const appName = 'Ebeasiswa App';
 
 void runEbeasiswaApp() async{
   WidgetsFlutterBinding.ensureInitialized();
