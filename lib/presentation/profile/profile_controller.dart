@@ -1,20 +1,33 @@
-import 'package:ebeasiswa/presentation/profile/profile_services.dart';
-import 'package:flutter/widgets.dart';
+import 'package:ebeasiswa/data/model/profile/profile_model.dart';
+import 'package:ebeasiswa/data/remote/profile_services/profile_services.dart';
 import 'package:get/state_manager.dart';
 
 class ProfileController extends GetxController {
-  ServicesProfile servicesProfile = ServicesProfile();
+  ProfileModel? profileModel;
+
+  var isLoading = true.obs;
+  var isError = false.obs;
+  var errmsg = "".obs;
+  ProfileServices profileServices = ProfileServices();
 
   @override
   void onInit() {
-    getDataDetail();
-    print("Kepanggil Otomatis di Dana");
+    onFetchProfile();
     super.onInit();
   }
 
-  Future getDataDetail() async {
-    var result = await servicesProfile.getDetailProfile();
-
-    debugPrint('ini isinya apa =====> $result');
+  Future<ProfileModel?> onFetchProfile() async {
+    isLoading(true);
+    try {
+      final data = await profileServices.profileServices();
+      profileModel = data;
+      isLoading(false);
+      isError(false);
+    } catch (e) {
+      isLoading(false);
+      isError(true);
+      throw Exception(e);
+    }
+    return null;
   }
 }
