@@ -1,8 +1,8 @@
 import 'package:ebeasiswa/gen/assets.gen.dart';
 import 'package:ebeasiswa/presentation/login/login_controller.dart';
+import 'package:ebeasiswa/presentation/registration/registration_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -67,7 +67,7 @@ class _LoginViewState extends State<LoginView> {
             padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
             child: TextFormField(
               controller: usernameController,
-      
+
               keyboardType: TextInputType.text,
               //  key: Key("_password"),
               onSaved: (String? value) {
@@ -184,7 +184,8 @@ class _LoginViewState extends State<LoginView> {
                             borderRadius: BorderRadius.circular(8),
                             side: const BorderSide(color: Color(0xFFFF6C06))))),
                 onPressed: () {
-                  controller.getAuth(usernameController.text, passwordController.text);
+                  controller.getAuth(
+                      usernameController.text, passwordController.text);
                   debugPrint('pressed');
                   // Get.snackbar('GetX Snackbar', 'Yay! Awesome GetX Snackbar');
                 },
@@ -224,7 +225,7 @@ class _LoginViewState extends State<LoginView> {
                           TextStyle(fontWeight: FontWeight.w300, fontSize: 11),
                     ),
                     GestureDetector(
-                        onTap: () => {},
+                        onTap: () => {Get.to(const RegistrationView())},
                         child: const Text(
                           "Buat Akun Disini",
                           style: TextStyle(

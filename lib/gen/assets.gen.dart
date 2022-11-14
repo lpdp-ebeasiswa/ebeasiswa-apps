@@ -39,6 +39,10 @@ class $AssetsImageGen {
   AssetGenImage get lpdpLogo =>
       const AssetGenImage('assets/image/lpdp_logo.png');
 
+  /// File path: assets/image/lpdp_logo.png
+  AssetGenImage get lpdpRegistration =>
+      const AssetGenImage('assets/image/lpdp_registration.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [lpdpHeader, lpdpLogo];
 }
