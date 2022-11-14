@@ -73,6 +73,8 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   build_runner: ^2.3.2
   flutter_gen_runner:
+  freezed: ^2.2.1
+  json_serializable: ^6.5.4
 
 #if you want to generate color asset and make it to dynamic use this command
 # $ flutter packages pub run build_runner build
