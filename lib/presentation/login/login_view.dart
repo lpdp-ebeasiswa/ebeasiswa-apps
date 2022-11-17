@@ -1,8 +1,8 @@
 import 'package:ebeasiswa/gen/assets.gen.dart';
+import 'package:ebeasiswa/presentation/forgot_password/forgot_passwrod_view.dart';
 import 'package:ebeasiswa/presentation/login/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -67,7 +67,7 @@ class _LoginViewState extends State<LoginView> {
             padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
             child: TextFormField(
               controller: usernameController,
-      
+
               keyboardType: TextInputType.text,
               //  key: Key("_password"),
               onSaved: (String? value) {
@@ -157,14 +157,17 @@ class _LoginViewState extends State<LoginView> {
                     ),
                   ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(right: 20.0),
-                  child: Text(
-                    "Lupa password?",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14,
-                        color: Color(0xFFFF6C06)),
+                Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: GestureDetector(
+                    onTap: () => {Get.to(const ForgotPasswordView())},
+                    child: const Text(
+                      "Lupa password?",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          color: Color(0xFFFF6C06)),
+                    ),
                   ),
                 ),
               ],
@@ -184,7 +187,8 @@ class _LoginViewState extends State<LoginView> {
                             borderRadius: BorderRadius.circular(8),
                             side: const BorderSide(color: Color(0xFFFF6C06))))),
                 onPressed: () {
-                  controller.getAuth(usernameController.text, passwordController.text);
+                  controller.getAuth(
+                      usernameController.text, passwordController.text);
                   debugPrint('pressed');
                   // Get.snackbar('GetX Snackbar', 'Yay! Awesome GetX Snackbar');
                 },
