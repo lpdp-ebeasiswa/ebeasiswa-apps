@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:ebeasiswa/app/constant/baseurl.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import '../../../app/helper/api_client/api_client_helper.dart';
 import '../../model/expenditure/expenditure_model.dart';
@@ -13,11 +12,8 @@ class ExpenditureServices {
   Future expenditureListServices() async {
     try {
       final response = await expenditureDataSource.loadListExpenditureUser();
-      debugPrint('clog $response');
-      debugPrint('clog ${response['data']}');
       final validationResponse = response['data'];
       if (validationResponse == []) {
-        debugPrint('clog ${response['data']}');
         Get.snackbar('Notification', 'Data is empty');
       } else {
         final List parsedResponse = response['data'] ?? [];
