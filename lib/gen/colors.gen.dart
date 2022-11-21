@@ -34,6 +34,9 @@ class ColorName {
   /// Color: #262626
   static const Color mineShaft = Color(0xFF262626);
 
+  /// Color: #FF6C06
+  static const Color orange = Color(0xFFFF6C06);
+
   /// Color: #757d88
   static const Color raven = Color(0xFF757D88);
 

@@ -49,6 +49,9 @@ dependencies:
   get_storage: ^2.0.3
   shared_preferences: ^2.0.15
 
+  #local setup
+  intl: ^0.17.0
+
   # extend
   catcher: ^0.6.9
   logging: ^1.1.0
@@ -57,6 +60,9 @@ dependencies:
   json_annotation: ^4.7.0
   json_serializable: ^6.5.4
   http: ^0.13.5
+  font_awesome_flutter: ^10.2.1
+  carousel_slider: ^4.1.1
+  url_launcher: ^6.1.6
 
 dev_dependencies:
   flutter_test:
@@ -69,12 +75,10 @@ dev_dependencies:
   # rules and activating additional ones.
 
   # use this command to run generator
-  # flutter pub run build_runner build
+  # flutter pub run build_runner build --delecting-no
   flutter_lints: ^2.0.0
   build_runner: ^2.3.2
   flutter_gen_runner:
-  freezed: ^2.2.1
-  json_serializable: ^6.5.4
 
 #if you want to generate color asset and make it to dynamic use this command
 # $ flutter packages pub run build_runner build
