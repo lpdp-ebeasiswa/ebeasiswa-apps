@@ -225,7 +225,7 @@ class _LoginViewState extends State<LoginView> {
                           TextStyle(fontWeight: FontWeight.w300, fontSize: 11),
                     ),
                     GestureDetector(
-                        onTap: () => {Get.to(const RegistrationView())},
+                        onTap: () => {Get.to(RegistrationView())},
                         child: const Text(
                           "Buat Akun Disini",
                           style: TextStyle(
