@@ -1,5 +1,5 @@
 import 'package:ebeasiswa/gen/assets.gen.dart';
-import 'package:ebeasiswa/presentation/forgot_password/forgot_passwrod_view.dart';
+import 'package:ebeasiswa/presentation/forgot_password/forgot_password_view.dart';
 import 'package:ebeasiswa/presentation/login/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -160,7 +160,7 @@ class _LoginViewState extends State<LoginView> {
                 Padding(
                   padding: const EdgeInsets.only(right: 20.0),
                   child: GestureDetector(
-                    onTap: () => {Get.to(const ForgotPasswordView())},
+                    onTap: () => {Get.to(ForgotPasswordView())},
                     child: const Text(
                       "Lupa password?",
                       style: TextStyle(
