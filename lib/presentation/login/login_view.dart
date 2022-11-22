@@ -1,4 +1,5 @@
 import 'package:ebeasiswa/gen/assets.gen.dart';
+import 'package:ebeasiswa/presentation/forgot_password/forgot_password_view.dart';
 import 'package:ebeasiswa/gen/colors.gen.dart';
 import 'package:ebeasiswa/presentation/login/login_controller.dart';
 import 'package:ebeasiswa/presentation/registration/registration_view.dart';
@@ -138,14 +139,17 @@ class _LoginViewState extends State<LoginView> {
                         ),
                       ],
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 20.0),
-                      child: Text(
-                        "Lupa password?",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14,
-                            color: Color(0xFFFF6C06)),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20.0),
+                      child: GestureDetector(
+                        onTap: () => {Get.to(ForgotPasswordView())},
+                        child: const Text(
+                          "Lupa password?",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                              color: Color(0xFFFF6C06)),
+                        ),
                       ),
                     ),
                   ],
