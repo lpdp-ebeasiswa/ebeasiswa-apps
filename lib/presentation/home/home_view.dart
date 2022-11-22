@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../list_app_role/list_app_role_view.dart';
+import '../../gen/assets.gen.dart';
+import '../home_content/carousel_content.dart';
+import '../list_app_role/menu_view.dart';
 import '../profile_header/profile_header_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -14,32 +16,31 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: ListView(
+       appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(80.0), 
+         child: AppBar(
+          flexibleSpace: Assets.image.lpdpAppbar.image(fit: BoxFit.fitWidth),
+          backgroundColor: Colors.transparent,
+             ),
+       ),
+      body: ListView(
         shrinkWrap: true,
         children: [
-          ProfileHeaderView(),
-          Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 20.0, bottom: 30.0),
-                    child: Text(
-                      "List App Role",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                  ),
-                  Container(),
+                  ProfileHeaderView(),
+                  const FirstMenuView(),
+                  const SecondMenuView(),
                 ],
               ),
-              const ListAppRoleView(),
-            ],
+            ),
           ),
+          CarouselContent(),
         ],
-      )),
+      ),
     );
   }
 }

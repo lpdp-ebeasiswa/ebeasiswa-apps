@@ -31,6 +31,10 @@ class $AssetsIconGen {
 class $AssetsImageGen {
   const $AssetsImageGen();
 
+  /// File path: assets/image/lpdp_appbar.png
+  AssetGenImage get lpdpAppbar =>
+      const AssetGenImage('assets/image/lpdp_appbar.png');
+
   /// File path: assets/image/lpdp_header.png
   AssetGenImage get lpdpHeader =>
       const AssetGenImage('assets/image/lpdp_header.png');
@@ -45,9 +49,21 @@ class $AssetsImageGen {
   AssetGenImage get lpdpKonfirmasiPassword =>
       const AssetGenImage('assets/image/lpdp_konfirmasi_password.png');
 
+  AssetGenImage get lpdpRegistration =>
+      const AssetGenImage('assets/image/lpdp_registration.png');
+
+  AssetGenImage get lpdpNoImage =>
+      const AssetGenImage('assets/image/lpdp_no_image.png');
+
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [lpdpHeader, lpdpLogo, lpdpForgotPassword, lpdpKonfirmasiPassword];
+  List<AssetGenImage> get values => [
+        lpdpHeader,
+        lpdpLogo,
+        lpdpRegistration,
+        lpdpNoImage,
+        lpdpForgotPassword,
+        lpdpKonfirmasiPassword
+      ];
 }
 
 class Assets {
