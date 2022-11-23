@@ -1,4 +1,4 @@
-import 'package:ebeasiswa/presentation/widgets/input_text_form_costum.dart';
+import 'package:ebeasiswa/app/widgets/input_text_form_costum.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';

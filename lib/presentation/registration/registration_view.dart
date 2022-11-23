@@ -1,11 +1,11 @@
 import 'package:ebeasiswa/gen/assets.gen.dart';
 import 'package:ebeasiswa/presentation/registration/register_controller.dart';
-import 'package:ebeasiswa/presentation/widgets/input_text_form_costum.dart';
-import 'package:ebeasiswa/presentation/widgets/select_date_costum.dart';
+import 'package:ebeasiswa/app/widgets/input_text_form_costum.dart';
+import 'package:ebeasiswa/app/widgets/select_date_costum.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../widgets/upload_photo_costum.dart';
+import '../../app/widgets/upload_photo_costum.dart';
 
 class RegistrationView extends StatelessWidget {
   RegistrationView({super.key});

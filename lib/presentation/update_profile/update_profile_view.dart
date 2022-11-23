@@ -1,10 +1,10 @@
 import 'package:ebeasiswa/presentation/update_profile/update_profile_controller.dart';
-import 'package:ebeasiswa/presentation/widgets/input_text_form_costum.dart';
+import 'package:ebeasiswa/app/widgets/input_text_form_costum.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../widgets/select_date_costum.dart';
-import '../widgets/upload_photo_costum.dart';
+import '../../app/widgets/select_date_costum.dart';
+import '../../app/widgets/upload_photo_costum.dart';
 
 class UpdateProfileView extends StatelessWidget {
   const UpdateProfileView({super.key});
