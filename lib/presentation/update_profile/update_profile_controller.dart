@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-class RegisterController extends GetxController {
+class UpdateProfileController extends GetxController {
   var msgErr = ''.obs;
   var msgErrValidator = ''.obs;
   var typeValidator = ''.obs;
