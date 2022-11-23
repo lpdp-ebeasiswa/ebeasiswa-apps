@@ -1,12 +1,10 @@
-import 'dart:io';
-
-import 'package:ebeasiswa/gen/assets.gen.dart';
 import 'package:ebeasiswa/presentation/update_profile/update_profile_controller.dart';
+import 'package:ebeasiswa/presentation/widgets/input_text_form_costum.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
-import 'package:scroll_date_picker/scroll_date_picker.dart';
+
+import '../widgets/select_date_costum.dart';
+import '../widgets/upload_photo_costum.dart';
 
 class UpdateProfileView extends StatelessWidget {
   const UpdateProfileView({super.key});
@@ -20,89 +18,17 @@ class UpdateProfileView extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
       ),
-      body: Container(
-        // width: Get.width,
-        padding: const EdgeInsets.all(10),
-        child: const FormUpdateProfile(),
-      ),
+      body: FormUpdateProfile(),
     );
   }
 }
 
-class FormUpdateProfile extends StatefulWidget {
-  const FormUpdateProfile({
+class FormUpdateProfile extends StatelessWidget {
+  FormUpdateProfile({
     Key? key,
   }) : super(key: key);
 
-  @override
-  State<FormUpdateProfile> createState() => _FormUpdateProfileState();
-}
-
-class _FormUpdateProfileState extends State<FormUpdateProfile> {
   final _formKey = GlobalKey<FormState>();
-
-  File? image;
-  TextEditingController controllerFilename = TextEditingController();
-
-  Future getImage() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? imagePicked =
-        await picker.pickImage(source: ImageSource.gallery);
-    image = File(imagePicked!.path);
-    String? fileName = image!.path.split('/').last;
-    String? fileExtension = fileName.split('.').last;
-
-    final bytes = image!.readAsBytesSync().lengthInBytes;
-    final kb = bytes / 1024;
-    final ukuranPhoto = kb / 1024;
-
-    if (fileExtension == 'png' ||
-        fileExtension == 'PNG' ||
-        fileExtension == 'MIME' ||
-        fileExtension == 'mime') {
-      if (ukuranPhoto <= 1.01) {
-        setState(() {
-          image = File(imagePicked.path);
-          controllerFilename.text = fileName;
-        });
-      } else {
-        setState(() {
-          controllerFilename.text = 'Ukuran photo belum sesuai';
-          image = null;
-          Get.snackbar('Gagal Upload', 'Ukuran photo belum sesuai',
-              snackPosition: SnackPosition.BOTTOM,
-              backgroundColor: Colors.redAccent);
-        });
-      }
-    } else {
-      setState(() {
-        image = null;
-        controllerFilename.text = 'Jenis photo belum sesuai';
-        Get.snackbar('Gagal Upload', 'Jenis photo belum sesuai',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.redAccent);
-      });
-    }
-  }
-
-  String? chekPhoto(String? text) {
-    if (text == null || text.isEmpty) {
-      return 'Photo tidak boleh kosong';
-    }
-    if (text == "Jenis photo belum sesuai") {
-      return 'Jenis photo yang di upload bukan jenis png \natau mime';
-    }
-    if (text == "Ukuran photo belum sesuai") {
-      return 'Ukuran photo harus kurang dari 1 MB';
-    }
-    return null;
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,72 +41,9 @@ class _FormUpdateProfileState extends State<FormUpdateProfile> {
         children: [
           Expanded(
             child: SingleChildScrollView(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(15),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 100,
-                      width: 100,
-                      child: SizedBox(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(50.0),
-                          child: Stack(
-                            children: [
-                              Container(
-                                color: Colors.red,
-                                child: image != null
-                                    ? SizedBox(
-                                        height: 200,
-                                        width: 150,
-                                        child: Image.file(
-                                          image!,
-                                          fit: BoxFit.fitWidth,
-                                        ),
-                                      )
-                                    : SizedBox(
-                                        height: 140,
-                                        width: 140,
-                                        child: Assets.image.lpdpNoImage.image(
-                                            height: 100.0,
-                                            width: 100.0,
-                                            fit: BoxFit.fitWidth),
-                                      ),
-                              ),
-                              Align(
-                                alignment: Alignment.bottomCenter,
-                                child: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      getImage();
-                                    });
-                                  },
-                                  child: Container(
-                                    width: double.infinity,
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 5),
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.3),
-                                    ),
-                                    child: Icon(
-                                      Icons.photo_camera,
-                                      color: Colors.white.withOpacity(0.5),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        "Photo",
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w500),
-                      ),
-                    ),
                     Card(
                       elevation: 2.5,
                       shape: RoundedRectangleBorder(
@@ -298,8 +161,7 @@ class _FormUpdateProfileState extends State<FormUpdateProfile> {
                               labletext: "Tempat Lahir",
                               hintText: "Tempat lahir",
                               typeInput: TextInputType.text,
-                              iconText:
-                                  const Icon(Icons.location_history_rounded),
+                              iconText: const Icon(Icons.pin_drop),
                               validator: ((value) => controllerUpdateProfile
                                   .checkValidator(value, TypeValidator.place)),
                               textInputAction: TextInputAction.next,
@@ -309,6 +171,7 @@ class _FormUpdateProfileState extends State<FormUpdateProfile> {
                             SelectDateCostum(
                                 labletext: "Tanggal Lahir",
                                 hintText: "dd/mm/yyyy",
+                                iconText: const Icon(Icons.date_range),
                                 validator: ((value) =>
                                     controllerUpdateProfile.checkValidator(
                                         value, TypeValidator.dateOfBirth)),
@@ -324,6 +187,15 @@ class _FormUpdateProfileState extends State<FormUpdateProfile> {
                               textInputAction: TextInputAction.next,
                               controller:
                                   controllerUpdateProfile.phoneCtrl.value,
+                            ),
+                            UploadPhoto(
+                              labletext: "Upload Photo",
+                              hintText: "Upload Photo (3x4)",
+                              iconText: const Icon(Icons.upload),
+                              validator: ((value) => controllerUpdateProfile
+                                  .checkValidator(value, TypeValidator.photo)),
+                              controller:
+                                  controllerUpdateProfile.photoCtrl.value,
                             ),
                           ],
                         ),
@@ -356,162 +228,6 @@ class _FormUpdateProfileState extends State<FormUpdateProfile> {
           )
         ],
       ),
-    );
-  }
-}
-
-class InputTextFormCostum extends StatelessWidget {
-  const InputTextFormCostum({
-    Key? key,
-    this.hintText,
-    this.labletext,
-    this.iconText,
-    this.typeInput,
-    this.disabled,
-    this.validator,
-    this.onsavecus,
-    this.onChanged,
-    this.controller,
-    this.onTap,
-    this.textInputAction,
-  }) : super(key: key);
-
-  final String? hintText;
-  final String? labletext;
-  final Icon? iconText;
-  final TextInputType? typeInput;
-  final TextEditingController? controller;
-  final TextInputAction? textInputAction;
-  final bool? disabled;
-  final String? Function(String?)? validator;
-  final String? Function(String?)? onsavecus;
-  final String? Function(String?)? onChanged;
-  final Function()? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
-      child: TextFormField(
-        textInputAction: textInputAction,
-        controller: controller,
-        validator: validator,
-        readOnly: disabled ?? false,
-        onSaved: onsavecus,
-        onChanged: onChanged,
-        onTap: onTap,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        // autovalidateMode: AutovalidateMode.onUserInteraction,
-        keyboardType: typeInput,
-        decoration: InputDecoration(
-          hintText: hintText,
-          labelText: labletext,
-          labelStyle: const TextStyle(color: Colors.grey),
-          prefixIcon: IconTheme(
-              data: const IconThemeData(color: Color(0xFFFF8226)),
-              child: iconText!),
-          // enabledBorder: OutlineInputBorder(
-          //   borderRadius: BorderRadius.circular(20.0),
-          // ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(35.0),
-            borderSide: const BorderSide(
-              color: Color(0xFFFF8226),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class SelectDateCostum extends StatefulWidget {
-  const SelectDateCostum(
-      {super.key,
-      this.hintText,
-      this.labletext,
-      this.controller,
-      this.validator});
-
-  final String? hintText;
-  final String? labletext;
-  final TextEditingController? controller;
-  final String? Function(String?)? validator;
-
-  @override
-  State<SelectDateCostum> createState() => _SelectDateState();
-}
-
-class _SelectDateState extends State<SelectDateCostum> {
-  DateTime _selectedDate = DateTime.now();
-
-  @override
-  Widget build(BuildContext context) {
-    return InputTextFormCostum(
-      hintText: widget.hintText,
-      labletext: widget.labletext,
-      typeInput: TextInputType.number,
-      iconText: const Icon(Icons.date_range),
-      textInputAction: TextInputAction.next,
-      controller: widget.controller!,
-      disabled: true,
-      validator: widget.validator,
-      onTap: () {
-        showModalBottomSheet(
-          enableDrag: false,
-          context: context,
-          builder: (context) {
-            return SizedBox(
-              height: 300,
-              width: Get.width,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 250,
-                    width: Get.width,
-                    child: ScrollDatePicker(
-                      options: const DatePickerOptions(itemExtent: 40),
-                      scrollViewOptions: const DatePickerScrollViewOptions(
-                        day: ScrollViewDetailOptions(
-                            alignment: Alignment.centerLeft,
-                            margin: EdgeInsets.only(right: 30)),
-                        month: ScrollViewDetailOptions(
-                            alignment: Alignment.center),
-                        year: ScrollViewDetailOptions(
-                            margin: EdgeInsets.only(left: 30)),
-                      ),
-                      selectedDate: _selectedDate,
-                      locale: const Locale('id'),
-                      onDateTimeChanged: (value) {
-                        setState(() {
-                          _selectedDate = value;
-                        });
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFFF8226),
-                      ),
-                      onPressed: () {
-                        String formattedDate =
-                            DateFormat('dd-MM-yyyy').format(_selectedDate);
-                        setState(() {
-                          widget.controller?.text = formattedDate;
-                          Get.back();
-                        });
-                      },
-                      child: const Text("Ok"),
-                    ),
-                  )
-                ],
-              ),
-            );
-          },
-        );
-      },
     );
   }
 }

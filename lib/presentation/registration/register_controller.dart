@@ -16,6 +16,7 @@ class RegisterController extends GetxController {
   var nikCtrl = TextEditingController().obs;
   var kkCtrl = TextEditingController().obs;
   var dateOfBirthCtrl = TextEditingController().obs;
+  var photoCtrl = TextEditingController().obs;
 
   @override
   void onClose() {
@@ -29,6 +30,7 @@ class RegisterController extends GetxController {
     nikCtrl.close();
     kkCtrl.close();
     dateOfBirthCtrl.close();
+    photoCtrl.close();
   }
 
   checkValidator(String? text, TypeValidator type) {
@@ -88,6 +90,12 @@ class RegisterController extends GetxController {
         msgErr.value = "Tanggal lahir tidak boleh kosong";
         msgErrValidator.value = "Tanggal lahir tidak valid ";
         break;
+      case TypeValidator.photo:
+        source = RegExp(r'^.*\.(png|PNG|mime|MIME)$');
+        msgErr.value = "Photo tidak boleh kosong";
+        msgErrValidator.value =
+            "Ukuran gambar harus kurang dari 1 MB \ndan format gambar harus .png atau .mime";
+        break;
     }
 
     if (text == null || text.isEmpty) {
@@ -110,4 +118,5 @@ enum TypeValidator {
   place,
   nik,
   dateOfBirth,
+  photo
 }
