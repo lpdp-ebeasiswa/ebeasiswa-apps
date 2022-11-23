@@ -8,107 +8,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
 
-String? checkEmail(String? text) {
-  RegExp regEx = RegExp(
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
-
-  if (text == null || text.isEmpty) {
-    return 'Email tidak boleh kosong';
-  }
-  if (!regEx.hasMatch(text)) {
-    return 'Harus Berbenruk Email yaa';
-  }
-  return null;
-}
-
-String? checkKataSandi(String? text) {
-  RegExp regEx =
-      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
-
-  if (text == null || text.isEmpty) {
-    return 'Kata sandi tidak boleh kosong';
-  }
-  if (!regEx.hasMatch(text)) {
-    return 'Kata sandi harus mempunyai 1 huruf besar dan kecil \nminimal 8 huruf dan 1 spesial karakter! ';
-  }
-  return null;
-}
-
-String? checkFullName(String? text) {
-  RegExp regEx = RegExp(r'^\s*[A-Za-z]{3}[^\n\d?=.*?[!@#\"%^()-_+{}|/<$&*~]*$');
-
-  if (text == null || text.isEmpty) {
-    return 'Nama lengkap tidak boleh kosong';
-  }
-  if (!regEx.hasMatch(text)) {
-    return 'Nama lengkap minimal 3 huruf dan tidak boleh ada karakter';
-  }
-  return null;
-}
-
-String? checkName(String? text) {
-  RegExp regEx = RegExp(r'^\s*[A-Za-z]{3}[^\n\d?=.*?[!@#\"%^()-_+{}|/<$&*~]*$');
-
-  if (text == null || text.isEmpty) {
-    return 'Nama panggilan tidak boleh kosong';
-  }
-  if (!regEx.hasMatch(text)) {
-    return 'Nama panggilan minimal 3 huruf dan tidak boleh ada karakter';
-  }
-  return null;
-}
-
-String? checkNik(String? text) {
-  RegExp regEx = RegExp(
-      r'^(1[1-9]|21|[37][1-6]|5[1-3]|6[1-5]|[89][12])\d{2}\d{2}([04][1-9]|[1256][0-9]|[37][01])(0[1-9]|1[0-2])\d{2}\d{4}$');
-
-  if (text == null || text.isEmpty) {
-    return 'NIK tidak boleh kosong';
-  }
-  if (!regEx.hasMatch(text)) {
-    return 'NIK tidak Valid';
-  }
-  return null;
-}
-
-String? checkKk(String? text) {
-  RegExp regEx = RegExp(
-      r'^(1[1-9]|21|[37][1-6]|5[1-3]|6[1-5]|[89][12])\d{2}\d{2}([04][1-9]|[1256][0-9]|[37][01])(0[1-9]|1[0-2])\d{2}\d{4}$');
-
-  if (text == null || text.isEmpty) {
-    return 'KK tidak boleh kosong';
-  }
-  if (!regEx.hasMatch(text)) {
-    return 'KK tidak Valid';
-  }
-  return null;
-}
-
-String? checkTempat(String? text) {
-  RegExp regEx = RegExp(r'^\s*[A-Za-z]{3}[^\n\d?=.*?[!@#\"%^()-_+{}|/<$&*~]*$');
-
-  if (text == null || text.isEmpty) {
-    return 'Alamat tidak boleh kosong';
-  }
-  if (!regEx.hasMatch(text)) {
-    return 'Alamat minimal 3 huruf dan tidak boleh ada karakter';
-  }
-  return null;
-}
-
-String? checkNoHandphone(String? text) {
-  RegExp regEx =
-      RegExp(r'^(\+62|62)?[\s-]?0?8[1-9]{1}\d{1}[\s-]?\d{4}[\s-]?\d{2,5}$');
-
-  if (text == null || text.isEmpty) {
-    return 'Nomor HP tidak boleh kosong';
-  }
-  if (!regEx.hasMatch(text)) {
-    return 'Nomor hp tidak valid';
-  }
-  return null;
-}
-
 class RegistrationView extends StatelessWidget {
   RegistrationView({super.key});
 
@@ -117,10 +16,10 @@ class RegistrationView extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController tanggalLahirController = TextEditingController();
 
-  final RegisterController controller = Get.put(RegisterController());
-
   @override
   Widget build(BuildContext context) {
+    final RegisterController controllerRegister = Get.put(RegisterController());
+
     return Scaffold(
       // appBar: AppBar(
       //   backgroundColor: const Color(0xFFFF8226),
@@ -150,73 +49,81 @@ class RegistrationView extends StatelessWidget {
                   child: SingleChildScrollView(
                       padding: const EdgeInsets.all(10),
                       child: Column(
-                        children: const [
+                        children: [
                           InputTextFormCostum(
                             labletext: "Email",
                             hintText: "Email",
                             typeInput: TextInputType.emailAddress,
-                            iconText: Icon(Icons.email_rounded),
-                            validator: checkEmail,
+                            iconText: const Icon(Icons.email_rounded),
+                            validator: ((value) => controllerRegister.checkValidator(value, TypeValidator.email)),
                             textInputAction: TextInputAction.next,
+                            controller: controllerRegister.emailCtrl.value,
                           ),
                           InputTextFormCostum(
                             labletext: "Kata Sandi",
                             hintText: "Kata Sandi",
                             typeInput: TextInputType.visiblePassword,
-                            iconText: Icon(Icons.lock),
-                            validator: checkKataSandi,
+                            iconText: const Icon(Icons.lock),
+                             validator: ((value) => controllerRegister.checkValidator(value, TypeValidator.password)),
                             textInputAction: TextInputAction.next,
+                            controller: controllerRegister.passwordCtrl.value,
                           ),
                           InputTextFormCostum(
                             hintText: "Nama Lengkap",
                             labletext: "Nama Lengkap",
                             typeInput: TextInputType.text,
-                            iconText: Icon(Icons.person),
-                            validator: checkFullName,
+                            iconText: const Icon(Icons.person),
+                           validator: ((value) => controllerRegister.checkValidator(value, TypeValidator.fullname)),
                             textInputAction: TextInputAction.next,
+                            controller: controllerRegister.fullnameCtrl.value,
                           ),
                           InputTextFormCostum(
                             hintText: "Nama Panggilan",
                             labletext: "Nama Panggilan",
                             typeInput: TextInputType.text,
-                            iconText: Icon(Icons.person_pin),
-                            validator: checkName,
+                            iconText: const Icon(Icons.person_pin),
+                            validator: ((value) => controllerRegister.checkValidator(value, TypeValidator.nickname)),
                             textInputAction: TextInputAction.next,
+                            controller: controllerRegister.nicknameCtrl.value,
                           ),
                           InputTextFormCostum(
                             labletext: "Nomor Induk Kependudukan (NIK)",
                             hintText: "Nomor Induk Kependudukan (NIK)",
                             typeInput: TextInputType.number,
-                            iconText: Icon(Icons.contacts),
-                            validator: checkNik,
+                            iconText: const Icon(Icons.contacts),
+                            validator: ((value) => controllerRegister.checkValidator(value, TypeValidator.nik)),
                             textInputAction: TextInputAction.next,
+                            controller: controllerRegister.nikCtrl.value,
                           ),
                           InputTextFormCostum(
                             labletext: "Nomor Kartu Keluarga (KK)",
                             hintText: "Nomor Kartu Keluarga (KK)",
                             typeInput: TextInputType.number,
-                            iconText: Icon(Icons.call_to_action),
-                            validator: checkKk,
+                            iconText: const Icon(Icons.call_to_action),
+                            validator: ((value) => controllerRegister.checkValidator(value, TypeValidator.kk)),
                             textInputAction: TextInputAction.next,
+                            controller: controllerRegister.kkCtrl.value,
                           ),
                           InputTextFormCostum(
                             labletext: "Tempat Lahir",
                             hintText: "Tempat lahir",
                             typeInput: TextInputType.text,
-                            iconText: Icon(Icons.location_history_rounded),
-                            validator: checkTempat,
+                            iconText: const Icon(Icons.location_history_rounded),
+                           validator: ((value) => controllerRegister.checkValidator(value, TypeValidator.place)),
                             textInputAction: TextInputAction.next,
+                            controller: controllerRegister.tempatLahirCtrl.value,
                           ),
-                          SelectDateCostum(),
+                          const SelectDateCostum(),
                           InputTextFormCostum(
                             labletext: "Nomor Handphone",
                             hintText: "Nomor Handphone",
                             typeInput: TextInputType.number,
-                            iconText: Icon(Icons.phone_android),
-                            validator: checkNoHandphone,
+                            iconText: const Icon(Icons.phone_android),
+                          validator: ((value) => controllerRegister.checkValidator(value, TypeValidator.phone)),
                             textInputAction: TextInputAction.next,
+                            controller: controllerRegister.phoneCtrl.value,
                           ),
-                          UploadPhoto(),
+                          const UploadPhoto(),
                         ],
                       )),
                 ),
@@ -271,36 +178,6 @@ class RegistrationView extends StatelessWidget {
       ),
     );
   }
-
-  // Future<dynamic> selectDate(BuildContext context) {
-  //   DateTime selectedDate = DateTime.now();
-  //   // final TextEditingController controller = TextEditingController();
-  //   return showModalBottomSheet(
-  //     context: context,
-  //     builder: (context) {
-  //       return SizedBox(
-  //         height: 250,
-  //         width: Get.width,
-  //         child: Column(
-  //           children: [
-  //             SizedBox(
-  //               height: 250,
-  //               child: ScrollDatePicker(
-  //                 selectedDate: selectedDate,
-  //                 locale: const Locale('id'),
-  //                 onDateTimeChanged: (DateTime value) {
-  //                   DateFormat dateFormat = DateFormat("DD-MM-YYYY");
-  //                   selectedDate = value;
-  //                   // context.te = selectedDate.toString();
-  //                 },
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
 
 }
 
@@ -367,12 +244,6 @@ class _UploadPhotoState extends State<UploadPhoto> {
       return 'Ukuran photo harus kurang dari 1 MB';
     }
     return null;
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
   }
 
   @override
