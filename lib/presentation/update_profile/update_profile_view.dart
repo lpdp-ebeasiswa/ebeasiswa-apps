@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:ebeasiswa/gen/assets.gen.dart';
+import 'package:ebeasiswa/presentation/update_profile/update_profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -15,7 +16,7 @@ class UpdateProfileView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orangeAccent[700],
-        title: const Text("Profile Detail"),
+        title: const Text("Update Profile"),
         centerTitle: true,
         elevation: 0,
       ),
@@ -26,107 +27,6 @@ class UpdateProfileView extends StatelessWidget {
       ),
     );
   }
-}
-
-String? checkEmail(String? text) {
-  RegExp regEx = RegExp(
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
-
-  if (text == null || text.isEmpty) {
-    return 'Email tidak boleh kosong';
-  }
-  if (!regEx.hasMatch(text)) {
-    return 'Harus Berbenruk Email yaa';
-  }
-  return null;
-}
-
-String? checkKataSandi(String? text) {
-  RegExp regEx =
-      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
-
-  if (text == null || text.isEmpty) {
-    return 'Kata sandi tidak boleh kosong';
-  }
-  if (!regEx.hasMatch(text)) {
-    return 'Kata sandi harus mempunyai 1 huruf besar dan kecil \nminimal 8 huruf dan 1 spesial karakter! ';
-  }
-  return null;
-}
-
-String? checkFullName(String? text) {
-  RegExp regEx = RegExp(r'^\s*[A-Za-z]{3}[^\n\d?=.*?[!@#\"%^()-_+{}|/<$&*~]*$');
-
-  if (text == null || text.isEmpty) {
-    return 'Nama lengkap tidak boleh kosong';
-  }
-  if (!regEx.hasMatch(text)) {
-    return 'Nama lengkap minimal 3 huruf dan tidak boleh ada karakter';
-  }
-  return null;
-}
-
-String? checkName(String? text) {
-  RegExp regEx = RegExp(r'^\s*[A-Za-z]{3}[^\n\d?=.*?[!@#\"%^()-_+{}|/<$&*~]*$');
-
-  if (text == null || text.isEmpty) {
-    return 'Nama panggilan tidak boleh kosong';
-  }
-  if (!regEx.hasMatch(text)) {
-    return 'Nama panggilan minimal 3 huruf dan tidak boleh ada karakter';
-  }
-  return null;
-}
-
-String? checkNik(String? text) {
-  RegExp regEx = RegExp(
-      r'^(1[1-9]|21|[37][1-6]|5[1-3]|6[1-5]|[89][12])\d{2}\d{2}([04][1-9]|[1256][0-9]|[37][01])(0[1-9]|1[0-2])\d{2}\d{4}$');
-
-  if (text == null || text.isEmpty) {
-    return 'NIK tidak boleh kosong';
-  }
-  if (!regEx.hasMatch(text)) {
-    return 'NIK tidak Valid';
-  }
-  return null;
-}
-
-String? checkKk(String? text) {
-  RegExp regEx = RegExp(
-      r'^(1[1-9]|21|[37][1-6]|5[1-3]|6[1-5]|[89][12])\d{2}\d{2}([04][1-9]|[1256][0-9]|[37][01])(0[1-9]|1[0-2])\d{2}\d{4}$');
-
-  if (text == null || text.isEmpty) {
-    return 'KK tidak boleh kosong';
-  }
-  if (!regEx.hasMatch(text)) {
-    return 'KK tidak Valid';
-  }
-  return null;
-}
-
-String? checkTempat(String? text) {
-  RegExp regEx = RegExp(r'^\s*[A-Za-z]{3}[^\n\d?=.*?[!@#\"%^()-_+{}|/<$&*~]*$');
-
-  if (text == null || text.isEmpty) {
-    return 'Alamat tidak boleh kosong';
-  }
-  if (!regEx.hasMatch(text)) {
-    return 'Alamat minimal 3 huruf dan tidak boleh ada karakter';
-  }
-  return null;
-}
-
-String? checkNoHandphone(String? text) {
-  RegExp regEx =
-      RegExp(r'^(\+62|62)?[\s-]?0?8[1-9]{1}\d{1}[\s-]?\d{4}[\s-]?\d{2,5}$');
-
-  if (text == null || text.isEmpty) {
-    return 'Nomor HP tidak boleh kosong';
-  }
-  if (!regEx.hasMatch(text)) {
-    return 'Nomor hp tidak valid';
-  }
-  return null;
 }
 
 class FormUpdateProfile extends StatefulWidget {
@@ -206,6 +106,9 @@ class _FormUpdateProfileState extends State<FormUpdateProfile> {
 
   @override
   Widget build(BuildContext context) {
+    final UpdateProfileController controllerUpdateProfile =
+        Get.put(UpdateProfileController());
+
     return Form(
       key: _formKey,
       child: Column(
@@ -278,70 +181,153 @@ class _FormUpdateProfileState extends State<FormUpdateProfile> {
                             fontSize: 14, fontWeight: FontWeight.w500),
                       ),
                     ),
-                    const InputTextFormCostum(
-                      labletext: "Email",
-                      hintText: "Email",
-                      typeInput: TextInputType.emailAddress,
-                      iconText: Icon(Icons.email_rounded),
-                      validator: checkEmail,
-                      textInputAction: TextInputAction.next,
+                    Card(
+                      elevation: 2.5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.only(
+                                  left: 10, bottom: 15, top: 10),
+                              child: Text(
+                                "Informasi Akun",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                            InputTextFormCostum(
+                              labletext: "Email",
+                              hintText: "Email",
+                              typeInput: TextInputType.emailAddress,
+                              iconText: const Icon(Icons.email_rounded),
+                              validator: ((value) => controllerUpdateProfile
+                                  .checkValidator(value, TypeValidator.email)),
+                              textInputAction: TextInputAction.next,
+                              controller:
+                                  controllerUpdateProfile.emailCtrl.value,
+                            ),
+                            InputTextFormCostum(
+                              labletext: "Kata Sandi",
+                              hintText: "Kata Sandi",
+                              typeInput: TextInputType.visiblePassword,
+                              iconText: const Icon(Icons.lock),
+                              validator: ((value) =>
+                                  controllerUpdateProfile.checkValidator(
+                                      value, TypeValidator.password)),
+                              textInputAction: TextInputAction.next,
+                              controller:
+                                  controllerUpdateProfile.passwordCtrl.value,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    const InputTextFormCostum(
-                      labletext: "Kata Sandi",
-                      hintText: "Kata Sandi",
-                      typeInput: TextInputType.visiblePassword,
-                      iconText: Icon(Icons.lock),
-                      validator: checkKataSandi,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    const InputTextFormCostum(
-                      hintText: "Nama Lengkap",
-                      labletext: "Nama Lengkap",
-                      typeInput: TextInputType.text,
-                      iconText: Icon(Icons.person),
-                      validator: checkFullName,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    const InputTextFormCostum(
-                      hintText: "Nama Panggilan",
-                      labletext: "Nama Panggilan",
-                      typeInput: TextInputType.text,
-                      iconText: Icon(Icons.person_pin),
-                      validator: checkName,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    const InputTextFormCostum(
-                      labletext: "Nomor Induk Kependudukan (NIK)",
-                      hintText: "Nomor Induk Kependudukan (NIK)",
-                      typeInput: TextInputType.number,
-                      iconText: Icon(Icons.contacts),
-                      validator: checkNik,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    const InputTextFormCostum(
-                      labletext: "Nomor Kartu Keluarga (KK)",
-                      hintText: "Nomor Kartu Keluarga (KK)",
-                      typeInput: TextInputType.number,
-                      iconText: Icon(Icons.call_to_action),
-                      validator: checkKk,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    const InputTextFormCostum(
-                      labletext: "Tempat Lahir",
-                      hintText: "Tempat lahir",
-                      typeInput: TextInputType.text,
-                      iconText: Icon(Icons.location_history_rounded),
-                      validator: checkTempat,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    const SelectDateCostum(),
-                    const InputTextFormCostum(
-                      labletext: "Nomor Handphone",
-                      hintText: "Nomor Handphone",
-                      typeInput: TextInputType.number,
-                      iconText: Icon(Icons.phone_android),
-                      validator: checkNoHandphone,
-                      textInputAction: TextInputAction.next,
+                    Card(
+                      elevation: 2.5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.only(
+                                  left: 10, bottom: 15, top: 10),
+                              child: Text(
+                                "Informasi Pribadi",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                            InputTextFormCostum(
+                              hintText: "Nama Lengkap",
+                              labletext: "Nama Lengkap",
+                              typeInput: TextInputType.text,
+                              iconText: const Icon(Icons.person),
+                              validator: ((value) =>
+                                  controllerUpdateProfile.checkValidator(
+                                      value, TypeValidator.fullname)),
+                              textInputAction: TextInputAction.next,
+                              controller:
+                                  controllerUpdateProfile.fullnameCtrl.value,
+                            ),
+                            InputTextFormCostum(
+                              hintText: "Nama Panggilan",
+                              labletext: "Nama Panggilan",
+                              typeInput: TextInputType.text,
+                              iconText: const Icon(Icons.person_pin),
+                              validator: ((value) =>
+                                  controllerUpdateProfile.checkValidator(
+                                      value, TypeValidator.nickname)),
+                              textInputAction: TextInputAction.next,
+                              controller:
+                                  controllerUpdateProfile.nicknameCtrl.value,
+                            ),
+                            InputTextFormCostum(
+                              labletext: "Nomor Induk Kependudukan (NIK)",
+                              hintText: "Nomor Induk Kependudukan (NIK)",
+                              typeInput: TextInputType.number,
+                              iconText: const Icon(Icons.contacts),
+                              validator: ((value) => controllerUpdateProfile
+                                  .checkValidator(value, TypeValidator.nik)),
+                              textInputAction: TextInputAction.next,
+                              controller: controllerUpdateProfile.nikCtrl.value,
+                            ),
+                            InputTextFormCostum(
+                              labletext: "Nomor Kartu Keluarga (KK)",
+                              hintText: "Nomor Kartu Keluarga (KK)",
+                              typeInput: TextInputType.number,
+                              iconText: const Icon(Icons.call_to_action),
+                              validator: ((value) => controllerUpdateProfile
+                                  .checkValidator(value, TypeValidator.kk)),
+                              textInputAction: TextInputAction.next,
+                              controller: controllerUpdateProfile.kkCtrl.value,
+                            ),
+                            InputTextFormCostum(
+                              labletext: "Tempat Lahir",
+                              hintText: "Tempat lahir",
+                              typeInput: TextInputType.text,
+                              iconText:
+                                  const Icon(Icons.location_history_rounded),
+                              validator: ((value) => controllerUpdateProfile
+                                  .checkValidator(value, TypeValidator.place)),
+                              textInputAction: TextInputAction.next,
+                              controller:
+                                  controllerUpdateProfile.tempatLahirCtrl.value,
+                            ),
+                            SelectDateCostum(
+                                labletext: "Tanggal Lahir",
+                                hintText: "dd/mm/yyyy",
+                                validator: ((value) =>
+                                    controllerUpdateProfile.checkValidator(
+                                        value, TypeValidator.dateOfBirth)),
+                                controller: controllerUpdateProfile
+                                    .dateOfBirthCtrl.value),
+                            InputTextFormCostum(
+                              labletext: "Nomor Handphone",
+                              hintText: "Nomor Handphone",
+                              typeInput: TextInputType.number,
+                              iconText: const Icon(Icons.phone_android),
+                              validator: ((value) => controllerUpdateProfile
+                                  .checkValidator(value, TypeValidator.phone)),
+                              textInputAction: TextInputAction.next,
+                              controller:
+                                  controllerUpdateProfile.phoneCtrl.value,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 )),
@@ -440,7 +426,17 @@ class InputTextFormCostum extends StatelessWidget {
 }
 
 class SelectDateCostum extends StatefulWidget {
-  const SelectDateCostum({super.key});
+  const SelectDateCostum(
+      {super.key,
+      this.hintText,
+      this.labletext,
+      this.controller,
+      this.validator});
+
+  final String? hintText;
+  final String? labletext;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
 
   @override
   State<SelectDateCostum> createState() => _SelectDateState();
@@ -449,26 +445,17 @@ class SelectDateCostum extends StatefulWidget {
 class _SelectDateState extends State<SelectDateCostum> {
   DateTime _selectedDate = DateTime.now();
 
-  final TextEditingController _controller = TextEditingController();
-
-  String? cekTanggalLahir(String? text) {
-    if (text == null || text.isEmpty) {
-      return 'Tanggal Lahir tidak boleh kosong';
-    }
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
     return InputTextFormCostum(
-      labletext: "Tanggal Lahir",
-      hintText: "Tanggal Lahir",
+      hintText: widget.hintText,
+      labletext: widget.labletext,
       typeInput: TextInputType.number,
       iconText: const Icon(Icons.date_range),
       textInputAction: TextInputAction.next,
-      controller: _controller,
+      controller: widget.controller!,
       disabled: true,
-      validator: cekTanggalLahir,
+      validator: widget.validator,
       onTap: () {
         showModalBottomSheet(
           enableDrag: false,
@@ -512,7 +499,7 @@ class _SelectDateState extends State<SelectDateCostum> {
                         String formattedDate =
                             DateFormat('dd-MM-yyyy').format(_selectedDate);
                         setState(() {
-                          _controller.text = formattedDate;
+                          widget.controller?.text = formattedDate;
                           Get.back();
                         });
                       },

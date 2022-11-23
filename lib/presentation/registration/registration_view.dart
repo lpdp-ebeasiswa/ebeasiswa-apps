@@ -13,20 +13,11 @@ class RegistrationView extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController tanggalLahirController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     final RegisterController controllerRegister = Get.put(RegisterController());
 
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: const Color(0xFFFF8226),
-      //   title: const Text("Registration"),
-      //   centerTitle: true,
-      //   elevation: 0,
-      // ),
       body: Container(
         color: const Color(0xFFD45820),
         child: Column(
@@ -34,6 +25,7 @@ class RegistrationView extends StatelessWidget {
             Assets.image.lpdpRegistration.image(fit: BoxFit.fitWidth),
             Expanded(
               child: Container(
+                // margin: const EdgeInsets.only(top: 10),
                 height: 20,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
@@ -46,86 +38,171 @@ class RegistrationView extends StatelessWidget {
                 ),
                 child: Form(
                   key: _formKey,
-                  child: SingleChildScrollView(
-                      padding: const EdgeInsets.all(10),
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 20),
+                    child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          InputTextFormCostum(
-                            labletext: "Email",
-                            hintText: "Email",
-                            typeInput: TextInputType.emailAddress,
-                            iconText: const Icon(Icons.email_rounded),
-                            validator: ((value) => controllerRegister.checkValidator(value, TypeValidator.email)),
-                            textInputAction: TextInputAction.next,
-                            controller: controllerRegister.emailCtrl.value,
+                          Card(
+                            elevation: 2.5,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 10, bottom: 15, top: 10),
+                                    child: Text(
+                                      "Informasi Akun",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                  InputTextFormCostum(
+                                    labletext: "Email",
+                                    hintText: "Email",
+                                    typeInput: TextInputType.emailAddress,
+                                    iconText: const Icon(Icons.email_rounded),
+                                    validator: ((value) =>
+                                        controllerRegister.checkValidator(
+                                            value, TypeValidator.email)),
+                                    textInputAction: TextInputAction.next,
+                                    controller:
+                                        controllerRegister.emailCtrl.value,
+                                  ),
+                                  InputTextFormCostum(
+                                    labletext: "Kata Sandi",
+                                    hintText: "Kata Sandi",
+                                    typeInput: TextInputType.visiblePassword,
+                                    iconText: const Icon(Icons.lock),
+                                    validator: ((value) =>
+                                        controllerRegister.checkValidator(
+                                            value, TypeValidator.password)),
+                                    textInputAction: TextInputAction.next,
+                                    controller:
+                                        controllerRegister.passwordCtrl.value,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          InputTextFormCostum(
-                            labletext: "Kata Sandi",
-                            hintText: "Kata Sandi",
-                            typeInput: TextInputType.visiblePassword,
-                            iconText: const Icon(Icons.lock),
-                             validator: ((value) => controllerRegister.checkValidator(value, TypeValidator.password)),
-                            textInputAction: TextInputAction.next,
-                            controller: controllerRegister.passwordCtrl.value,
+                          Card(
+                            elevation: 2.5,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 10, bottom: 15, top: 10),
+                                    child: Text(
+                                      "Informasi Pribadi",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                  InputTextFormCostum(
+                                    hintText: "Nama Lengkap",
+                                    labletext: "Nama Lengkap",
+                                    typeInput: TextInputType.text,
+                                    iconText: const Icon(Icons.person),
+                                    validator: ((value) =>
+                                        controllerRegister.checkValidator(
+                                            value, TypeValidator.fullname)),
+                                    textInputAction: TextInputAction.next,
+                                    controller:
+                                        controllerRegister.fullnameCtrl.value,
+                                  ),
+                                  InputTextFormCostum(
+                                    hintText: "Nama Panggilan",
+                                    labletext: "Nama Panggilan",
+                                    typeInput: TextInputType.text,
+                                    iconText: const Icon(Icons.person_pin),
+                                    validator: ((value) =>
+                                        controllerRegister.checkValidator(
+                                            value, TypeValidator.nickname)),
+                                    textInputAction: TextInputAction.next,
+                                    controller:
+                                        controllerRegister.nicknameCtrl.value,
+                                  ),
+                                  InputTextFormCostum(
+                                    labletext: "Nomor Induk Kependudukan (NIK)",
+                                    hintText: "Nomor Induk Kependudukan (NIK)",
+                                    typeInput: TextInputType.number,
+                                    iconText: const Icon(Icons.contacts),
+                                    validator: ((value) =>
+                                        controllerRegister.checkValidator(
+                                            value, TypeValidator.nik)),
+                                    textInputAction: TextInputAction.next,
+                                    controller:
+                                        controllerRegister.nikCtrl.value,
+                                  ),
+                                  InputTextFormCostum(
+                                    labletext: "Nomor Kartu Keluarga (KK)",
+                                    hintText: "Nomor Kartu Keluarga (KK)",
+                                    typeInput: TextInputType.number,
+                                    iconText: const Icon(Icons.call_to_action),
+                                    validator: ((value) =>
+                                        controllerRegister.checkValidator(
+                                            value, TypeValidator.kk)),
+                                    textInputAction: TextInputAction.next,
+                                    controller: controllerRegister.kkCtrl.value,
+                                  ),
+                                  InputTextFormCostum(
+                                    labletext: "Tempat Lahir",
+                                    hintText: "Tempat lahir",
+                                    typeInput: TextInputType.text,
+                                    iconText: const Icon(
+                                        Icons.location_history_rounded),
+                                    validator: ((value) =>
+                                        controllerRegister.checkValidator(
+                                            value, TypeValidator.place)),
+                                    textInputAction: TextInputAction.next,
+                                    controller: controllerRegister
+                                        .tempatLahirCtrl.value,
+                                  ),
+                                  SelectDateCostum(
+                                      labletext: "Tanggal Lahir",
+                                      hintText: "dd/mm/yyyy",
+                                      validator: ((value) =>
+                                          controllerRegister.checkValidator(
+                                              value,
+                                              TypeValidator.dateOfBirth)),
+                                      controller: controllerRegister
+                                          .dateOfBirthCtrl.value),
+                                  InputTextFormCostum(
+                                    labletext: "Nomor Handphone",
+                                    hintText: "Nomor Handphone",
+                                    typeInput: TextInputType.number,
+                                    iconText: const Icon(Icons.phone_android),
+                                    validator: ((value) =>
+                                        controllerRegister.checkValidator(
+                                            value, TypeValidator.phone)),
+                                    textInputAction: TextInputAction.next,
+                                    controller:
+                                        controllerRegister.phoneCtrl.value,
+                                  ),
+                                  const UploadPhoto(),
+                                ],
+                              ),
+                            ),
                           ),
-                          InputTextFormCostum(
-                            hintText: "Nama Lengkap",
-                            labletext: "Nama Lengkap",
-                            typeInput: TextInputType.text,
-                            iconText: const Icon(Icons.person),
-                           validator: ((value) => controllerRegister.checkValidator(value, TypeValidator.fullname)),
-                            textInputAction: TextInputAction.next,
-                            controller: controllerRegister.fullnameCtrl.value,
-                          ),
-                          InputTextFormCostum(
-                            hintText: "Nama Panggilan",
-                            labletext: "Nama Panggilan",
-                            typeInput: TextInputType.text,
-                            iconText: const Icon(Icons.person_pin),
-                            validator: ((value) => controllerRegister.checkValidator(value, TypeValidator.nickname)),
-                            textInputAction: TextInputAction.next,
-                            controller: controllerRegister.nicknameCtrl.value,
-                          ),
-                          InputTextFormCostum(
-                            labletext: "Nomor Induk Kependudukan (NIK)",
-                            hintText: "Nomor Induk Kependudukan (NIK)",
-                            typeInput: TextInputType.number,
-                            iconText: const Icon(Icons.contacts),
-                            validator: ((value) => controllerRegister.checkValidator(value, TypeValidator.nik)),
-                            textInputAction: TextInputAction.next,
-                            controller: controllerRegister.nikCtrl.value,
-                          ),
-                          InputTextFormCostum(
-                            labletext: "Nomor Kartu Keluarga (KK)",
-                            hintText: "Nomor Kartu Keluarga (KK)",
-                            typeInput: TextInputType.number,
-                            iconText: const Icon(Icons.call_to_action),
-                            validator: ((value) => controllerRegister.checkValidator(value, TypeValidator.kk)),
-                            textInputAction: TextInputAction.next,
-                            controller: controllerRegister.kkCtrl.value,
-                          ),
-                          InputTextFormCostum(
-                            labletext: "Tempat Lahir",
-                            hintText: "Tempat lahir",
-                            typeInput: TextInputType.text,
-                            iconText: const Icon(Icons.location_history_rounded),
-                           validator: ((value) => controllerRegister.checkValidator(value, TypeValidator.place)),
-                            textInputAction: TextInputAction.next,
-                            controller: controllerRegister.tempatLahirCtrl.value,
-                          ),
-                          const SelectDateCostum(),
-                          InputTextFormCostum(
-                            labletext: "Nomor Handphone",
-                            hintText: "Nomor Handphone",
-                            typeInput: TextInputType.number,
-                            iconText: const Icon(Icons.phone_android),
-                          validator: ((value) => controllerRegister.checkValidator(value, TypeValidator.phone)),
-                            textInputAction: TextInputAction.next,
-                            controller: controllerRegister.phoneCtrl.value,
-                          ),
-                          const UploadPhoto(),
                         ],
-                      )),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -178,7 +255,6 @@ class RegistrationView extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class UploadPhoto extends StatefulWidget {
@@ -372,7 +448,17 @@ class InputTextFormCostum extends StatelessWidget {
 }
 
 class SelectDateCostum extends StatefulWidget {
-  const SelectDateCostum({super.key});
+  const SelectDateCostum(
+      {super.key,
+      this.controller,
+      this.validator,
+      this.hintText,
+      this.labletext});
+
+  final String? hintText;
+  final String? labletext;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
 
   @override
   State<SelectDateCostum> createState() => _SelectDateState();
@@ -381,26 +467,18 @@ class SelectDateCostum extends StatefulWidget {
 class _SelectDateState extends State<SelectDateCostum> {
   DateTime _selectedDate = DateTime.now();
 
-  final TextEditingController _controller = TextEditingController();
-
-  String? cekTanggalLahir(String? text) {
-    if (text == null || text.isEmpty) {
-      return 'Tanggal Lahir tidak boleh kosong';
-    }
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
     return InputTextFormCostum(
-      labletext: "Tanggal Lahir",
-      hintText: "Tanggal Lahir",
+      hintText: widget.hintText,
+      labletext: widget.labletext,
       typeInput: TextInputType.number,
       iconText: const Icon(Icons.phone_android),
       textInputAction: TextInputAction.next,
-      controller: _controller,
+      controller: widget.controller!,
       disabled: true,
-      validator: cekTanggalLahir,
+      // validator: cekTanggalLahir,
+      validator: widget.validator,
       onTap: () {
         showModalBottomSheet(
           enableDrag: false,
@@ -428,11 +506,8 @@ class _SelectDateState extends State<SelectDateCostum> {
                       selectedDate: _selectedDate,
                       locale: const Locale('id'),
                       onDateTimeChanged: (DateTime value) {
-                        String formattedDate =
-                            DateFormat('dd-MM-yyyy').format(_selectedDate);
                         setState(() {
                           _selectedDate = value;
-                          _controller.text = formattedDate;
                         });
                       },
                     ),
@@ -444,6 +519,9 @@ class _SelectDateState extends State<SelectDateCostum> {
                         backgroundColor: const Color(0xFFFF8226),
                       ),
                       onPressed: () {
+                        String formattedDate =
+                            DateFormat('dd-MM-yyyy').format(_selectedDate);
+                        widget.controller?.text = formattedDate;
                         Get.back();
                       },
                       child: const Text("Ok"),
