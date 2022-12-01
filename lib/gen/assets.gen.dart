@@ -55,6 +55,9 @@ class $AssetsImageGen {
   AssetGenImage get lpdpNoImage =>
       const AssetGenImage('assets/image/lpdp_no_image.png');
 
+  AssetGenImage get lpdpSendEmail =>
+      const AssetGenImage('assets/image/lpdp_send_email.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         lpdpHeader,
@@ -62,7 +65,8 @@ class $AssetsImageGen {
         lpdpRegistration,
         lpdpNoImage,
         lpdpForgotPassword,
-        lpdpKonfirmasiPassword
+        lpdpKonfirmasiPassword,
+        lpdpSendEmail
       ];
 }
 
