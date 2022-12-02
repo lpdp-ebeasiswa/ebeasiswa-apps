@@ -89,7 +89,7 @@ class ProfileAccountView extends GetView<LoginController> {
                                               ),
                                             ],
                                           ),
-                                        ),
+                                        ),)
                                       ],
                                     ),
                                     Text(
