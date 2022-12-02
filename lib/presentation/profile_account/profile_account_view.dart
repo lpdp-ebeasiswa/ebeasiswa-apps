@@ -1,5 +1,6 @@
 import 'package:ebeasiswa/presentation/login/login_controller.dart';
 import 'package:ebeasiswa/presentation/profile/profile_view.dart';
+import 'package:ebeasiswa/presentation/update_profile/update_profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -67,6 +68,10 @@ class ProfileAccountView extends GetView<LoginController> {
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.only(left:10.0),
+                                           child: GestureDetector(
+                                            onTap: () {
+                                              Get.to(const UpdateProfileView());
+                                            },
                                           child: Row(
                                             children: const [
                                               Text(
