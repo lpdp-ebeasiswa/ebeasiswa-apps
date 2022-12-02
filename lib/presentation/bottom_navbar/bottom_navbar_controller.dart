@@ -42,7 +42,7 @@ class EbeasiswaBottomNavbarController extends GetxController {
         buttons: [
           DialogButton(
             color: Colors.red,
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () => onLogoutApps(),
             child: const Text(
               "Logout",
               style: TextStyle(color: Colors.white, fontSize: 16),
