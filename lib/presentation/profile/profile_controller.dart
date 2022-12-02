@@ -12,8 +12,8 @@ class ProfileController extends GetxController {
 
   @override
   void onInit() {
-    onFetchProfile();
     super.onInit();
+    onFetchProfile();
   }
 
   Future<ProfileModel?> onFetchProfile() async {

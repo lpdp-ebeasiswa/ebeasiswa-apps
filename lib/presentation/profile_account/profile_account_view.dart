@@ -77,6 +77,7 @@ class ProfileAccountView extends GetView<LoginController> {
                                                     color: Colors.black),
                                               ),
                                               FaIcon(
+                                                // ignore: deprecated_member_use
                                                 FontAwesomeIcons.edit,
                                                 color: ColorName.orange,
                                                 size: 14,

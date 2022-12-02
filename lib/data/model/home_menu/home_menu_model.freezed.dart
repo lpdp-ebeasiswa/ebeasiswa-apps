@@ -14,10 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-HomeMenuModel _$HomeMenuModelFromJson(Map<String, dynamic> json) {
-  return _HomeMenuModel.fromJson(json);
-}
-
 /// @nodoc
 mixin _$HomeMenuModel {
   int get id => throw _privateConstructorUsedError;
@@ -25,7 +21,6 @@ mixin _$HomeMenuModel {
   String get label => throw _privateConstructorUsedError;
   Color get colors => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $HomeMenuModelCopyWith<HomeMenuModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -128,16 +123,13 @@ class __$$_HomeMenuModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$_HomeMenuModel implements _HomeMenuModel {
   const _$_HomeMenuModel(
       {required this.id,
       required this.menu,
       required this.label,
       required this.colors});
-
-  factory _$_HomeMenuModel.fromJson(Map<String, dynamic> json) =>
-      _$$_HomeMenuModelFromJson(json);
 
   @override
   final int id;
@@ -161,26 +153,17 @@ class _$_HomeMenuModel implements _HomeMenuModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.menu, menu) || other.menu == menu) &&
             (identical(other.label, label) || other.label == label) &&
-            const DeepCollectionEquality().equals(other.colors, colors));
+            (identical(other.colors, colors) || other.colors == colors));
   }
 
-  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, menu, label,
-      const DeepCollectionEquality().hash(colors));
+  int get hashCode => Object.hash(runtimeType, id, menu, label, colors);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$_HomeMenuModelCopyWith<_$_HomeMenuModel> get copyWith =>
       __$$_HomeMenuModelCopyWithImpl<_$_HomeMenuModel>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_HomeMenuModelToJson(
-      this,
-    );
-  }
 }
 
 abstract class _HomeMenuModel implements HomeMenuModel {
@@ -189,9 +172,6 @@ abstract class _HomeMenuModel implements HomeMenuModel {
       required final String menu,
       required final String label,
       required final Color colors}) = _$_HomeMenuModel;
-
-  factory _HomeMenuModel.fromJson(Map<String, dynamic> json) =
-      _$_HomeMenuModel.fromJson;
 
   @override
   int get id;

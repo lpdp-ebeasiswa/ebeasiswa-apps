@@ -14,10 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-AccountMenuModel _$AccountMenuModelFromJson(Map<String, dynamic> json) {
-  return _AccountMenuModel.fromJson(json);
-}
-
 /// @nodoc
 mixin _$AccountMenuModel {
   int get id => throw _privateConstructorUsedError;
@@ -25,7 +21,6 @@ mixin _$AccountMenuModel {
   String get label => throw _privateConstructorUsedError;
   Color get colors => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $AccountMenuModelCopyWith<AccountMenuModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -128,16 +123,13 @@ class __$$_AccountMenuModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$_AccountMenuModel implements _AccountMenuModel {
   const _$_AccountMenuModel(
       {required this.id,
       required this.menu,
       required this.label,
       required this.colors});
-
-  factory _$_AccountMenuModel.fromJson(Map<String, dynamic> json) =>
-      _$$_AccountMenuModelFromJson(json);
 
   @override
   final int id;
@@ -161,26 +153,17 @@ class _$_AccountMenuModel implements _AccountMenuModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.menu, menu) || other.menu == menu) &&
             (identical(other.label, label) || other.label == label) &&
-            const DeepCollectionEquality().equals(other.colors, colors));
+            (identical(other.colors, colors) || other.colors == colors));
   }
 
-  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, menu, label,
-      const DeepCollectionEquality().hash(colors));
+  int get hashCode => Object.hash(runtimeType, id, menu, label, colors);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$_AccountMenuModelCopyWith<_$_AccountMenuModel> get copyWith =>
       __$$_AccountMenuModelCopyWithImpl<_$_AccountMenuModel>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_AccountMenuModelToJson(
-      this,
-    );
-  }
 }
 
 abstract class _AccountMenuModel implements AccountMenuModel {
@@ -189,9 +172,6 @@ abstract class _AccountMenuModel implements AccountMenuModel {
       required final String menu,
       required final String label,
       required final Color colors}) = _$_AccountMenuModel;
-
-  factory _AccountMenuModel.fromJson(Map<String, dynamic> json) =
-      _$_AccountMenuModel.fromJson;
 
   @override
   int get id;
