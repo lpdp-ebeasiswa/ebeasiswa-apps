@@ -67,31 +67,29 @@ class ProfileAccountView extends GetView<LoginController> {
                                               color: Colors.orange),
                                         ),
                                         Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10.0),
-                                          child: GestureDetector(
+                                          padding: const EdgeInsets.only(left:10.0),
+                                           child: GestureDetector(
                                             onTap: () {
                                               Get.to(const UpdateProfileView());
                                             },
-                                            child: Row(
-                                              children: const [
-                                                Text(
-                                                  "Edit Profile",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 12,
-                                                      color: Colors.black),
-                                                ),
-                                                FaIcon(
-                                                  FontAwesomeIcons.edit,
-                                                  color: ColorName.orange,
-                                                  size: 14,
-                                                ),
-                                              ],
-                                            ),
+                                          child: Row(
+                                            children: const [
+                                              Text(
+                                                "Edit Profile",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12,
+                                                    color: Colors.black),
+                                              ),
+                                              FaIcon(
+                                                // ignore: deprecated_member_use
+                                                FontAwesomeIcons.edit,
+                                                color: ColorName.orange,
+                                                size: 14,
+                                              ),
+                                            ],
                                           ),
-                                        ),
+                                        ),)
                                       ],
                                     ),
                                     Text(

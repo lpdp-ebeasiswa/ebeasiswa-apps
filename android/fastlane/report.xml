@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.0022444">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="1: load_json" time="0.0089018">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: load_json" time="0.010575">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="3: microsft_teams_message_card" time="1.4426769">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="4: flutter build apk --flavor development -t lib/app/config/main_development.dart" time="16.2732647">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="5: firebase_app_distribution" time="13.1449086">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="6: microsft_teams_message_card" time="1.7252631">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>

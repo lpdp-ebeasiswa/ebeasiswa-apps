@@ -125,7 +125,7 @@ class _CallcenterMenuViewState extends State<CallcenterMenuView> {
                                   ),
                                   Text(ctx[index].menu,
                                       textAlign: TextAlign.center,
-                                      style: const TextStyle(fontSize: 14, color: ColorName.raven))
+                                      style: const TextStyle(fontSize: 12, color: ColorName.raven))
                                 ],
                               ),
                               const FaIcon(FontAwesomeIcons.angleRight, color: ColorName.raven, size: 16,),
@@ -134,7 +134,7 @@ class _CallcenterMenuViewState extends State<CallcenterMenuView> {
                         ),
                       ),
                       const Padding(
-                        padding: EdgeInsets.only(left: 20.0),
+                        padding: EdgeInsets.only(left: 20.0, right: 20.0),
                         child: Divider(
                           thickness: 2,
                         ),

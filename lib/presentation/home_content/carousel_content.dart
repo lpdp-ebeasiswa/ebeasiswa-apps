@@ -23,8 +23,10 @@ class CarouselContent extends StatelessWidget {
           aspectRatio: 2.0,
           enlargeCenterPage: true,
           enableInfiniteScroll: false,
+          pauseAutoPlayInFiniteScroll: true,
           initialPage: 2,
-          autoPlay: true,
+          autoPlay: false,
+          scrollPhysics: const BouncingScrollPhysics()
         ),
         items: imageSliders,
       ),

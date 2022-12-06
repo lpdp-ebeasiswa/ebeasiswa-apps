@@ -6,14 +6,14 @@ import 'package:get/get.dart';
 import '../../data/model/account_menu/account_menu_model.dart';
 import '../../gen/colors.gen.dart';
 
-class FaqMenuView extends StatefulWidget {
-  const FaqMenuView({super.key});
+class UmumMenuView extends StatefulWidget {
+  const UmumMenuView({super.key});
 
   @override
-  State<FaqMenuView> createState() => _FaqMenuViewState();
+  State<UmumMenuView> createState() => _UmumMenuViewState();
 }
 
-class _FaqMenuViewState extends State<FaqMenuView> {
+class _UmumMenuViewState extends State<UmumMenuView> {
   List<dynamic> icondata = const [
     FaIcon(
       FontAwesomeIcons.comment,
@@ -142,7 +142,7 @@ class _FaqMenuViewState extends State<FaqMenuView> {
                         ),
                       ),
                       const Padding(
-                        padding: EdgeInsets.only(left: 20.0),
+                        padding: EdgeInsets.only(left: 20.0, right: 20.0),
                         child: Divider(
                           thickness: 2,
                         ),

@@ -39,7 +39,7 @@ class _EbeasiswaBottomNavbarState extends State<EbeasiswaBottomNavbar> {
                 unselectedFontSize: 11.0,
                 selectedFontSize: 12.0,
                 onTap: (_) {
-                  ebeasiswaBottomNavbarController.onTapBottomMenu(_);
+                  ebeasiswaBottomNavbarController.onTapBottomMenu(_, context);
                   setState(() {});
                 },
                 items: const <BottomNavigationBarItem>[

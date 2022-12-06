@@ -37,6 +37,9 @@ class ColorName {
   /// Color: #FF6C06
   static const Color orange = Color(0xFFFF6C06);
 
+  /// Color: #FF8226
+  static const Color orangeGlow = Color(0xFFFF8226);
+
   /// Color: #757d88
   static const Color raven = Color(0xFF757D88);
 
