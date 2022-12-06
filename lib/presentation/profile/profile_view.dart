@@ -1,14 +1,17 @@
 import 'package:ebeasiswa/gen/assets.gen.dart';
 import 'package:ebeasiswa/presentation/profile/profile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+
+import '../verifikasi_email/verfikasi_email_view.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ProfileController profileController = Get.put(ProfileController());
+    ProfileController profileController = Get.put(ProfileController());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orange,
@@ -24,6 +27,8 @@ class ProfileView extends StatelessWidget {
             return Text("Error: ${profileController.errmsg.value.capitalize}");
           } else {
             var data = profileController.profileModel;
+            var status = profileController.statusVerifikasi;
+            status.value;
             return Stack(
               children: [
                 ClipPath(
@@ -102,103 +107,48 @@ class ProfileView extends StatelessWidget {
                       Expanded(
                           child: Padding(
                         padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Nama Lengkap",
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w300),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              "${data?.name}",
-                              style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w400),
-                            ),
-                            const SizedBox(height: 15),
-                            Container(
-                              height: 1.5,
-                              color: Colors.grey[300],
-                            ),
-                            const SizedBox(height: 15),
-                            const Text(
-                              "Email",
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w300),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              "${data?.email}",
-                              style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w400),
-                            ),
-                            const SizedBox(height: 15),
-                            Container(
-                              height: 1.5,
-                              color: Colors.grey[300],
-                            ),
-                            const SizedBox(height: 15),
-                            const Text(
-                              "Alamat",
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w300),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              "${data?.alamat}",
-                              style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w400),
-                            ),
-                            const SizedBox(height: 15),
-                            Container(
-                              height: 1.5,
-                              color: Colors.grey[300],
-                            ),
-                            const SizedBox(height: 15),
-                            const Text(
-                              "Expenditure",
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w300),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              "${data?.expenditure}",
-                              style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w400),
-                            ),
-                            const SizedBox(height: 15),
-                            Container(
-                              height: 1.5,
-                              color: Colors.grey[300],
-                            ),
-                            const SizedBox(height: 15),
-                            const Text(
-                              "Date Expenditure",
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w300),
-                            ),
-                            const SizedBox(
-                              height: 1.5,
-                            ),
-                            Text(
-                              "${data?.expenditureDate} - ${data?.expenditureTime}",
-                              style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w400),
-                            ),
-                            const SizedBox(height: 15),
-                            Container(
-                              height: 2,
-                              color: Colors.grey[300],
-                            ),
-                            const SizedBox(height: 15),
-                          ],
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              LabelProfile(
+                                label: "Nama Lengkap",
+                                data: '${data?.name}',
+                              ),
+                              LabelProfile(
+                                label: "Email",
+                                data: '${data?.email}',
+                                cek: status,
+                                trailing: true,
+                                onTap: () {
+                                  Get.to(VerifikasiEmailView(), arguments: [
+                                    {"email": data?.email},
+                                    {
+                                      "verifikasi": "1001",
+                                    }
+                                  ])?.then(
+                                    (reslut) => {
+                                      if (reslut[0]["backValue"] == "berhasil")
+                                        {status.value = true}
+                                    },
+                                  );
+                                },
+                              ),
+                              LabelProfile(
+                                label: "Alamat",
+                                data: '${data?.alamat}',
+                              ),
+                              LabelProfile(
+                                label: "Expenditure",
+                                data: '${data?.expenditure}',
+                              ),
+                              LabelProfile(
+                                label: "Date Expenditure",
+                                data:
+                                    '${data?.expenditureDate} - ${data?.expenditureTime}',
+                              ),
+                            ],
+                          ),
                         ),
                       ))
                     ],
@@ -209,6 +159,77 @@ class ProfileView extends StatelessWidget {
           }
         },
       ),
+    );
+  }
+}
+
+class LabelProfile extends StatelessWidget {
+  const LabelProfile({
+    Key? key,
+    // this.data,
+    this.cek,
+    this.trailing,
+    required this.label,
+    required this.data,
+    this.onTap,
+  }) : super(key: key);
+
+  // final ProfileModel? data;
+  final RxBool? cek;
+  final bool? trailing;
+  final String label;
+  final String data;
+  final Function()? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 5),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              data,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+            ),
+            trailing == true
+                ? !cek!.value
+                    ? InkWell(
+                        onTap: onTap,
+                        child: Row(
+                          children: const [
+                            Text(
+                              "Belum Verifikasi",
+                              style: TextStyle(color: Colors.redAccent),
+                            ),
+                            FaIcon(
+                              FontAwesomeIcons.angleRight,
+                              color: Colors.redAccent,
+                              size: 14,
+                            ),
+                          ],
+                        ),
+                      )
+                    : const Text(
+                        "Sudah Verifikasi",
+                        style: TextStyle(color: Colors.blue),
+                      )
+                : const Text(""),
+          ],
+        ),
+        const SizedBox(height: 15),
+        Container(
+          height: 2,
+          color: Colors.grey[300],
+        ),
+        const SizedBox(height: 15),
+      ],
     );
   }
 }
