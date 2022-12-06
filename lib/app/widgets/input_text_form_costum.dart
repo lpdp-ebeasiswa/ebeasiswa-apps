@@ -13,7 +13,8 @@ class InputTextFormCostum extends StatelessWidget {
       this.validator,
       this.onsavecus,
       this.onChanged,
-      this.onTap});
+      this.onTap,
+      this.setBorder});
 
   final String? hintText;
   final String? labletext;
@@ -26,6 +27,7 @@ class InputTextFormCostum extends StatelessWidget {
   final String? Function(String?)? onsavecus;
   final String? Function(String?)? onChanged;
   final Function()? onTap;
+  final bool? setBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -43,15 +45,20 @@ class InputTextFormCostum extends StatelessWidget {
         // autovalidateMode: AutovalidateMode.onUserInteraction,
         keyboardType: typeInput,
         decoration: InputDecoration(
-          hintText: hintText ?? "Default",
-          labelText: labletext ?? "Default",
+          hintText: hintText,
+          labelText: labletext,
           labelStyle: const TextStyle(color: Colors.grey),
           prefixIcon: IconTheme(
               data: const IconThemeData(color: Color(0xFFFF8226)),
-              child: iconText!),
-          // enabledBorder: OutlineInputBorder(
-          //   borderRadius: BorderRadius.circular(20.0),
-          // ),
+              child: iconText ?? const Icon(Icons.text_fields)),
+          enabledBorder: setBorder == true
+              ? OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFFF8226),
+                  ),
+                )
+              : null,
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(35.0),
             borderSide: const BorderSide(

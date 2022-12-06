@@ -1,3 +1,4 @@
+import 'package:ebeasiswa/presentation/faq/faq_view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -87,14 +88,19 @@ class _FaqMenuViewState extends State<FaqMenuView> {
                       SizedBox(
                         height: 60,
                         child: ElevatedButton(
-                           style: ButtonStyle(
+                          style: ButtonStyle(
                             elevation: MaterialStateProperty.all(0.0),
                             foregroundColor: MaterialStateProperty.all<Color>(
                                 Colors.transparent),
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 Colors.transparent),
                           ),
-                          onPressed: () => {},
+                          onPressed: () => {
+                            if (ctx[index].id == 1)
+                              {Get.to(const FaqView())}
+                            else if (ctx[index].id == 2)
+                              {print("umum---> object 2")}
+                          },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -106,7 +112,8 @@ class _FaqMenuViewState extends State<FaqMenuView> {
                                     child: ElevatedButton(
                                         child: icondata[index],
                                         style: ButtonStyle(
-                                          elevation: MaterialStateProperty.all(0.0),
+                                          elevation:
+                                              MaterialStateProperty.all(0.0),
                                           foregroundColor:
                                               MaterialStateProperty.all<Color>(
                                                   Colors.transparent),
@@ -121,17 +128,24 @@ class _FaqMenuViewState extends State<FaqMenuView> {
                                   ),
                                   Text(ctx[index].menu,
                                       textAlign: TextAlign.center,
-                                      style: const TextStyle(fontSize: 12,  color: ColorName.raven))
+                                      style: const TextStyle(
+                                          fontSize: 12, color: ColorName.raven))
                                 ],
                               ),
-                              const FaIcon(FontAwesomeIcons.angleRight,  color: ColorName.raven, size: 16,),
+                              const FaIcon(
+                                FontAwesomeIcons.angleRight,
+                                color: ColorName.raven,
+                                size: 16,
+                              ),
                             ],
                           ),
                         ),
                       ),
-                     const Padding(
-                        padding:  EdgeInsets.only(left:20.0),
-                        child:  Divider(thickness: 2,),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 20.0),
+                        child: Divider(
+                          thickness: 2,
+                        ),
                       ),
                     ],
                   ),
