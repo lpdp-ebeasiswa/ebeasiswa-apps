@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../gen/colors.gen.dart';
 import '../account_menu/callcenter_menu_view.dart';
-import '../account_menu/faq_menu_view.dart';
+import '../account_menu/umum_menu_view.dart';
 import '../profile_account/profile_account_view.dart';
 
 class AccountView extends StatefulWidget {
@@ -16,8 +16,11 @@ class _AccountViewState extends State<AccountView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: ColorName.orange,
+        appBar:  PreferredSize(
+          preferredSize: const Size.fromHeight(20.0),
+          child: AppBar(
+            backgroundColor: ColorName.orange,
+          ),
         ),
         body: ListView(
           shrinkWrap: true,
@@ -26,7 +29,7 @@ class _AccountViewState extends State<AccountView> {
             Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
-                  FaqMenuView(),
+                  UmumMenuView(),
                   CallcenterMenuView(),
                 ])
           ],

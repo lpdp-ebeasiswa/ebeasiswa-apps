@@ -1,0 +1,105 @@
+default_platform(:android)
+releaseData = load_json(json_path: "app/release_data.json")
+data = load_json(json_path: "app/cicd_android.json")
+
+# gradle env
+taskClean = data['taskClean']
+
+# teams env
+titleProcess = data['titleProcess']
+titleSuccess = data['titleSuccess']
+summary = data['summary']
+text = data['text']
+activityImage = data['activityImage']
+platformName = data['platformName']
+platformValue = data['platformValue']
+actionName = data['actionName']
+actionType = data['actionType']
+actionOS = data['actionOS']
+actionUrl = data['actionUrl']
+webhookUrl = data['webhookUrl']
+# release data
+releaseNote = releaseData['releaseNote']
+# app distribution
+appId = data['appIdFirebase']
+appPath = data['appPath']
+groupPath = data['groupPath']
+firebaseCLIPath = data['firebaseCLIPath']
+releasePath = data['releasePath']
+
+platform :android do
+  desc "Release Development"
+  lane :android_dev do
+    microsft_teams_message_card(
+      title: titleProcess,
+      summary: summary,
+      text: text,
+      activity_title: releaseNote,
+      activity_subtitle: Time.now.strftime("%d/%m/%Y %H:%M"),
+      activity_image: activityImage,
+      facts:[
+        {
+          "name"=> platformName,
+          "value"=> platformValue
+        }
+            ],
+      potential_action:[
+        {
+          "@type": actionType,
+          "name": actionName,
+          "targets": [
+            { 
+              "os": actionOS, 
+              "uri": actionUrl
+            }
+                     ]
+        },
+                          ],
+      teams_url: webhookUrl
+    )
+      gradle(task: taskClean)
+    Dir.chdir "../.." do
+      sh("flutter", "clean")
+      sh("flutter", "pub", "get")
+      sh("flutter", "build", "apk", "--flavor", "development", "-t", "lib/app/config/main_development.dart")  
+    end 
+      firebase_app_distribution(
+            app: appId,
+            groups: groupPath,
+            release_notes: releaseNote,
+            firebase_cli_path: firebaseCLIPath,
+            apk_path: appPath,        
+        )
+     
+      microsft_teams_message_card(
+        title: titleSuccess,
+        summary: summary,
+        text: text,
+        activity_title: releaseNote,
+        activity_subtitle: Time.now.strftime("%d/%m/%Y %H:%M"),
+        activity_image: activityImage,
+        facts:[
+          {
+            "name"=> platformName,
+            "value"=> platformValue
+          }
+              ],
+        potential_action:[
+          {
+            "@type": actionType,
+            "name": actionName,
+            "targets": [
+              { 
+                "os": actionOS, 
+                "uri": actionUrl
+              }
+                       ]
+          },
+                            ],
+        teams_url: webhookUrl
+      )
+    end
+  end
+
+
+

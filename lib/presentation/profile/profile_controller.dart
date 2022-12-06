@@ -20,9 +20,9 @@ class ProfileController extends GetxController {
 
   @override
   void onInit() {
-    onFetchProfile();
-    storageVerifikasi();
     super.onInit();
+    storageVerifikasi();
+    onFetchProfile();
   }
 
   void storageVerifikasi() {

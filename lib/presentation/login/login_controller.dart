@@ -132,12 +132,10 @@ class LoginController extends GetxController {
   onLoginUser() {
     if (isLoggedin.value == true) {
       Get.snackbar('Login Success', 'Your Token : $token');
-      //Get.off(() => const HomeView());
       Get.off(() => const EbeasiswaBottomNavbar());
     } else {
       Get.off(() => const LoginView());
     }
-    // getAuth( 'smeb', 'pass123');
   }
 
   onLogoutUser() {

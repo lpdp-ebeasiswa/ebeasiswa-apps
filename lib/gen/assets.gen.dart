@@ -35,38 +35,44 @@ class $AssetsImageGen {
   AssetGenImage get lpdpAppbar =>
       const AssetGenImage('assets/image/lpdp_appbar.png');
 
+  /// File path: assets/image/lpdp_forgot_password.png
+  AssetGenImage get lpdpForgotPassword =>
+      const AssetGenImage('assets/image/lpdp_forgot_password.png');
+
   /// File path: assets/image/lpdp_header.png
   AssetGenImage get lpdpHeader =>
       const AssetGenImage('assets/image/lpdp_header.png');
+
+  /// File path: assets/image/lpdp_konfirmasi_password.png
+  AssetGenImage get lpdpKonfirmasiPassword =>
+      const AssetGenImage('assets/image/lpdp_konfirmasi_password.png');
 
   /// File path: assets/image/lpdp_logo.png
   AssetGenImage get lpdpLogo =>
       const AssetGenImage('assets/image/lpdp_logo.png');
 
-  AssetGenImage get lpdpForgotPassword =>
-      const AssetGenImage('assets/image/lpdp_forgot_password.png');
-
-  AssetGenImage get lpdpKonfirmasiPassword =>
-      const AssetGenImage('assets/image/lpdp_konfirmasi_password.png');
-
-  AssetGenImage get lpdpRegistration =>
-      const AssetGenImage('assets/image/lpdp_registration.png');
-
+  /// File path: assets/image/lpdp_no_image.png
   AssetGenImage get lpdpNoImage =>
       const AssetGenImage('assets/image/lpdp_no_image.png');
 
   AssetGenImage get lpdpSendEmail =>
       const AssetGenImage('assets/image/lpdp_send_email.png');
 
+  /// File path: assets/image/lpdp_registration.png
+  AssetGenImage get lpdpRegistration =>
+      const AssetGenImage('assets/image/lpdp_registration.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
-        lpdpHeader,
-        lpdpLogo,
-        lpdpRegistration,
-        lpdpNoImage,
+        lpdpAppbar,
         lpdpForgotPassword,
         lpdpKonfirmasiPassword,
-        lpdpSendEmail
+        lpdpSendEmail,
+        lpdpHeader,
+        lpdpKonfirmasiPassword,
+        lpdpLogo,
+        lpdpNoImage,
+        lpdpRegistration
       ];
 }
 
