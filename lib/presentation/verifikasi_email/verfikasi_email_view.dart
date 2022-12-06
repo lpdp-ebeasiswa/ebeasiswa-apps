@@ -1,5 +1,5 @@
 import 'package:ebeasiswa/app/widgets/input_text_form_costum.dart';
-import 'package:ebeasiswa/presentation/verifikasi_email/verifikasi_emial_controller.dart';
+import 'package:ebeasiswa/presentation/verifikasi_email/verifikasi_email_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -191,12 +191,7 @@ class VerifikasiEmailView extends StatelessWidget {
                                 const Text("Tidak menerima kode unik? "),
                                 InkWell(
                                   onTap: () {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                            'Berhasil kirim ulang, kode unik anda adalah = ${controller.argumentData[1]['verifikasi']}'),
-                                      ),
-                                    );
+                                    controller.resendingCode();
                                   },
                                   child: const Text(
                                     "Kirim ulang",

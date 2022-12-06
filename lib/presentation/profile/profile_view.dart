@@ -28,6 +28,7 @@ class ProfileView extends StatelessWidget {
           } else {
             var data = profileController.profileModel;
             var status = profileController.statusVerifikasi;
+            status.value;
             return Stack(
               children: [
                 ClipPath(
@@ -118,7 +119,7 @@ class ProfileView extends StatelessWidget {
                                 label: "Email",
                                 data: '${data?.email}',
                                 cek: status,
-                                dataKanan: "ada",
+                                trailing: true,
                                 onTap: () {
                                   Get.to(VerifikasiEmailView(), arguments: [
                                     {"email": data?.email},
@@ -167,7 +168,7 @@ class LabelProfile extends StatelessWidget {
     Key? key,
     // this.data,
     this.cek,
-    this.dataKanan,
+    this.trailing,
     required this.label,
     required this.data,
     this.onTap,
@@ -175,7 +176,7 @@ class LabelProfile extends StatelessWidget {
 
   // final ProfileModel? data;
   final RxBool? cek;
-  final String? dataKanan;
+  final bool? trailing;
   final String label;
   final String data;
   final Function()? onTap;
@@ -197,7 +198,7 @@ class LabelProfile extends StatelessWidget {
               data,
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
             ),
-            dataKanan != null
+            trailing == true
                 ? !cek!.value
                     ? InkWell(
                         onTap: onTap,

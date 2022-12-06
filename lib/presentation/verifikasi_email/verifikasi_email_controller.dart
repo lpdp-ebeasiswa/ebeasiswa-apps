@@ -21,13 +21,10 @@ class VerifikasiEmailController extends GetxController {
   void onClose() {
     super.onClose();
     emailCtrl.close();
-  }
-
-  @override
-  void onInit() {
-    debugPrint('data email ${argumentData[0]['email']}');
-    debugPrint('data verifikasi ${argumentData[1]['verifikasi']}');
-    super.onInit();
+    kodeUnikCtrl_1.close();
+    kodeUnikCtrl_2.close();
+    kodeUnikCtrl_3.close();
+    kodeUnikCtrl_4.close();
   }
 
   void verifyOTP() {
@@ -48,6 +45,13 @@ class VerifikasiEmailController extends GetxController {
     //   debugPrint("sukses------> ${sukses.value}");
     //   Get.snackbar('Gagak verifikasi', 'OTP yang di kirim tidak sama');
     // }
+  }
+
+  resendingCode() {
+    Get.snackbar(
+        snackPosition: SnackPosition.BOTTOM,
+        'Berhasil kirim ulang',
+        'kode unik anda adalah = ${argumentData[1]['verifikasi']}');
   }
 
   checkValidator(String? text, TypeValidator type) {
