@@ -1,4 +1,6 @@
+import 'package:ebeasiswa/app/widgets/dot_indicator_costum.dart';
 import 'package:ebeasiswa/gen/assets.gen.dart';
+import 'package:ebeasiswa/presentation/onboarding/list_onboarding_view.dart';
 import 'package:ebeasiswa/presentation/onboarding/onboarding_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,18 +45,16 @@ class _OnBoardingState extends State<OnBoardingView> {
                     });
                   },
                   itemBuilder: (context, index) => ImageInformation(
-                      pageIndex: controller.pageIndex,
-                      onboard: Onboard(
-                          asset: dataBoarding[index].asset,
-                          judul: dataBoarding[index].judul,
-                          deskripsi: dataBoarding[index].deskripsi)),
+                    pageIndex: controller.pageIndex,
+                    onboard: Onboard(
+                        asset: dataBoarding[index].asset,
+                        judul: dataBoarding[index].judul,
+                        deskripsi: dataBoarding[index].deskripsi),
+                  ),
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
               Padding(
-                padding: const EdgeInsets.only(top: 40, bottom: 40),
+                padding: const EdgeInsets.only(top: 30, bottom: 30),
                 child: controller.pageIndex == 2
                     ? Column(
                         children: [
@@ -95,7 +95,7 @@ class _OnBoardingState extends State<OnBoardingView> {
                         ],
                       )
                     : Container(
-                        padding: const EdgeInsets.symmetric(vertical: 32),
+                        padding: const EdgeInsets.symmetric(vertical: 40),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -119,62 +119,6 @@ class _OnBoardingState extends State<OnBoardingView> {
     );
   }
 }
-
-class DotIndikator extends StatelessWidget {
-  const DotIndikator({
-    Key? key,
-    this.aktif = false,
-  }) : super(key: key);
-
-  final bool aktif;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 8,
-      width: aktif ? 25 : 8,
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: aktif
-                ? [
-                    const Color(0xffF9B415),
-                    const Color(0xffFFD87E),
-                  ]
-                : [
-                    const Color(0xffFFFFFF),
-                    const Color(0xffFFFFFF),
-                  ],
-          ),
-          // color: aktif ? Colors.white : Colors.white.withOpacity(0.4),
-          borderRadius: const BorderRadius.all(Radius.circular(12))),
-    );
-  }
-}
-
-class Onboard {
-  final String judul, deskripsi;
-  final AssetGenImage asset;
-
-  Onboard({required this.asset, required this.judul, required this.deskripsi});
-}
-
-final List<Onboard> dataBoarding = [
-  Onboard(
-      asset: Assets.image.lpdp_board1,
-      judul: "Selamat datang di E-Beasiswa!",
-      deskripsi:
-          "Aplikasi untuk mempermudah semua urusan Proses Administrasi Awardee."),
-  Onboard(
-      asset: Assets.image.lpdp_board2,
-      judul: "Report",
-      deskripsi: "Mempermudah semua proses Laporan Awardee."),
-  Onboard(
-      asset: Assets.image.lpdp_board3,
-      judul: "Realtime status & Monitoring",
-      deskripsi: "Bisa cek langsung status dan aktivitas kamu."),
-];
 
 class ImageInformation extends StatelessWidget {
   const ImageInformation({
@@ -209,11 +153,7 @@ class ImageInformation extends StatelessWidget {
                   child: SafeArea(
                     child: InkWell(
                       onTap: () {
-                        pageIndex != 2
-                            ? c.pageController.nextPage(
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.ease)
-                            : Get.to(const LoginView());
+                        c.nextPage();
                       },
                       child: const Text(
                         "Lewati",
@@ -227,7 +167,7 @@ class ImageInformation extends StatelessWidget {
           ),
         ),
         Container(
-          padding: const EdgeInsets.only(bottom: 50),
+          padding: const EdgeInsets.only(bottom: 70),
           child: Column(
             children: [
               Text(
@@ -238,7 +178,7 @@ class ImageInformation extends StatelessWidget {
                     fontSize: 24,
                     fontWeight: FontWeight.w600),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 15),
               Text(
                 onboard.deskripsi,
                 textAlign: TextAlign.center,
