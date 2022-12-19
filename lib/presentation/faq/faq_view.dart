@@ -15,7 +15,7 @@ class FaqView extends StatelessWidget {
           backgroundColor: Colors.orange,
           title: const Text("FAQ"),
           centerTitle: true,
-          //untuk add data faq
+          // untuk add data faq
           // actions: <Widget>[
           //   IconButton(
           //       onPressed: () {
@@ -126,71 +126,65 @@ class _MainFaqViewState extends State<MainFaqView> {
 
         /// MAIN BODY
         Expanded(
-          child: SingleChildScrollView(
-            child: Container(
-                margin: const EdgeInsets.only(top: 5),
-                width: double.infinity,
-                height: Get.height * 0.795,
-                child: StreamBuilder<QuerySnapshot<Object?>>(
-                  stream: c.streamDataFaq(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.active) {
-                      var listFaq = snapshot.data!.docs;
-                      return ListView.builder(
-                        itemCount: listFaq.length,
-                        itemBuilder: (context, index) {
-                          var data =
-                              listFaq[index].data() as Map<String, dynamic>;
-                          var ctgry = int.parse(data["categoryId"]);
-                          if (name.isEmpty) {
-                            if (items[current]["id"] == 0) {
-                              return ListTile(
-                                title: Text("${data["title"]}"),
-                                subtitle: Text('${data["desc"]}'),
-                                //untuk hapus data faq
-                                // trailing: IconButton(
-                                //     onPressed: () {
-                                //       c.deleteFaq(listFaq[index].id);
-                                //     },
-                                //     icon: const Icon(Icons.delete_outlined)),
-                              );
-                            } else if (items[current]["id"] == ctgry) {
-                              return ListTile(
-                                title: Text("${data["title"]}"),
-                                subtitle: Text('${data["desc"]}'),
-                              );
-                            }
-                          }
-                          if (data["title"]
-                              .toString()
-                              .toLowerCase()
-                              .startsWith(name.toLowerCase())) {
-                            if (items[current]["id"] == 0) {
-                              return ListTile(
-                                title: Text("${data["title"]}"),
-                                subtitle: Text('${data["desc"]}'),
-                              );
-                            } else if (items[current]["id"] == ctgry) {
-                              return ListTile(
-                                title: Text("${data["title"]}"),
-                                subtitle: Text('${data["desc"]}'),
-                              );
-                            }
-                          }
-                          return const Visibility(
-                            visible: false,
-                            child: Text(""),
-                          );
-                        },
-                      );
+          child: StreamBuilder<QuerySnapshot<Object?>>(
+            stream: c.streamDataFaq(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.active) {
+                var listFaq = snapshot.data!.docs;
+                return ListView.builder(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  itemCount: listFaq.length,
+                  itemBuilder: (context, index) {
+                    var data = listFaq[index].data() as Map<String, dynamic>;
+                    var ctgry = int.parse(data["categoryId"]);
+                    if (name.isEmpty) {
+                      if (items[current]["id"] == 0) {
+                        return ListTile(
+                          title: Text("${data["title"]}"),
+                          subtitle: Text('${data["desc"]}'),
+                          //untuk hapus data faq
+                          // trailing: IconButton(
+                          //     onPressed: () {
+                          //       c.deleteFaq(listFaq[index].id);
+                          //     },
+                          //     icon: const Icon(Icons.delete_outlined)),
+                        );
+                      } else if (items[current]["id"] == ctgry) {
+                        return ListTile(
+                          title: Text("${data["title"]}"),
+                          subtitle: Text('${data["desc"]}'),
+                        );
+                      }
                     }
-                    return const Center(
-                      child: CircularProgressIndicator(),
+                    if (data["title"]
+                        .toString()
+                        .toLowerCase()
+                        .contains(name.toLowerCase())) {
+                      if (items[current]["id"] == 0) {
+                        return ListTile(
+                          title: Text("${data["title"]}"),
+                          subtitle: Text('${data["desc"]}'),
+                        );
+                      } else if (items[current]["id"] == ctgry) {
+                        return ListTile(
+                          title: Text("${data["title"]}"),
+                          subtitle: Text('${data["desc"]}'),
+                        );
+                      }
+                    }
+                    return const Visibility(
+                      visible: false,
+                      child: Text(""),
                     );
                   },
-                )),
+                );
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
           ),
-        ),
+        )
       ],
     );
   }
