@@ -62,6 +62,18 @@ class $AssetsImageGen {
   AssetGenImage get lpdpRegistration =>
       const AssetGenImage('assets/image/lpdp_registration.png');
 
+  AssetGenImage get lpdpLogoFullColor =>
+      const AssetGenImage('assets/image/lpdp_logo_fullcolor.png');
+
+  AssetGenImage get lpdp_boarding =>
+      const AssetGenImage('assets/image/lpdp_boarding.png');
+  AssetGenImage get lpdp_board1 =>
+      const AssetGenImage('assets/image/lpdp_board1.png');
+  AssetGenImage get lpdp_board2 =>
+      const AssetGenImage('assets/image/lpdp_board2.png');
+  AssetGenImage get lpdp_board3 =>
+      const AssetGenImage('assets/image/lpdp_board3.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         lpdpAppbar,
@@ -72,7 +84,12 @@ class $AssetsImageGen {
         lpdpKonfirmasiPassword,
         lpdpLogo,
         lpdpNoImage,
-        lpdpRegistration
+        lpdpRegistration,
+        lpdpLogoFullColor,
+        lpdp_boarding,
+        lpdp_board1,
+        lpdp_board2,
+        lpdp_board3,
       ];
 }
 
