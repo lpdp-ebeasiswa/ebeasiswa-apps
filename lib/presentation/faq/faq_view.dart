@@ -60,7 +60,7 @@ class _MainFaqViewState extends State<MainFaqView> {
           child: InputTextFormCostum(
             hintText: "Cari FAQ ...",
             iconText: const Icon(Icons.search),
-            setBorder: true,
+            border: true,
             onChanged: ((val) {
               setState(() {
                 name = val!;

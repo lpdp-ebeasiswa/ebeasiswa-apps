@@ -35,7 +35,7 @@ class _DatePickerModalState extends State<SelectDateCostum> {
       textInputAction: TextInputAction.next,
       controller: widget.controller!,
       disabled: true,
-      // validator: cekTanggalLahir,
+      border: true,
       validator: widget.validator,
       onTap: () {
         showModalBottomSheet(
