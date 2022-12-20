@@ -18,11 +18,14 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
-      appBar:  PreferredSize(
-          preferredSize: const Size.fromHeight(10.0), child: AppBar(
-            elevation: 0,
-            automaticallyImplyLeading: false, backgroundColor: ColorName.orangeGlow,)),
-            body: SafeArea(
+        appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(10.0),
+            child: AppBar(
+              elevation: 0,
+              automaticallyImplyLeading: false,
+              backgroundColor: ColorName.orangeGlow,
+            )),
+        body: SafeArea(
           child: ListView(
             children: [
               Assets.image.lpdpHeader.image(fit: BoxFit.fitWidth),
