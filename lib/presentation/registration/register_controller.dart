@@ -42,49 +42,6 @@ class RegisterController extends GetxController {
     photoCtrl.close();
   }
 
-  // Future getImage() async {
-  //   final ImagePicker picker = ImagePicker();
-  //   final XFile? imagePicked =
-  //       await picker.pickImage(source: ImageSource.gallery);
-  //   image = File(imagePicked!.path);
-  //   String? fileName = image!.path.split('/').last;
-  //   String? fileExtension = fileName.split('.').last;
-
-  //   final bytes = image!.readAsBytesSync().lengthInBytes;
-  //   final kb = bytes / 1024;
-  //   final ukuranPhoto = kb / 1024;
-
-  //   if (fileExtension == 'png' ||
-  //       fileExtension == 'PNG' ||
-  //       fileExtension == 'MIME' ||
-  //       fileExtension == 'mime') {
-  //     if (ukuranPhoto <= 1.01) {
-  //       image = File(imagePicked.path);
-  //       photoCtrl.value.text = fileName;
-  //     } else {
-  //       photoCtrl.value.text = 'Ukuran photo belum sesuai';
-  //       image = null;
-  //       Get.snackbar('Gagal Upload', 'Ukuran photo belum sesuai',
-  //           snackPosition: SnackPosition.BOTTOM,
-  //           backgroundColor: Colors.redAccent);
-  //       Get.snackbar('Gagal Upload', 'Ukuran photo belum sesuai',
-  //           snackPosition: SnackPosition.BOTTOM,
-  //           backgroundColor: Colors.redAccent);
-  //     }
-  //   } else {
-  //     image = null;
-  //     photoCtrl.value.text = 'Jenis photo belum sesuai';
-  //     Get.snackbar('Gagal Upload', 'Jenis photo belum sesuai',
-  //         snackPosition: SnackPosition.BOTTOM,
-  //         backgroundColor: Colors.redAccent);
-  //     image = null;
-  //     photoCtrl.value.text = 'Jenis photo belum sesuai';
-  //     Get.snackbar('Gagal Upload', 'Jenis photo belum sesuai',
-  //         snackPosition: SnackPosition.BOTTOM,
-  //         backgroundColor: Colors.redAccent);
-  //   }
-  // }
-
   hidepassword() {
     isPasswordVisible.value
         ? isPasswordVisible.value = false
