@@ -3,6 +3,7 @@ import 'package:ebeasiswa/presentation/forgot_password/forgot_password_view.dart
 import 'package:ebeasiswa/gen/colors.gen.dart';
 import 'package:ebeasiswa/presentation/login/login_controller.dart';
 import 'package:ebeasiswa/presentation/registration/registration_view.dart';
+import 'package:ebeasiswa/presentation/verifikasi_account/send_code_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -217,7 +218,7 @@ class _LoginViewState extends State<LoginView> {
                               fontWeight: FontWeight.w300, fontSize: 11),
                         ),
                         GestureDetector(
-                            onTap: () => {Get.to(RegistrationView())},
+                            onTap: () => {Get.to(const RegistrationView())},
                             child: const Text(
                               "Buat Akun Disini",
                               style: TextStyle(
@@ -237,7 +238,8 @@ class _LoginViewState extends State<LoginView> {
                               fontWeight: FontWeight.w300, fontSize: 11),
                         ),
                         GestureDetector(
-                            onTap: () => {},
+                            // onTap: () => {Get.to(const VerifikasiAcountView())},
+                            onTap: () => {Get.to(const SendCodeView())},
                             child: const Text(
                               "Verifikasi Akun Anda",
                               style: TextStyle(
