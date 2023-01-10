@@ -14,11 +14,16 @@ class InputTextFormCostum extends StatelessWidget {
       this.onsavecus,
       this.onChanged,
       this.onTap,
-      this.setBorder});
+      this.border,
+      this.focusBorder,
+      this.iconTextRight,
+      this.onPresIconRight,
+      this.obscureText});
 
   final String? hintText;
   final String? labletext;
   final Icon? iconText;
+  final Icon? iconTextRight;
   final TextInputType? typeInput;
   final TextEditingController? controller;
   final TextInputAction? textInputAction;
@@ -27,7 +32,10 @@ class InputTextFormCostum extends StatelessWidget {
   final String? Function(String?)? onsavecus;
   final String? Function(String?)? onChanged;
   final Function()? onTap;
-  final bool? setBorder;
+  final Function()? onPresIconRight;
+  final bool? border;
+  final bool? focusBorder;
+  final bool? obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -40,32 +48,35 @@ class InputTextFormCostum extends StatelessWidget {
         readOnly: disabled ?? false,
         onSaved: onsavecus,
         onChanged: onChanged,
+        obscureText: obscureText ?? false,
         onTap: onTap,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         // autovalidateMode: AutovalidateMode.onUserInteraction,
         keyboardType: typeInput,
         decoration: InputDecoration(
-          hintText: hintText,
-          labelText: labletext,
-          labelStyle: const TextStyle(color: Colors.grey),
-          prefixIcon: IconTheme(
-              data: const IconThemeData(color: Color(0xFFFF8226)),
-              child: iconText ?? const Icon(Icons.text_fields)),
-          enabledBorder: setBorder == true
-              ? OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                  borderSide: const BorderSide(
-                    color: Color(0xFFFF8226),
-                  ),
-                )
-              : null,
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(35.0),
-            borderSide: const BorderSide(
-              color: Color(0xFFFF8226),
-            ),
-          ),
-        ),
+            hintText: hintText,
+            labelText: labletext,
+            labelStyle: const TextStyle(color: Colors.grey),
+            suffixIcon: iconTextRight != null
+                ? IconButton(icon: iconTextRight!, onPressed: onPresIconRight)
+                : null,
+            prefixIcon: IconTheme(
+                data: const IconThemeData(color: Color(0xFFFF8226)),
+                child: iconText ?? const Icon(null)),
+            enabledBorder: border == true
+                ? OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                    borderSide: const BorderSide(
+                      color: Color(0xFFFF8226),
+                    ),
+                  )
+                : null,
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(35.0),
+              borderSide: const BorderSide(
+                color: Color(0xFFFF8226),
+              ),
+            )),
       ),
     );
   }

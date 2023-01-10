@@ -1,16 +1,24 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
   var msgErr = ''.obs;
   var msgErrValidator = ''.obs;
   var typeValidator = ''.obs;
+  var isPasswordVisible = true.obs;
+  var isPasswordConfirmVisible = true.obs;
+  var currentStep = 0.obs;
+  var isComplete = false.obs;
   RegExp? source;
+  File? image;
 
   var emailCtrl = TextEditingController().obs;
   var tempatLahirCtrl = TextEditingController().obs;
   var phoneCtrl = TextEditingController().obs;
   var passwordCtrl = TextEditingController().obs;
+  var confirmpasswordCtrl = TextEditingController().obs;
   var fullnameCtrl = TextEditingController().obs;
   var nicknameCtrl = TextEditingController().obs;
   var nikCtrl = TextEditingController().obs;
@@ -25,12 +33,36 @@ class RegisterController extends GetxController {
     tempatLahirCtrl.close();
     phoneCtrl.close();
     passwordCtrl.close();
+    confirmpasswordCtrl.close();
     fullnameCtrl.close();
     nicknameCtrl.close();
     nikCtrl.close();
     kkCtrl.close();
     dateOfBirthCtrl.close();
     photoCtrl.close();
+  }
+
+  hidepassword() {
+    isPasswordVisible.value
+        ? isPasswordVisible.value = false
+        : isPasswordVisible.value = true;
+  }
+
+  hidepasswordConfirmasi() {
+    isPasswordConfirmVisible.value
+        ? isPasswordConfirmVisible.value = false
+        : isPasswordConfirmVisible.value = true;
+  }
+
+  chekValidatorConfirmPassword(String? text) {
+    msgErr.value = "Kata sandi tidak boleh kosong";
+    msgErrValidator.value = "Kata sandi tidak sama dengan sebelumnya";
+    if (text == null || text.isEmpty) {
+      return msgErr.value;
+    }
+    if (text != passwordCtrl.value.text) {
+      return msgErrValidator.value;
+    }
   }
 
   checkValidator(String? text, TypeValidator type) {
