@@ -45,6 +45,7 @@ dependencies:
   firebase_crashlytics: ^3.0.6
   firebase_app_check: ^0.1.1+5
   cloud_firestore: ^4.1.0
+  firebase_messaging: ^14.2.1
 
   #storage
   get_storage: ^2.0.3
@@ -70,6 +71,7 @@ dependencies:
   rflutter_alert: ^2.0.4
   sms_autofill: ^2.2.0
   twilio_flutter: ^0.0.9
+  flutter_local_notifications: ^13.0.0
 
 
 dev_dependencies:

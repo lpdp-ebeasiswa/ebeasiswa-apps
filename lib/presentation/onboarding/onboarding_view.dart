@@ -77,6 +77,7 @@ class _OnBoardingState extends State<OnBoardingView> {
                                 ),
                               ),
                               onPressed: () {
+                                controller.pushNotif();
                                 Get.to(const LoginView());
                               },
                               child: const Text(
@@ -154,6 +155,7 @@ class ImageInformation extends StatelessWidget {
                     child: InkWell(
                       onTap: () {
                         c.nextPage();
+                        // Get.to(const ListUserTOkenFcm());
                       },
                       child: const Text(
                         "Lewati",

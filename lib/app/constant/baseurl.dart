@@ -8,6 +8,8 @@ class Baseuri {
   String get baseAuth => "http://103.176.78.112:8080/";
 
   String get baseMock => "https://dityadeveloper.github.io/";
+
+  String get basePushNotif => "https://fcm.googleapis.com/fcm/send";
 }
 
 class PathAuth {
