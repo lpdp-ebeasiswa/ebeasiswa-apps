@@ -1,20 +1,21 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 import 'package:ebeasiswa/presentation/login/login_view.dart';
 
 import '../../app/constant/baseurl.dart';
+import '../../data/local/box/box_storage.dart';
+import '../../data/model/users/users_model.dart';
 import '../bottom_navbar/bottom_navbar_view.dart';
+import '../splash_screen/get_token_fcm_controller.dart';
 
 class LoginController extends GetxController {
-  final box = GetStorage();
-
   String baseurl = MasterUri.baseurl.baseAuth;
   String pathLogin = MasterUri.pathAuth.authLogin;
   var isLoggedin = false.obs;
@@ -26,6 +27,9 @@ class LoginController extends GetxController {
   var isTime = ''.obs;
   var isLocalTime = ''.obs;
   var isLocalDate = ''.obs;
+  var getToken = Get.find<GetTokenFcmController>();
+  final boxstorage = BoxStorage();
+  String? fcmToken;
 
   @override
   void onInit() {
@@ -36,8 +40,10 @@ class LoginController extends GetxController {
 
   void greetingLocalTimes() {
     var now = DateTime.now().hour;
-    isLocalDate.value = DateFormat('EEE, d/M/y').format(DateTime.now()).toString();
-    isLocalTime.value = DateFormat('HH:mm:ss').format(DateTime.now()).toString();
+    isLocalDate.value =
+        DateFormat('EEE, d/M/y').format(DateTime.now()).toString();
+    isLocalTime.value =
+        DateFormat('HH:mm:ss').format(DateTime.now()).toString();
 
     if (now >= 11 && now <= 14) {
       isTime.value = 'Selamat Siang';
@@ -73,9 +79,10 @@ class LoginController extends GetxController {
       debugPrint(response.statusCode.toString());
       switch (response.statusCode) {
         case 200:
-          box.write('token', result);
+          boxstorage.setToken(result);
           isLoggedin.value = true;
           token = result;
+          onLoadTokenFcm();
           onLoginUser();
           break;
         case 500:
@@ -105,24 +112,23 @@ class LoginController extends GetxController {
   }
 
   onLoad() {
-    isRemember.value = box.read('rememberMeCheck') ?? isRemember.value;
+    isRemember.value = boxstorage.getUserRememberMe();
     if (isRemember.value == true) {
-      username.value.text = box.read('username');
-      password.value.text = box.read('password');
+      username.value.text = boxstorage.getUserName();
+      password.value.text = boxstorage.getUserPassword();
     }
   }
 
   onSavedRememberMe(bool uncheck) {
-    //isRemember.value = uncheck;
-    box.write('rememberMeCheck', uncheck);
+    boxstorage.setUserRememberMe(uncheck);
     if (uncheck == false) {
-      box.remove('username');
-      box.remove('password');
-      box.remove('rememberMeCheck');
+      boxstorage.deleteUserName();
+      boxstorage.deleteUserPassword();
+      boxstorage.deleteUserRememberMe();
       debugPrint('on saved');
     } else {
-      box.write('username', username.value.text);
-      box.write('password', password.value.text);
+      boxstorage.setUserName(username.value.text);
+      boxstorage.setUserPassword(password.value.text);
       debugPrint('on removed');
     }
     debugPrint(
@@ -139,8 +145,39 @@ class LoginController extends GetxController {
   }
 
   onLogoutUser() {
-    box.remove('token');
+    boxstorage.deleteToken();
     debugPrint('token has been deleted');
     Get.off(() => const LoginView());
+  }
+
+  onLoadTokenFcm() async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference user = firestore.collection("user");
+    DocumentSnapshot? getUser;
+    String getStorageToken = boxstorage.getStorageToken();
+    String fcmToken = getToken.token!;
+    print('token fcmToken---> $fcmToken');
+    print('token getStorageToken---> $getStorageToken');
+    if (getStorageToken == '') {
+      try {
+        await user.doc(fcmToken).set({
+          'fcmtoken': fcmToken,
+          'username': username.value.text,
+          'password': password.value.text
+        });
+        getUser = await user.doc(fcmToken).get();
+        print('token getUsers save---> ${getUser.get('fcmtoken')}');
+        boxstorage.setStoageToken(fcmToken);
+        UsersModel(
+            fcmtoken: getUser.get('fcmtoken'),
+            username: getUser.get('username'),
+            password: getUser.get('password'));
+        print("token Fcm Berhasil simpan");
+      } catch (e) {
+        print("Token Fcm Gagal simpan token----> ${e.toString()}");
+      }
+    } else {
+      print("Token Fcm Sudah ada");
+    }
   }
 }

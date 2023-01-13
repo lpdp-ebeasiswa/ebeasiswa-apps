@@ -77,7 +77,7 @@ class _OnBoardingState extends State<OnBoardingView> {
                                 ),
                               ),
                               onPressed: () {
-                                controller.pushNotif();
+                                // controller.pushNotif();
                                 Get.to(const LoginView());
                               },
                               child: const Text(

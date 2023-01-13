@@ -3,8 +3,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
+import '../../data/local/box/box_storage.dart';
 import '../../data/remote/push_notifikasi/push_notifikasi_service.dart';
 import '../../main.dart';
 import '../login/login_view.dart';
@@ -13,8 +13,7 @@ class OnboaringController extends GetxController {
   late PageController pageController;
   int pageIndex = 0;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  final box = GetStorage();
-  String? token;
+  final boxstorage = BoxStorage();
 
   PushNotifikasiServices pushNotifService = PushNotifikasiServices();
   var isLoading = true.obs;
@@ -25,7 +24,6 @@ class OnboaringController extends GetxController {
   void onInit() {
     pageController = PageController(initialPage: 0);
     setUpNotifikasi();
-    getToken();
     super.onInit();
   }
 
@@ -87,27 +85,6 @@ class OnboaringController extends GetxController {
     });
   }
 
-  getToken() async {
-    String getToken = (await FirebaseMessaging.instance.getToken())!;
-    token = getToken;
-    String? storageToken = box.read('fcmtoken');
-
-    if (storageToken == null) {
-      CollectionReference user = firestore.collection("user");
-      try {
-        await user.add({
-          "fcmtoken": token,
-        }).then((value) => null);
-        box.write('fcmtoken', token);
-        print("Berhasil simpan token");
-      } catch (e) {
-        print("Gagal simpan token");
-      }
-    } else {
-      print("Token Sudah ada");
-    }
-  }
-
   Stream<QuerySnapshot<Object?>> streamDataUserTokenFCM() {
     CollectionReference user = firestore.collection("user");
     return user.snapshots();
@@ -117,7 +94,7 @@ class OnboaringController extends GetxController {
     DocumentReference listUsersTokenFcm = firestore.collection("user").doc(id);
     try {
       await listUsersTokenFcm.delete();
-      await box.remove('fcmtoken');
+      boxstorage.deleteStorageToken();
     } catch (e) {
       Get.defaultDialog(
         title: "Terjadi kesalahan",
@@ -131,9 +108,10 @@ class OnboaringController extends GetxController {
   }
 
   Future<void> pushNotif() async {
+    String? token = boxstorage.getStorageToken();
     isLoading(true);
     try {
-      pushNotifService.loadPushNotif(token!);
+      pushNotifService.loadPushNotif(token);
       isLoading(false);
       isError(false);
     } catch (e) {

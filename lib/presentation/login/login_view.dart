@@ -179,6 +179,7 @@ class _LoginViewState extends State<LoginView> {
                                         color: Color(0xFFFF6C06))))),
                     onPressed: () {
                       controller.getAuth(ischeckedValue);
+                      // controller.onLoadTokenFcm();
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),

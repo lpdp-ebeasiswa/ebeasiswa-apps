@@ -1,4 +1,6 @@
+import 'package:ebeasiswa/presentation/splash_screen/get_token_fcm_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../gen/assets.gen.dart';
 
@@ -7,6 +9,7 @@ class SplashScreenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GetTokenFcmController c = Get.put(GetTokenFcmController());
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(

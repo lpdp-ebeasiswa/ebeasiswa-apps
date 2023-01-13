@@ -32,7 +32,8 @@ class _ListUserTOkenFcmState extends State<ListUserTOkenFcm> {
               itemBuilder: (context, index) {
                 var data = listTokenFcm[index].data() as Map<String, dynamic>;
                 return ListTile(
-                    title: Text("${data["fcmtoken"]}"),
+                    title: Text("${data["username"]}"),
+                    subtitle: Text("${data["fcmtoken"]}"),
                     onTap: () => c.deleteFaq(listTokenFcm[index].id));
               },
             );
