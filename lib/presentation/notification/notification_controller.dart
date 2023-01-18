@@ -7,12 +7,12 @@ import 'package:get/get.dart';
 
 import '../../data/local/box/box_storage.dart';
 import '../../data/remote/push_notifikasi/push_notifikasi_service.dart';
-import '../login/login_controller.dart';
 
 class NotificationController extends GetxController {
   int pageIndex = 0;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final boxstorage = BoxStorage();
+  String? username;
 
   @override
   void onInit() {
@@ -20,7 +20,6 @@ class NotificationController extends GetxController {
     super.onInit();
   }
 
-  LoginController loginController = Get.find<LoginController>();
   PushNotifikasiServices pushNotifService = PushNotifikasiServices();
   var isLoading = true.obs;
   var isError = false.obs;
@@ -100,7 +99,7 @@ class NotificationController extends GetxController {
       await notification.doc(docReference.id).set({
         'id': docReference.id,
         'uid': boxstorage.getToken(),
-        'username': loginController.username.value.text,
+        'username': username,
         'title': title,
         'body': body,
         'createdAt': DateTime.now(),
@@ -113,7 +112,7 @@ class NotificationController extends GetxController {
   Stream<List<NotificationModel>> readNotification() {
     final data = firestore
         .collection("notification")
-        .where('username', isEqualTo: loginController.username.value.text)
+        .where('username', isEqualTo: username)
         .snapshots()
         .map((event) => event.docs
             .map((doc) => NotificationModel.fromJson(doc.data()))

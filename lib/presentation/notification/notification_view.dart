@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../data/model/notification/notification_model.dart';
+import '../login/login_controller.dart';
 
 class NotificationView extends StatefulWidget {
   const NotificationView({Key? key}) : super(key: key);
@@ -15,6 +16,14 @@ class NotificationView extends StatefulWidget {
 
 class _NotificationViewState extends State<NotificationView> {
   NotificationController c = Get.find<NotificationController>();
+  LoginController loginController = Get.find<LoginController>();
+
+  @override
+  void initState() {
+    c.username = loginController.username.value.text;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

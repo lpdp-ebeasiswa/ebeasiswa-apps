@@ -1,17 +1,17 @@
-import 'package:ebeasiswa/presentation/notification/notification_controller.dart';
 import 'package:ebeasiswa/presentation/splash_screen/get_token_fcm_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../gen/assets.gen.dart';
+import '../notification/notification_controller.dart';
 
 class SplashScreenView extends StatelessWidget {
   const SplashScreenView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    GetTokenFcmController c = Get.put(GetTokenFcmController());
-    NotificationController cNotif = Get.put(NotificationController());
+    Get.put(GetTokenFcmController());
+    Get.put(NotificationController());
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
