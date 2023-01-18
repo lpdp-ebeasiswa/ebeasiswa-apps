@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+
 import '../../../app/constant/baseurl.dart';
 import 'package:http/http.dart' as http;
 
@@ -10,11 +11,12 @@ class PushNotifikasiServices {
       "data": {
         "title": "ebeasiswa-title",
         "body": "ebeasiswa-body",
-        "url": "ebeasiswa-uri"
+        "url": "ebeasiswa-uri",
+        "route": "/notification-view"
       },
       "notification": {
-        "title": "E-Beasiswa",
-        "body": "Selamat datang di apk e-basiswa",
+        "title": "Pengumuman",
+        "body": "Akhir Januari Cuti Bersama",
         "content_available": true
       },
       "to": token,

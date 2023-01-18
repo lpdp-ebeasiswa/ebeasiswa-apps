@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ebeasiswa/data/model/users/users_model.dart';
 import 'package:ebeasiswa/presentation/onboarding/onboarding_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,25 +22,33 @@ class _ListUserTOkenFcmState extends State<ListUserTOkenFcm> {
         backgroundColor: const Color(0xFFFF6C06),
         title: const Text("List User Token FCM"),
       ),
-      body: StreamBuilder<QuerySnapshot<Object?>>(
-        stream: c.streamDataUserTokenFCM(),
+      body: StreamBuilder<List<UsersModel>>(
+        stream: c.readUsers(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.active) {
-            var listTokenFcm = snapshot.data!.docs;
-            return ListView.builder(
-              itemCount: listTokenFcm.length,
-              itemBuilder: (context, index) {
-                var data = listTokenFcm[index].data() as Map<String, dynamic>;
-                return ListTile(
-                    title: Text("${data["username"]}"),
-                    subtitle: Text("${data["fcmtoken"]}"),
-                    onTap: () => c.deleteFaq(listTokenFcm[index].id));
-              },
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
             );
+          } else {
+            if (snapshot.hasError) {
+              return const Center(child: Text("Tidak dapat menampilkan data"));
+            } else if (snapshot.hasData) {
+              var notif = snapshot.data!;
+              if (notif.isNotEmpty) {
+                return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, i) {
+                    return ListTile(
+                      title: Text(notif[i].username),
+                      subtitle: Text(notif[i].fcmtoken),
+                      onTap: () => c.deleteUsers(notif[i].fcmtoken),
+                    );
+                  },
+                );
+              }
+            }
           }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const Center(child: Text("Tidak ada notifikasi"));
         },
       ),
     );

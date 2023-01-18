@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:ebeasiswa/data/model/users/users_model.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 
 import '../../data/local/box/box_storage.dart';
 import '../../data/remote/push_notifikasi/push_notifikasi_service.dart';
-import '../../main.dart';
 import '../login/login_view.dart';
 
 class OnboaringController extends GetxController {
@@ -23,7 +21,6 @@ class OnboaringController extends GetxController {
   @override
   void onInit() {
     pageController = PageController(initialPage: 0);
-    setUpNotifikasi();
     super.onInit();
   }
 
@@ -40,57 +37,13 @@ class OnboaringController extends GetxController {
         : Get.to(const LoginView());
   }
 
-  setUpNotifikasi() {
-    var initialzationSettingsAndroid =
-        const AndroidInitializationSettings('@mipmap/ic_launcher');
-    var initializationSettings =
-        InitializationSettings(android: initialzationSettingsAndroid);
-
-    flutterLocalNotificationsPlugin.initialize(initializationSettings);
-
-    // Ketika notifikasi di klik dan keadaanya on Terminate
-    FirebaseMessaging.instance.getInitialMessage().then((event) {
-      if (event != null) {
-        print('broadcast ${event.notification!.title}');
-        // var routeName = event.data['route'];
-        // Navigator.of(context).pushNamed(routeName);
-      }
-    });
-
-    //Ketika notifikasi di klik dan keadaan nya on background
-    FirebaseMessaging.onMessageOpenedApp.listen((event) {
-      print('broadcast ${event.notification!.title}');
-      // var routeName = event.data['route'];
-      // Navigator.of(context).pushNamed(routeName);
-    });
-
-    //Ketika on background
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      RemoteNotification? notification = message.notification;
-      AndroidNotification? android = message.notification?.android;
-      if (notification != null && android != null) {
-        flutterLocalNotificationsPlugin.show(
-            notification.hashCode,
-            notification.title,
-            notification.body,
-            NotificationDetails(
-              android: AndroidNotificationDetails(
-                channel.id,
-                channel.name,
-                channelDescription: channel.description,
-                icon: android.smallIcon,
-              ),
-            ));
-      }
-    });
+  Stream<List<UsersModel>> readUsers() {
+    final data = firestore.collection("user").snapshots().map((event) =>
+        event.docs.map((doc) => UsersModel.fromJson(doc.data())).toList());
+    return data;
   }
 
-  Stream<QuerySnapshot<Object?>> streamDataUserTokenFCM() {
-    CollectionReference user = firestore.collection("user");
-    return user.snapshots();
-  }
-
-  void deleteFaq(String id) async {
+  void deleteUsers(String id) async {
     DocumentReference listUsersTokenFcm = firestore.collection("user").doc(id);
     try {
       await listUsersTokenFcm.delete();
@@ -105,20 +58,5 @@ class OnboaringController extends GetxController {
         },
       );
     }
-  }
-
-  Future<void> pushNotif() async {
-    String? token = boxstorage.getStorageToken();
-    isLoading(true);
-    try {
-      pushNotifService.loadPushNotif(token);
-      isLoading(false);
-      isError(false);
-    } catch (e) {
-      isLoading(false);
-      isError(true);
-      throw Exception(e);
-    }
-    return;
   }
 }

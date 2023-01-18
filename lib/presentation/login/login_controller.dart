@@ -11,7 +11,6 @@ import 'package:ebeasiswa/presentation/login/login_view.dart';
 
 import '../../app/constant/baseurl.dart';
 import '../../data/local/box/box_storage.dart';
-import '../../data/model/users/users_model.dart';
 import '../bottom_navbar/bottom_navbar_view.dart';
 import '../splash_screen/get_token_fcm_controller.dart';
 
@@ -166,12 +165,7 @@ class LoginController extends GetxController {
           'password': password.value.text
         });
         getUser = await user.doc(fcmToken).get();
-        print('token getUsers save---> ${getUser.get('fcmtoken')}');
         boxstorage.setStoageToken(fcmToken);
-        UsersModel(
-            fcmtoken: getUser.get('fcmtoken'),
-            username: getUser.get('username'),
-            password: getUser.get('password'));
         print("token Fcm Berhasil simpan");
       } catch (e) {
         print("Token Fcm Gagal simpan token----> ${e.toString()}");

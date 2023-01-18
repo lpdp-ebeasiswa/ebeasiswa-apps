@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../gen/assets.gen.dart';
 import '../home_content/carousel_content.dart';
@@ -16,13 +17,25 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80.0), 
-         child: AppBar(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(80.0),
+        child: AppBar(
+          leading: const Icon(
+            Icons.home,
+            color: Colors.transparent,
+          ),
           flexibleSpace: Assets.image.lpdpAppbar.image(fit: BoxFit.fitWidth),
           backgroundColor: Colors.transparent,
-             ),
-       ),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  // Get.to(const NotificationView());
+                  Get.toNamed('/notification-view');
+                },
+                icon: const Icon(Icons.notifications))
+          ],
+        ),
+      ),
       body: ListView(
         shrinkWrap: true,
         children: [
