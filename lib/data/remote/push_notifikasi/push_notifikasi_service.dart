@@ -11,12 +11,13 @@ class PushNotifikasiServices {
       "data": {
         "title": "ebeasiswa-title",
         "body": "ebeasiswa-body",
-        "url": "ebeasiswa-uri",
+        "url": "https://batamtoday.com/media/news/lpdp-01.jpg",
+        // "url": "",
         "route": "/notification-view"
       },
       "notification": {
-        "title": "Pengumuman",
-        "body": "Akhir Januari Cuti Bersama",
+        "title": "Promo IMAGE",
+        "body": "Untuk anak IT hari senin tanggal 16 Libur ya",
         "content_available": true
       },
       "to": token,

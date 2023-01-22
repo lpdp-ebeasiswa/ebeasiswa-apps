@@ -34,44 +34,75 @@ class NotificationController extends GetxController {
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
     // Ketika notifikasi di klik dan keadaanya on Terminate
-    FirebaseMessaging.instance.getInitialMessage().then((event) {
-      if (event != null) {
-        var routeName = event.data['route'];
-        Get.toNamed(routeName);
-        RemoteNotification? notification = event.notification!;
-        sendingDataNotification(notification.title!, notification.body!);
+    FirebaseMessaging.instance
+        .getInitialMessage()
+        .then((RemoteMessage? message) {
+      RemoteNotification? notification = message?.notification;
+      AndroidNotification? android = message?.notification?.android;
+      if (notification != null && android != null) {
+        var routeName = message?.data['route'];
+        var image = message?.data['url'];
+        int id = notification.hashCode;
+        String? title = notification.title ?? '';
+        String? body = notification.body ?? '';
+        String? info = "TERMINATE";
+        // Get.toNamed(routeName);
+        sendingDataNotification(title, body);
+        showNotifLocal(info, id, title, body, image, routeName);
+        //   showNotifLocal(info, id, title!, body!, image, routeName);
       }
     });
 
     //Ketika notifikasi di klik dan keadaan nya on background
-    FirebaseMessaging.onMessageOpenedApp.listen((event) {
-      var routeName = event.data['route'];
-      RemoteNotification? notification = event.notification!;
-      Get.toNamed(routeName);
-      sendingDataNotification(notification.title!, notification.body!);
-    });
+    // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    //   RemoteNotification? notification = message.notification;
+    //   AndroidNotification? android = message.notification?.android;
+    //   if (notification != null && android != null) {
+    //     var routeName = message.data['route'];
+    //     var image = message.data['url'];
+    //     int id = notification.hashCode;
+    //     String? title = notification.title!;
+    //     String? body = notification.body!;
+    //     String? info = "BACKGROUND";
+    //     // Get.toNamed(routeName!);
+    //     sendingDataNotification(title, body);
+    //     // print('routeName---> $routeName');
+    //     showNotifLocal(info, id, title, body, image, routeName);
+    //   }
+    // });
+    // FirebaseMessaging.onBackgroundMessage((RemoteMessage message) async {
+    //   RemoteNotification? notification = message.notification;
+    //   AndroidNotification? android = message.notification?.android;
+    //   if (notification != null && android != null) {
+    //     var routeName = message.data['route'];
+    //     var image = message.data['url'];
+    //     int id = notification.hashCode;
+    //     String? title = notification.title!;
+    //     String? body = notification.body!;
+    //     String? info = "BACKGROUND";
+    //     // Get.toNamed(routeName!);
+    //     await sendingDataNotification(title, body);
+    //     // print('routeName---> $routeName');
+    //     await showNotifLocal(info, id, title, body, image, routeName);
+    //   }
+    // });
 
     //Ketika on foreground
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null) {
-        var routeName = message.data['route'];
-        Get.toNamed(routeName);
-        sendingDataNotification(notification.title!, notification.body!);
-        flutterLocalNotificationsPlugin.show(
-          notification.hashCode,
-          notification.title,
-          notification.body,
-          NotificationDetails(
-            android: AndroidNotificationDetails(
-              channel.id,
-              channel.name,
-              channelDescription: channel.description,
-              icon: android.smallIcon,
-            ),
-          ),
-        );
+        String? routeName = message.data['route'] ?? '';
+        String? image = message.data['url'] ?? '';
+        int id = notification.hashCode;
+        String? title = notification.title!;
+        String? body = notification.body!;
+        String? info = "FOREGROUND";
+        // if (routeName != null) {
+        //   Get.toNamed(routeName);
+        // }
+        sendingDataNotification(title, body);
+        showNotifLocal(info, id, title, body, image!, routeName!);
       }
     });
   }
@@ -81,6 +112,7 @@ class NotificationController extends GetxController {
     isLoading(true);
     try {
       pushNotifService.loadPushNotif(token);
+      // showNotifLocal();
       isLoading(false);
       isError(false);
     } catch (e) {
@@ -104,6 +136,7 @@ class NotificationController extends GetxController {
         'body': body,
         'createdAt': DateTime.now(),
       });
+      print("Berhasil Add Notif");
     } catch (e) {
       print(e);
     }
