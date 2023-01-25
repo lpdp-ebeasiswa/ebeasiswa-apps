@@ -1,4 +1,3 @@
-import 'package:ebeasiswa/presentation/notification/notification_view.dart';
 import 'package:ebeasiswa/presentation/onboarding/onboarding_view.dart';
 import 'package:ebeasiswa/presentation/splash_screen/splash_screen_view.dart';
 import 'package:flutter/material.dart';
@@ -31,9 +30,6 @@ class EbeasiswaApp extends StatelessWidget {
         } else {
           return GetMaterialApp(
             home: OnBoardingView(),
-            routes: {
-              '/notification-view': (_) => const NotificationView(),
-            },
           );
         }
       },

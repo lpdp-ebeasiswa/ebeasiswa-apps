@@ -41,11 +41,14 @@ dependencies:
   get: ^4.6.5
 
   # firebase configuration
-  firebase_core: ^2.3.0
+  firebase_core: ^2.4.1
   firebase_crashlytics: ^3.0.6
   firebase_app_check: ^0.1.1+5
-  cloud_firestore: ^4.1.0
-  firebase_messaging: ^14.2.1
+  cloud_firestore: ^4.3.1
+  # firebase_messaging: ^14.2.1
+
+  #One Signal
+  onesignal_flutter: ^3.5.0
 
   #storage
   get_storage: ^2.0.3

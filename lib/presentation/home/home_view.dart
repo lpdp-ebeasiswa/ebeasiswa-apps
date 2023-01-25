@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../gen/assets.gen.dart';
 import '../home_content/carousel_content.dart';
 import '../list_app_role/menu_view.dart';
+import '../notification/notification_view.dart';
 import '../profile_header/profile_header_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -29,8 +30,7 @@ class _HomeViewState extends State<HomeView> {
           actions: [
             IconButton(
                 onPressed: () {
-                  // Get.to(const NotificationView());
-                  Get.toNamed('/notification-view');
+                  Get.to(const NotificationView(), arguments: false);
                 },
                 icon: const Icon(Icons.notifications))
           ],

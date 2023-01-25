@@ -152,10 +152,9 @@ class LoginController extends GetxController {
   onLoadTokenFcm() async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference user = firestore.collection("user");
-    DocumentSnapshot? getUser;
     String getStorageToken = boxstorage.getStorageToken();
     String fcmToken = getToken.token!;
-    print('token fcmToken---> $fcmToken');
+    print('token oneSignal---> $fcmToken');
     print('token getStorageToken---> $getStorageToken');
     if (getStorageToken == '') {
       try {
@@ -164,7 +163,6 @@ class LoginController extends GetxController {
           'username': username.value.text,
           'password': password.value.text
         });
-        getUser = await user.doc(fcmToken).get();
         boxstorage.setStoageToken(fcmToken);
         print("token Fcm Berhasil simpan");
       } catch (e) {

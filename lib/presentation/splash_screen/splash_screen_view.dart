@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../gen/assets.gen.dart';
-import '../notification/notification_controller.dart';
 
 class SplashScreenView extends StatelessWidget {
   const SplashScreenView({super.key});
@@ -11,7 +10,7 @@ class SplashScreenView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(GetTokenFcmController());
-    Get.put(NotificationController());
+    // Get.put(NotificationController());
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(

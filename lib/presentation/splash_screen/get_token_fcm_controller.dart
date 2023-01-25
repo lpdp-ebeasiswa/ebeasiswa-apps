@@ -1,7 +1,5 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
-
-import '../../data/local/box/box_storage.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 class GetTokenFcmController extends GetxController {
   String? token;
@@ -14,13 +12,17 @@ class GetTokenFcmController extends GetxController {
   }
 
   Future getToken() async {
-    final boxstorage = BoxStorage();
-    String getToken = (await FirebaseMessaging.instance.getToken())!;
-    token = getToken;
-    String getStorageToken = boxstorage.getStorageToken();
-    // boxstorage.deleteStorageToken();
-    print('token get ---> $token');
-    print('token getStorageToken---> $getStorageToken');
+    // final boxstorage = BoxStorage();
+    OneSignal.shared.getDeviceState().then((deviceState) {
+      print("oneSignal DeviceState ----->: ${deviceState?.pushToken}");
+      token = deviceState?.pushToken;
+      OneSignal.shared.setExternalUserId(token ?? '').then((results) {
+        print('oneSignal setExternalId Succes ------> ${results.toString()}');
+      }).catchError((error) {
+        print('oneSignal setExternalId error ------> ${error.toString()}');
+      });
+      print('token get aaaa---> $token');
+    });
     return token;
   }
 }

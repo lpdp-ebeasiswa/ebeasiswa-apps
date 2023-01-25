@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ebeasiswa/data/model/users/users_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import '../../data/local/box/box_storage.dart';
 import '../../data/remote/push_notifikasi/push_notifikasi_service.dart';
@@ -48,6 +49,7 @@ class OnboaringController extends GetxController {
     try {
       await listUsersTokenFcm.delete();
       boxstorage.deleteStorageToken();
+      OneSignal.shared.removeExternalUserId();
     } catch (e) {
       Get.defaultDialog(
         title: "Terjadi kesalahan",

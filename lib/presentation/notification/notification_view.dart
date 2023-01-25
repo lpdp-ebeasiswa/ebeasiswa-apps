@@ -15,7 +15,8 @@ class NotificationView extends StatefulWidget {
 }
 
 class _NotificationViewState extends State<NotificationView> {
-  NotificationController c = Get.find<NotificationController>();
+  // NotificationController c = Get.find<NotificationController>();
+  NotificationController c = Get.put(NotificationController());
   LoginController loginController = Get.put(LoginController());
 
   @override
