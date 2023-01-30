@@ -13,6 +13,8 @@ class NotificationModel with _$NotificationModel {
     String? username,
     String? title,
     String? body,
+    String? icons,
+    String? images,
     Timestamp? createdAt,
   }) = _NotificationModel;
 

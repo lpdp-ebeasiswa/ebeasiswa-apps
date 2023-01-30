@@ -1,14 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 
 import '../../local/box/box_storage.dart';
 
 class PushNotifikasiServices {
   final boxstorage = BoxStorage();
-  Future<dynamic> sendNotification(String token, String? username) async {
+  Future<dynamic> sendNotification(String token) async {
     Map data = {
       "app_id": "01a913d7-1c1a-46c0-aa15-c42ff9c575bf",
       "include_external_user_ids": [token],
@@ -16,11 +15,16 @@ class PushNotifikasiServices {
       "small_icon": "@mipmap/ic_launcher",
       "large_icon":
           "https://awsimages.detik.net.id/visual/2020/08/13/lpdp-kemenkeu.jpeg?w=650",
-      "headings": {"en": "Ebeasiswa aaaaaaaaaaa"},
-      "contents": {"en": "SELAMAT DATANG DI APPS EBEASISWA"},
-      "data": {"user": "pic"},
-      "big_picture":
-          "https://awsimages.detik.net.id/visual/2020/08/13/lpdp-kemenkeu.jpeg?w=650"
+      "headings": {"en": "One Signal Note"},
+      "contents": {
+        "en":
+            "The Create Notification method is used when you want your server to programmatically send Push Notification, Email, and SMS messages through OneSignal. You may target users in one of three ways using this method:"
+      },
+      "data": {
+        "user": "widi",
+        "route": "notif",
+      },
+      "big_picture": ""
     };
     var bodyRequestParam = jsonEncode(data);
 
@@ -35,24 +39,5 @@ class PushNotifikasiServices {
     ).then((http.Response response) {
       print('oneSignal ${response.statusCode} - ${response.body}');
     });
-  }
-
-  sendingDataNotification(String? title, String? body, String? username) async {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference notification = firestore.collection("notification");
-    DocumentReference docReference = notification.doc();
-    try {
-      await notification.doc(docReference.id).set({
-        'id': docReference.id,
-        'uid': boxstorage.getToken(),
-        'username': username,
-        'title': title,
-        'body': body,
-        'createdAt': DateTime.now(),
-      });
-      print("Berhasil Add Notif");
-    } catch (e) {
-      print(e);
-    }
   }
 }

@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import '../login/login_view.dart';
 
 class OnBoardingView extends StatefulWidget {
+  const OnBoardingView({super.key});
   @override
   State<OnBoardingView> createState() => _OnBoardingState();
 }
@@ -146,7 +147,7 @@ class ImageInformation extends StatelessWidget {
                 padding: const EdgeInsets.all(40),
                 child: pageIndex == 2
                     ? null
-                    : Assets.image.lpdp_boarding.image(fit: BoxFit.fitWidth),
+                    : Assets.image.lpdpBoarding.image(fit: BoxFit.fitWidth),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 30, right: 30),

@@ -25,6 +25,8 @@ mixin _$NotificationModel {
   String? get username => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   String? get body => throw _privateConstructorUsedError;
+  String? get icons => throw _privateConstructorUsedError;
+  String? get images => throw _privateConstructorUsedError;
   Timestamp? get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,6 +47,8 @@ abstract class $NotificationModelCopyWith<$Res> {
       String? username,
       String? title,
       String? body,
+      String? icons,
+      String? images,
       Timestamp? createdAt});
 }
 
@@ -66,6 +70,8 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
     Object? username = freezed,
     Object? title = freezed,
     Object? body = freezed,
+    Object? icons = freezed,
+    Object? images = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -89,6 +95,14 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
               as String?,
+      icons: freezed == icons
+          ? _value.icons
+          : icons // ignore: cast_nullable_to_non_nullable
+              as String?,
+      images: freezed == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -111,6 +125,8 @@ abstract class _$$_NotificationModelCopyWith<$Res>
       String? username,
       String? title,
       String? body,
+      String? icons,
+      String? images,
       Timestamp? createdAt});
 }
 
@@ -130,6 +146,8 @@ class __$$_NotificationModelCopyWithImpl<$Res>
     Object? username = freezed,
     Object? title = freezed,
     Object? body = freezed,
+    Object? icons = freezed,
+    Object? images = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_$_NotificationModel(
@@ -153,6 +171,14 @@ class __$$_NotificationModelCopyWithImpl<$Res>
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
               as String?,
+      icons: freezed == icons
+          ? _value.icons
+          : icons // ignore: cast_nullable_to_non_nullable
+              as String?,
+      images: freezed == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -170,6 +196,8 @@ class _$_NotificationModel implements _NotificationModel {
       this.username,
       this.title,
       this.body,
+      this.icons,
+      this.images,
       this.createdAt});
 
   factory _$_NotificationModel.fromJson(Map<String, dynamic> json) =>
@@ -186,11 +214,15 @@ class _$_NotificationModel implements _NotificationModel {
   @override
   final String? body;
   @override
+  final String? icons;
+  @override
+  final String? images;
+  @override
   final Timestamp? createdAt;
 
   @override
   String toString() {
-    return 'NotificationModel(id: $id, uid: $uid, username: $username, title: $title, body: $body, createdAt: $createdAt)';
+    return 'NotificationModel(id: $id, uid: $uid, username: $username, title: $title, body: $body, icons: $icons, images: $images, createdAt: $createdAt)';
   }
 
   @override
@@ -204,14 +236,16 @@ class _$_NotificationModel implements _NotificationModel {
                 other.username == username) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.body, body) || other.body == body) &&
+            (identical(other.icons, icons) || other.icons == icons) &&
+            (identical(other.images, images) || other.images == images) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, uid, username, title, body, createdAt);
+  int get hashCode => Object.hash(
+      runtimeType, id, uid, username, title, body, icons, images, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -235,6 +269,8 @@ abstract class _NotificationModel implements NotificationModel {
       final String? username,
       final String? title,
       final String? body,
+      final String? icons,
+      final String? images,
       final Timestamp? createdAt}) = _$_NotificationModel;
 
   factory _NotificationModel.fromJson(Map<String, dynamic> json) =
@@ -250,6 +286,10 @@ abstract class _NotificationModel implements NotificationModel {
   String? get title;
   @override
   String? get body;
+  @override
+  String? get icons;
+  @override
+  String? get images;
   @override
   Timestamp? get createdAt;
   @override

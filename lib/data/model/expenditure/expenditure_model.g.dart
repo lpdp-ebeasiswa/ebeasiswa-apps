@@ -6,7 +6,6 @@ part of 'expenditure_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-// ignore: non_constant_identifier_names
 _$_ExpenditureModel _$$_ExpenditureModelFromJson(Map<String, dynamic> json) =>
     _$_ExpenditureModel(
       id: json['id'] as int,
@@ -18,7 +17,6 @@ _$_ExpenditureModel _$$_ExpenditureModelFromJson(Map<String, dynamic> json) =>
       expenditureTime: json['expenditure_time'] as String?,
     );
 
-// ignore: non_constant_identifier_names
 Map<String, dynamic> _$$_ExpenditureModelToJson(_$_ExpenditureModel instance) =>
     <String, dynamic>{
       'id': instance.id,

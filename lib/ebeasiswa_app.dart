@@ -1,12 +1,9 @@
-import 'package:ebeasiswa/presentation/onboarding/onboarding_view.dart';
-import 'package:ebeasiswa/presentation/splash_screen/splash_screen_view.dart';
+import 'package:ebeasiswa/app/routes/route_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+import 'package:get/route_manager.dart';
 
 class EbeasiswaApp extends StatelessWidget {
-  const EbeasiswaApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -16,23 +13,9 @@ class EbeasiswaApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
-
-    // return const GetMaterialApp(
-    //   home: LoginView(),
-    // );
-    return FutureBuilder(
-      future: Future.delayed(const Duration(seconds: 3)),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const GetMaterialApp(
-            home: SplashScreenView(),
-          );
-        } else {
-          return GetMaterialApp(
-            home: OnBoardingView(),
-          );
-        }
-      },
+    return GetMaterialApp(
+      initialRoute: RoutesPage.Init,
+      getPages: RoutesPage.routes,
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:catcher/catcher.dart';
+import 'package:ebeasiswa/app/routes/route_name.dart';
 import 'package:ebeasiswa/ebeasiswa_app.dart';
-import 'package:ebeasiswa/presentation/notification/notification_view.dart';
+import 'package:ebeasiswa/presentation/notification/notification_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,11 +12,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'app/utilities/catcher_setup.dart';
-import 'data/remote/push_notifikasi/push_notifikasi_service.dart';
 
 const appName = 'Ebeasiswa App';
-
-PushNotifikasiServices pushNotifService = PushNotifikasiServices();
 
 void runEbeasiswaApp() async {
   usePathUrlStrategy();
@@ -23,12 +21,14 @@ void runEbeasiswaApp() async {
   await _firebaseSetup();
   await _setupOneSignal();
   Catcher(
-    rootWidget: const EbeasiswaApp(),
+    rootWidget: EbeasiswaApp(),
     debugConfig: CatcherSetup.debug(),
     releaseConfig: CatcherSetup.release(),
     profileConfig: CatcherSetup.debug(),
   );
 }
+
+NotificationController c = Get.put(NotificationController());
 
 Future<void> _firebaseSetup() async {
   const AndroidNotificationChannel channel = AndroidNotificationChannel(
@@ -65,20 +65,44 @@ Future<void> _setupOneSignal() async {
   OneSignal.shared.setNotificationWillShowInForegroundHandler(
       (OSNotificationReceivedEvent event) {
     handleNotif = false;
+    print('handleNotif ----> $handleNotif');
     if (!handleNotif) {
-      pushNotifService.sendingDataNotification(event.notification.title,
-          event.notification.body, event.notification.additionalData!["user"]);
+      c.sendingDataNotification(
+          event.notification.notificationId,
+          event.notification.title,
+          event.notification.body,
+          event.notification.additionalData!["user"],
+          event.notification.smallIcon,
+          event.notification.bigPicture);
     }
   });
 
   OneSignal.shared
       .setNotificationOpenedHandler((OSNotificationOpenedResult event) {
+    print('handleNotif ----> $handleNotif');
     if (handleNotif) {
-      pushNotifService.sendingDataNotification(event.notification.title,
-          event.notification.body, event.notification.additionalData!["user"]);
+      c.sendingDataNotification(
+          event.notification.notificationId,
+          event.notification.title,
+          event.notification.body,
+          event.notification.additionalData!["user"],
+          event.notification.smallIcon,
+          event.notification.bigPicture);
+      navNotif(event.notification.additionalData!["route"],
+          event.notification.notificationId);
     }
-    Get.to(const NotificationView(), arguments: handleNotif);
   });
+}
+
+Future<void> navNotif(String name, String? id) async {
+  switch (name) {
+    case 'notif':
+      Get.toNamed(RoutesName.notificationDetail, arguments: id);
+      break;
+
+    default:
+      Get.toNamed(RoutesName.splashScreen);
+  }
 }
 
 void main() {}

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../gen/assets.gen.dart';
+import '../onboarding/onboarding_view.dart';
 
 class SplashScreenView extends StatelessWidget {
   const SplashScreenView({super.key});
@@ -10,35 +11,44 @@ class SplashScreenView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(GetTokenFcmController());
-    // Get.put(NotificationController());
-    return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Color(0xffFFC568),
-              Color(0xffFF983D),
-              Color(0xffFF6C06),
-            ],
-          ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Assets.image.lpdpLogo
-                  .image(fit: BoxFit.cover, height: 70, width: 220),
-              const SizedBox(
-                height: 50,
+    return FutureBuilder(
+      future: Future.delayed(const Duration(seconds: 3)),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Scaffold(
+            body: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    Color(0xffFFC568),
+                    Color(0xffFF983D),
+                    Color(0xffFF6C06),
+                  ],
+                ),
               ),
-              const CircularProgressIndicator(color: Colors.white),
-            ],
-          ),
-        ),
-      ),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Assets.image.lpdpLogo
+                        .image(fit: BoxFit.cover, height: 70, width: 220),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    const CircularProgressIndicator(color: Colors.white),
+                  ],
+                ),
+              ),
+            ),
+          );
+          // const Text("Splash SCreeen");
+        } else {
+          return const OnBoardingView();
+        }
+      },
     );
   }
 }

@@ -63,8 +63,9 @@ class EbeasiswaBottomNavbarController extends GetxController {
     Get.off(() => const LoginView());
   }
 
-  onCloseLogoutMsg(context){onTapBottomMenu(3, context);}
-
+  onCloseLogoutMsg(context) {
+    onTapBottomMenu(3, context);
+  }
 
   Widget fadeAlertAnimation(
     BuildContext context,

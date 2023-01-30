@@ -9,16 +9,16 @@ class Onboard {
 
 final List<Onboard> dataBoarding = [
   Onboard(
-      asset: Assets.image.lpdp_board1,
+      asset: Assets.image.lpdpBoard1,
       judul: "Selamat datang di E-Beasiswa!",
       deskripsi:
           "Aplikasi untuk mempermudah semua urusan Proses Administrasi Awardee."),
   Onboard(
-      asset: Assets.image.lpdp_board2,
+      asset: Assets.image.lpdpBoard2,
       judul: "Report",
       deskripsi: "Mempermudah semua proses Laporan Awardee."),
   Onboard(
-      asset: Assets.image.lpdp_board3,
+      asset: Assets.image.lpdpBoard3,
       judul: "Realtime status & Monitoring",
       deskripsi: "Bisa cek langsung status dan aktivitas kamu."),
 ];

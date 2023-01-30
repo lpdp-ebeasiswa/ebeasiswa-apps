@@ -6,7 +6,6 @@ part of 'profile_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-// ignore: non_constant_identifier_names
 _$_ProfileModel _$$_ProfileModelFromJson(Map<String, dynamic> json) =>
     _$_ProfileModel(
       id: json['id'] as int,
@@ -18,7 +17,6 @@ _$_ProfileModel _$$_ProfileModelFromJson(Map<String, dynamic> json) =>
       expenditureTime: json['expenditure_time'] as String?,
     );
 
-// ignore: non_constant_identifier_names
 Map<String, dynamic> _$$_ProfileModelToJson(_$_ProfileModel instance) =>
     <String, dynamic>{
       'id': instance.id,

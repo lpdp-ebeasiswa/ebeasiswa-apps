@@ -13,6 +13,8 @@ _$_NotificationModel _$$_NotificationModelFromJson(Map<String, dynamic> json) =>
       username: json['username'] as String?,
       title: json['title'] as String?,
       body: json['body'] as String?,
+      icons: json['icons'] as String?,
+      images: json['images'] as String?,
       createdAt: json['createdAt'] as Timestamp?,
     );
 
@@ -24,5 +26,7 @@ Map<String, dynamic> _$$_NotificationModelToJson(
       'username': instance.username,
       'title': instance.title,
       'body': instance.body,
+      'icons': instance.icons,
+      'images': instance.images,
       'createdAt': instance.createdAt,
     };
