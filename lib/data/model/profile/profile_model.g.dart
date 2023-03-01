@@ -13,8 +13,8 @@ _$_ProfileModel _$$_ProfileModelFromJson(Map<String, dynamic> json) =>
       email: json['email'] as String?,
       alamat: json['alamat'] as String?,
       expenditure: json['expenditure'] as int? ?? 0,
-      expenditureDate: json['expenditure_date'] as String?,
-      expenditureTime: json['expenditure_time'] as String?,
+      expenditureDate: json['expenditureDate'] as String?,
+      expenditureTime: json['expenditureTime'] as String?,
     );
 
 Map<String, dynamic> _$$_ProfileModelToJson(_$_ProfileModel instance) =>
@@ -24,6 +24,6 @@ Map<String, dynamic> _$$_ProfileModelToJson(_$_ProfileModel instance) =>
       'email': instance.email,
       'alamat': instance.alamat,
       'expenditure': instance.expenditure,
-      'expenditure_date': instance.expenditureDate,
-      'expenditure_time': instance.expenditureTime,
+      'expenditureDate': instance.expenditureDate,
+      'expenditureTime': instance.expenditureTime,
     };

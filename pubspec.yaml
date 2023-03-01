@@ -75,7 +75,9 @@ dependencies:
   sms_autofill: ^2.2.0
   twilio_flutter: ^0.0.9
   flutter_local_notifications: ^13.0.0
-  
+  sqflite: ^2.2.4
+  path_provider: ^2.0.12
+  badges: ^3.0.2
 
 
 dev_dependencies:

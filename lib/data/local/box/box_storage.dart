@@ -15,6 +15,8 @@ class BoxStorage {
   static const _token = 'token';
   static const _fcmtoken = 'fcmtoken';
 
+  static const _countNotif = 'countNotif';
+
   void setSplashScreen(String splashScreenKey) {
     _getStorage.write(_selectedSplashScreenKey, splashScreenKey);
   }
@@ -100,4 +102,12 @@ class BoxStorage {
 
   String getStorageToken() => _getStorage.read(_fcmtoken) ?? '';
   void deleteStorageToken() => _getStorage.remove(_fcmtoken);
+
+//set jumlah notif yang belum di baca
+  void setCountNotif(int countNotif) {
+    _getStorage.write(_countNotif, countNotif);
+  }
+
+//get jumlah notif yang belum di baca
+  int getCountNotif() => _getStorage.read(_countNotif) ?? 0;
 }

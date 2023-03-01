@@ -20,6 +20,8 @@ class _NotificationDatailViewState extends State<NotificationDatailView> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    c.notifRead(id);
+    c.cekUnreadNotif();
     c.getDataNotification(id);
   }
 
@@ -52,7 +54,7 @@ class _NotificationDatailViewState extends State<NotificationDatailView> {
                 body: SafeArea(
                   child: Column(
                     children: [
-                      data.images != null
+                      data.images != ''
                           ? Padding(
                               padding: const EdgeInsets.only(bottom: 20),
                               child: ClipRRect(

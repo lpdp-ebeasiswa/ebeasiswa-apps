@@ -1,6 +1,7 @@
 import 'package:ebeasiswa/app/routes/route_name.dart';
 import 'package:ebeasiswa/presentation/notification/notification_controller.dart';
 import 'package:ebeasiswa/presentation/notification/notification_detail_view.dart';
+import 'package:ebeasiswa/presentation/notification/notification_local_view.dart';
 import 'package:ebeasiswa/presentation/splash_screen/splash_screen_view.dart';
 import 'package:get/get.dart';
 // import 'package:ebeasiswa/presentation/account/account_view.dart';
@@ -91,6 +92,10 @@ class RoutesPage {
     GetPage(
       name: RoutesName.notification,
       page: () => const NotificationView(),
+    ),
+    GetPage(
+      name: RoutesName.notificationLocal,
+      page: () => const NotificationLocalView(),
     ),
     GetPage(
       name: RoutesName.notificationDetail,

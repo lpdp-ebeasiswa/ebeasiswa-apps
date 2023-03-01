@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// This file is "main.dart"
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'notification_model.freezed.dart';
@@ -7,15 +7,15 @@ part 'notification_model.g.dart';
 @freezed
 class NotificationModel with _$NotificationModel {
   const factory NotificationModel({
-    String? id,
+    int? id,
+    String? firestoreId,
     String? uid,
     String? username,
     String? title,
     String? body,
     String? icons,
     String? images,
-    @Default(false) bool? read,
-    Timestamp? createdAt,
+    String? createdAt,
   }) = _NotificationModel;
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) =>

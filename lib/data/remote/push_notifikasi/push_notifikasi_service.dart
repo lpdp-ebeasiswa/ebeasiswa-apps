@@ -15,14 +15,12 @@ class PushNotifikasiServices {
       "small_icon": "@mipmap/ic_launcher",
       "large_icon":
           "https://awsimages.detik.net.id/visual/2020/08/13/lpdp-kemenkeu.jpeg?w=650",
-      "headings": {"en": "One Signal Note"},
-      "contents": {
-        "en":
-            "The Create Notification method is used when you want your server to programmatically send Push Notification, Email, and SMS messages through OneSignal. You may target users in one of three ways using this method:"
-      },
+      "headings": {"en": "Test Notif Local"},
+      "contents": {"en": "ini body dari notif Local"},
       "data": {
-        "user": "widi",
+        "user": "pic",
         "route": "notif",
+        "read": false,
       },
       "big_picture": ""
     };

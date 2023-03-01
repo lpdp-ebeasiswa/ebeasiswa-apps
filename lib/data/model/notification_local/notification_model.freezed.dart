@@ -20,15 +20,15 @@ NotificationModel _$NotificationModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$NotificationModel {
-  String? get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  String? get firestoreId => throw _privateConstructorUsedError;
   String? get uid => throw _privateConstructorUsedError;
   String? get username => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   String? get body => throw _privateConstructorUsedError;
   String? get icons => throw _privateConstructorUsedError;
   String? get images => throw _privateConstructorUsedError;
-  bool? get read => throw _privateConstructorUsedError;
-  Timestamp? get createdAt => throw _privateConstructorUsedError;
+  String? get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,15 +43,15 @@ abstract class $NotificationModelCopyWith<$Res> {
       _$NotificationModelCopyWithImpl<$Res, NotificationModel>;
   @useResult
   $Res call(
-      {String? id,
+      {int? id,
+      String? firestoreId,
       String? uid,
       String? username,
       String? title,
       String? body,
       String? icons,
       String? images,
-      bool? read,
-      Timestamp? createdAt});
+      String? createdAt});
 }
 
 /// @nodoc
@@ -68,19 +68,23 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
   @override
   $Res call({
     Object? id = freezed,
+    Object? firestoreId = freezed,
     Object? uid = freezed,
     Object? username = freezed,
     Object? title = freezed,
     Object? body = freezed,
     Object? icons = freezed,
     Object? images = freezed,
-    Object? read = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      firestoreId: freezed == firestoreId
+          ? _value.firestoreId
+          : firestoreId // ignore: cast_nullable_to_non_nullable
               as String?,
       uid: freezed == uid
           ? _value.uid
@@ -106,14 +110,10 @@ class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as String?,
-      read: freezed == read
-          ? _value.read
-          : read // ignore: cast_nullable_to_non_nullable
-              as bool?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp?,
+              as String?,
     ) as $Val);
   }
 }
@@ -127,15 +127,15 @@ abstract class _$$_NotificationModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? id,
+      {int? id,
+      String? firestoreId,
       String? uid,
       String? username,
       String? title,
       String? body,
       String? icons,
       String? images,
-      bool? read,
-      Timestamp? createdAt});
+      String? createdAt});
 }
 
 /// @nodoc
@@ -150,19 +150,23 @@ class __$$_NotificationModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? firestoreId = freezed,
     Object? uid = freezed,
     Object? username = freezed,
     Object? title = freezed,
     Object? body = freezed,
     Object? icons = freezed,
     Object? images = freezed,
-    Object? read = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_$_NotificationModel(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      firestoreId: freezed == firestoreId
+          ? _value.firestoreId
+          : firestoreId // ignore: cast_nullable_to_non_nullable
               as String?,
       uid: freezed == uid
           ? _value.uid
@@ -188,14 +192,10 @@ class __$$_NotificationModelCopyWithImpl<$Res>
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as String?,
-      read: freezed == read
-          ? _value.read
-          : read // ignore: cast_nullable_to_non_nullable
-              as bool?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as Timestamp?,
+              as String?,
     ));
   }
 }
@@ -205,20 +205,22 @@ class __$$_NotificationModelCopyWithImpl<$Res>
 class _$_NotificationModel implements _NotificationModel {
   const _$_NotificationModel(
       {this.id,
+      this.firestoreId,
       this.uid,
       this.username,
       this.title,
       this.body,
       this.icons,
       this.images,
-      this.read = false,
       this.createdAt});
 
   factory _$_NotificationModel.fromJson(Map<String, dynamic> json) =>
       _$$_NotificationModelFromJson(json);
 
   @override
-  final String? id;
+  final int? id;
+  @override
+  final String? firestoreId;
   @override
   final String? uid;
   @override
@@ -232,14 +234,11 @@ class _$_NotificationModel implements _NotificationModel {
   @override
   final String? images;
   @override
-  @JsonKey()
-  final bool? read;
-  @override
-  final Timestamp? createdAt;
+  final String? createdAt;
 
   @override
   String toString() {
-    return 'NotificationModel(id: $id, uid: $uid, username: $username, title: $title, body: $body, icons: $icons, images: $images, read: $read, createdAt: $createdAt)';
+    return 'NotificationModel(id: $id, firestoreId: $firestoreId, uid: $uid, username: $username, title: $title, body: $body, icons: $icons, images: $images, createdAt: $createdAt)';
   }
 
   @override
@@ -248,6 +247,8 @@ class _$_NotificationModel implements _NotificationModel {
         (other.runtimeType == runtimeType &&
             other is _$_NotificationModel &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.firestoreId, firestoreId) ||
+                other.firestoreId == firestoreId) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.username, username) ||
                 other.username == username) &&
@@ -255,15 +256,14 @@ class _$_NotificationModel implements _NotificationModel {
             (identical(other.body, body) || other.body == body) &&
             (identical(other.icons, icons) || other.icons == icons) &&
             (identical(other.images, images) || other.images == images) &&
-            (identical(other.read, read) || other.read == read) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, uid, username, title, body,
-      icons, images, read, createdAt);
+  int get hashCode => Object.hash(runtimeType, id, firestoreId, uid, username,
+      title, body, icons, images, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -282,21 +282,23 @@ class _$_NotificationModel implements _NotificationModel {
 
 abstract class _NotificationModel implements NotificationModel {
   const factory _NotificationModel(
-      {final String? id,
+      {final int? id,
+      final String? firestoreId,
       final String? uid,
       final String? username,
       final String? title,
       final String? body,
       final String? icons,
       final String? images,
-      final bool? read,
-      final Timestamp? createdAt}) = _$_NotificationModel;
+      final String? createdAt}) = _$_NotificationModel;
 
   factory _NotificationModel.fromJson(Map<String, dynamic> json) =
       _$_NotificationModel.fromJson;
 
   @override
-  String? get id;
+  int? get id;
+  @override
+  String? get firestoreId;
   @override
   String? get uid;
   @override
@@ -310,9 +312,7 @@ abstract class _NotificationModel implements NotificationModel {
   @override
   String? get images;
   @override
-  bool? get read;
-  @override
-  Timestamp? get createdAt;
+  String? get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$_NotificationModelCopyWith<_$_NotificationModel> get copyWith =>

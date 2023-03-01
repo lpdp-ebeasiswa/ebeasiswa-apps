@@ -8,27 +8,27 @@ part of 'notification_model.dart';
 
 _$_NotificationModel _$$_NotificationModelFromJson(Map<String, dynamic> json) =>
     _$_NotificationModel(
-      id: json['id'] as String?,
+      id: json['id'] as int?,
+      firestoreId: json['firestoreId'] as String?,
       uid: json['uid'] as String?,
       username: json['username'] as String?,
       title: json['title'] as String?,
       body: json['body'] as String?,
       icons: json['icons'] as String?,
       images: json['images'] as String?,
-      read: json['read'] as bool? ?? false,
-      createdAt: json['createdAt'] as Timestamp?,
+      createdAt: json['createdAt'] as String?,
     );
 
 Map<String, dynamic> _$$_NotificationModelToJson(
         _$_NotificationModel instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'firestoreId': instance.firestoreId,
       'uid': instance.uid,
       'username': instance.username,
       'title': instance.title,
       'body': instance.body,
       'icons': instance.icons,
       'images': instance.images,
-      'read': instance.read,
       'createdAt': instance.createdAt,
     };

@@ -1,7 +1,6 @@
 import 'package:ebeasiswa/app/widgets/dot_indicator_costum.dart';
 import 'package:ebeasiswa/gen/assets.gen.dart';
 import 'package:ebeasiswa/presentation/onboarding/list_onboarding_view.dart';
-import 'package:ebeasiswa/presentation/onboarding/list_user_tokenfcm.dart';
 import 'package:ebeasiswa/presentation/onboarding/onboarding_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -156,8 +155,8 @@ class ImageInformation extends StatelessWidget {
                   child: SafeArea(
                     child: InkWell(
                       onTap: () {
-                        // c.nextPage();
-                        Get.to(const ListUserTOkenFcm());
+                        c.nextPage();
+                        // Get.to(const ListUserTOkenFcm());
                       },
                       child: const Text(
                         "Lewati",

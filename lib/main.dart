@@ -28,8 +28,6 @@ void runEbeasiswaApp() async {
   );
 }
 
-NotificationController c = Get.put(NotificationController());
-
 Future<void> _firebaseSetup() async {
   const AndroidNotificationChannel channel = AndroidNotificationChannel(
       'high_importance_channel', // id
@@ -52,7 +50,7 @@ Future<void> _firebaseSetup() async {
 }
 
 Future<void> _setupOneSignal() async {
-  bool handleNotif = true;
+  final c = Get.put(NotificationController(), permanent: true);
   OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
 
   OneSignal.shared.setAppId("01a913d7-1c1a-46c0-aa15-c42ff9c575bf");
@@ -64,40 +62,37 @@ Future<void> _setupOneSignal() async {
 
   OneSignal.shared.setNotificationWillShowInForegroundHandler(
       (OSNotificationReceivedEvent event) {
-    handleNotif = false;
-    print('handleNotif ----> $handleNotif');
-    if (!handleNotif) {
-      c.sendingDataNotification(
-          event.notification.notificationId,
-          event.notification.title,
-          event.notification.body,
-          event.notification.additionalData!["user"],
-          event.notification.smallIcon,
-          event.notification.bigPicture);
-    }
+    c.sendingDataNotification(
+        event.notification.notificationId,
+        event.notification.title,
+        event.notification.body,
+        event.notification.additionalData!["user"],
+        event.notification.additionalData!["read"],
+        event.notification.smallIcon,
+        event.notification.bigPicture);
+    c.cekUnreadNotif();
   });
 
   OneSignal.shared
       .setNotificationOpenedHandler((OSNotificationOpenedResult event) {
-    print('handleNotif ----> $handleNotif');
-    if (handleNotif) {
-      c.sendingDataNotification(
-          event.notification.notificationId,
-          event.notification.title,
-          event.notification.body,
-          event.notification.additionalData!["user"],
-          event.notification.smallIcon,
-          event.notification.bigPicture);
-      navNotif(event.notification.additionalData!["route"],
-          event.notification.notificationId);
-    }
+    c.sendingDataNotification(
+        event.notification.notificationId,
+        event.notification.title,
+        event.notification.body,
+        event.notification.additionalData!["user"],
+        event.notification.additionalData!["read"],
+        event.notification.smallIcon,
+        event.notification.bigPicture);
+    navNotif(event.notification.additionalData!["route"],
+        event.notification.notificationId);
+    c.cekUnreadNotif();
   });
 }
 
 Future<void> navNotif(String name, String? id) async {
   switch (name) {
     case 'notif':
-      Get.toNamed(RoutesName.notificationDetail, arguments: id);
+      Get.toNamed(RoutesName.notification);
       break;
 
     default:

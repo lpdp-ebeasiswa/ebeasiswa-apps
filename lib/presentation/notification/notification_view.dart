@@ -1,4 +1,3 @@
-import 'package:ebeasiswa/presentation/notification/notification_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,6 +5,7 @@ import '../../app/routes/route_name.dart';
 import '../../app/utilities/date_format_timestamp.dart';
 import '../../data/model/notification/notification_model.dart';
 import '../login/login_controller.dart';
+import 'notification_controller.dart';
 
 class NotificationView extends StatefulWidget {
   const NotificationView({Key? key}) : super(key: key);
@@ -15,7 +15,10 @@ class NotificationView extends StatefulWidget {
 }
 
 class _NotificationViewState extends State<NotificationView> {
-  NotificationController c = Get.put(NotificationController());
+  // final c = Get.put(
+  //   NotificationController(),
+  // );
+  var c = Get.find<NotificationController>();
   LoginController loginController = Get.put(LoginController());
 
   @override
@@ -35,36 +38,39 @@ class _NotificationViewState extends State<NotificationView> {
         actions: [
           IconButton(
               onPressed: () {
+                Get.toNamed(RoutesName.notificationLocal);
+              },
+              icon: const Icon(Icons.data_object)),
+          IconButton(
+              onPressed: () {
                 c.pushNotif();
               },
               icon: const Icon(Icons.send))
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 10),
-        child: StreamBuilder<List<NotificationModel>>(
-          stream: c.readNotification(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              if (snapshot.hasError) {
-                return const Center(
-                    child: Text("Tidak dapat menampilkan data"));
-              } else if (snapshot.hasData) {
-                var notif = snapshot.data!;
-                if (notif.isNotEmpty) {
-                  return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, i) {
-                      NotificationModel item = notif[i];
-
-                      String? time = readTimestamp(item.createdAt == null
-                          ? 0
-                          : item.createdAt!.microsecondsSinceEpoch);
-                      return Column(
+      body: StreamBuilder<List<NotificationModel>>(
+        stream: c.readNotification(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            if (snapshot.hasError) {
+              return const Center(child: Text("Tidak dapat menampilkan data"));
+            } else if (snapshot.hasData) {
+              var notif = snapshot.data!;
+              if (notif.isNotEmpty) {
+                return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, i) {
+                    NotificationModel item = notif[i];
+                    c.time = readTimestamp(item.createdAt == null
+                        ? 0
+                        : item.createdAt!.microsecondsSinceEpoch);
+                    return Container(
+                      color: item.read == false ? Colors.orange[50] : null,
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           ListTile(
@@ -83,48 +89,61 @@ class _NotificationViewState extends State<NotificationView> {
                             title: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("${item.title}"),
+                                Expanded(
+                                  child: Text("${item.title}",
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis),
+                                ),
                                 Text(
-                                  time,
+                                  c.time!,
                                   style: const TextStyle(fontSize: 12),
                                 ),
                               ],
                             ),
                             subtitle: Text("${item.body}",
                                 maxLines: 3, overflow: TextOverflow.ellipsis),
-                            // onTap: () => c.deleteNotification('${item.id}')),
-                            onTap: () => Get.toNamed(
-                                RoutesName.notificationDetail,
-                                arguments: item.id),
+                            // onTap: () => c.deleteNotification('${item.id}'),
+                            onTap: () {
+                              Get.toNamed(RoutesName.notificationDetail,
+                                  arguments: item.id);
+                            },
                           ),
-                          item.images != null
-                              ? Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 65, right: 10, bottom: 5),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    child: Image.network(
-                                      "${item.images}",
-                                      height: 130,
-                                      width: Get.width,
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ))
-                              : const Center(),
+                          InkWell(
+                            onTap: () {
+                              Get.toNamed(RoutesName.notificationDetail,
+                                  arguments: item.id);
+                            },
+                            child: item.images != ''
+                                ? Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 65, right: 10, bottom: 5),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      child: Image.network(
+                                        "${item.images}",
+                                        height: 130,
+                                        width: Get.width,
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ))
+                                : const Center(),
+                          ),
                           const Divider(
-                            indent: 65,
-                            height: 10,
+                            indent: 15,
+                            endIndent: 15,
+                            thickness: 0.8,
+                            height: 1,
                           )
                         ],
-                      );
-                    },
-                  );
-                }
+                      ),
+                    );
+                  },
+                );
               }
             }
-            return const Center(child: Text("Tidak ada notifikasi"));
-          },
-        ),
+          }
+          return const Center(child: Text("Tidak ada notifikasi"));
+        },
       ),
     );
   }

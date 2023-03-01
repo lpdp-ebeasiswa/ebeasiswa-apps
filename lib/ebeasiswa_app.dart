@@ -14,6 +14,7 @@ class EbeasiswaApp extends StatelessWidget {
       statusBarColor: Colors.transparent,
     ));
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: RoutesPage.Init,
       getPages: RoutesPage.routes,
     );

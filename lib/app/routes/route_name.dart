@@ -4,5 +4,6 @@ abstract class RoutesName {
   static String login = "/login";
   static String home = "/home";
   static String notification = "/notification";
+  static String notificationLocal = "/notification-local";
   static String notificationDetail = "/notification-detail";
 }
