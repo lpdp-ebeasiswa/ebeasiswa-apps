@@ -57,7 +57,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 30, bottom: 30),
-                child: controller.pageIndex == 2
+                child: controller.pageIndex.value == 2
                     ? Column(
                         children: [
                           SizedBox(
@@ -106,7 +106,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                               (index) => Padding(
                                 padding: const EdgeInsets.only(right: 6),
                                 child: DotIndikator(
-                                  aktif: index == controller.pageIndex,
+                                  aktif: index == controller.pageIndex.value,
                                 ),
                               ),
                             ),
@@ -140,30 +140,42 @@ class ImageInformation extends StatelessWidget {
         Expanded(
           child: Stack(
             children: [
-              onboard.asset.image(fit: BoxFit.fitHeight),
-              Container(
-                margin: const EdgeInsets.only(top: 70),
-                padding: const EdgeInsets.all(40),
-                child: pageIndex == 2
-                    ? null
-                    : Assets.image.lpdp_boarding.image(fit: BoxFit.fitWidth),
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 14.0, right: 14.0, top: 200.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    onboard.asset
+                        .image(fit: BoxFit.fitHeight, height: 270, width: 270),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 30, right: 30),
                 child: Align(
                   alignment: Alignment.topRight,
                   child: SafeArea(
-                    child:
-                    Obx(() => c.pageIndex.value != 2 ?  InkWell(
-                      onTap: () {
-                        c.closePage();
-                      },
-                      child: const Text(
-                        "Lewati",
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                    ) : const SizedBox.shrink(),)
-                  ),
+                      child: Obx(
+                    () => c.pageIndex.value != 2
+                        ? InkWell(
+                            onTap: () {
+                              c.closePage();
+                            },
+                            child: const Text(
+                              "Lewati",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          )
+                        : const SizedBox.shrink(),
+                  )),
                 ),
               ),
             ],

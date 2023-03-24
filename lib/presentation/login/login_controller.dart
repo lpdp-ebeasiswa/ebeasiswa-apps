@@ -11,6 +11,7 @@ import 'package:ebeasiswa/presentation/login/login_view.dart';
 
 import '../../app/constant/baseurl.dart';
 import '../bottom_navbar/bottom_navbar_view.dart';
+import '../login_verification.dart/login_verification_view.dart';
 
 class LoginController extends GetxController {
   final box = GetStorage();
@@ -132,7 +133,7 @@ class LoginController extends GetxController {
   onLoginUser() {
     if (isLoggedin.value == true) {
       Get.snackbar('Login Success', 'Your Token : $token');
-      Get.off(() => const EbeasiswaBottomNavbar());
+      Get.off(() => const LoginVerificationView());
     } else {
       Get.off(() => const LoginView());
     }
