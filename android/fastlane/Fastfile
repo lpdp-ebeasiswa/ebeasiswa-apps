@@ -57,7 +57,7 @@ platform :android do
                           ],
       teams_url: webhookUrl
     )
-      gradle(task: taskClean)
+     # gradle(task: taskClean)
     Dir.chdir "../.." do
       sh("flutter", "clean")
       sh("flutter", "pub", "get")

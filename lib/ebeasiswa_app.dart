@@ -28,7 +28,7 @@ class EbeasiswaApp extends StatelessWidget {
             home: SplashScreenView(),
           );
         } else {
-          return GetMaterialApp(
+          return const GetMaterialApp(
             home: OnBoardingView(),
           );
         }

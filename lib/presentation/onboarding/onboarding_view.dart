@@ -8,11 +8,13 @@ import 'package:get/get.dart';
 import '../login/login_view.dart';
 
 class OnBoardingView extends StatefulWidget {
+  const OnBoardingView({super.key});
+
   @override
-  State<OnBoardingView> createState() => _OnBoardingState();
+  State<OnBoardingView> createState() => _OnBoardingViewState();
 }
 
-class _OnBoardingState extends State<OnBoardingView> {
+class _OnBoardingViewState extends State<OnBoardingView> {
   OnboaringController controller = Get.put(OnboaringController());
 
   @override
@@ -41,11 +43,11 @@ class _OnBoardingState extends State<OnBoardingView> {
                   controller: controller.pageController,
                   onPageChanged: (index) {
                     setState(() {
-                      controller.pageIndex = index;
+                      controller.pageIndex.value = index;
                     });
                   },
                   itemBuilder: (context, index) => ImageInformation(
-                    pageIndex: controller.pageIndex,
+                    pageIndex: controller.pageIndex.value,
                     onboard: Onboard(
                         asset: dataBoarding[index].asset,
                         judul: dataBoarding[index].judul,
@@ -151,15 +153,16 @@ class ImageInformation extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.topRight,
                   child: SafeArea(
-                    child: InkWell(
+                    child:
+                    Obx(() => c.pageIndex.value != 2 ?  InkWell(
                       onTap: () {
-                        c.nextPage();
+                        c.closePage();
                       },
                       child: const Text(
                         "Lewati",
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
-                    ),
+                    ) : const SizedBox.shrink(),)
                   ),
                 ),
               ),

@@ -9,7 +9,7 @@ class FaqView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FaqController faqController = Get.put(FaqController());
+   // FaqController faqController = Get.put(FaqController());
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.orange,

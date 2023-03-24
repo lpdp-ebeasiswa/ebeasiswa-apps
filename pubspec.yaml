@@ -70,6 +70,7 @@ dependencies:
   rflutter_alert: ^2.0.4
   sms_autofill: ^2.2.0
   twilio_flutter: ^0.0.9
+  auto_route: ^5.0.4
 
 
 dev_dependencies:

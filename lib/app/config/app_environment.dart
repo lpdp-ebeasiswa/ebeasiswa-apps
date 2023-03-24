@@ -12,7 +12,7 @@ class AppEnvironment {
     factory AppEnvironment.dev() {
     const env = AppEnvironment._(
       name: 'development',
-      baseUrl: 'https://api-dev.internpos.com',
+      baseUrl: 'http://103.176.78.112:8080',
     );
     instance = env;
 
@@ -22,7 +22,7 @@ class AppEnvironment {
   factory AppEnvironment.prod() {
     const env = AppEnvironment._(
       name: 'production',
-      baseUrl: 'https://api-dev.internpos.com',
+      baseUrl: 'https://services.internpos.com',
     );
     instance = env;
 

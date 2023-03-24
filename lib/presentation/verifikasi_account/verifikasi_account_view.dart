@@ -156,12 +156,13 @@ class _VerifikasiAcountViewState extends State<VerifikasiAcountView> {
                               ),
                               onPressed: () {
                                 // getCode();
-                                print(
+                                debugPrint(
                                     "code reciveKodeOtp ------> ${controller.otpCode}");
                                 if (controller.messageOtpCode.value.length ==
                                     4) {
                                   if (controller.otpCode ==
                                       controller.messageOtpCode.value) {
+                                       
                                     Get.snackbar('Berhasil',
                                         'Akun berhasil di verifikasi',
                                         snackPosition: SnackPosition.BOTTOM,

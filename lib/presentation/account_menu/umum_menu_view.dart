@@ -99,7 +99,9 @@ class _UmumMenuViewState extends State<UmumMenuView> {
                             if (ctx[index].id == 1)
                               {Get.to(const FaqView())}
                             else if (ctx[index].id == 2)
-                              {print("umum---> object 2")}
+                              {
+                                
+                              }
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -25,7 +25,7 @@ class RegistrationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final RegisterController controllerRegister = Get.put(RegisterController());
+  //  final RegisterController controllerRegister = Get.put(RegisterController());
 
     return Scaffold(
       appBar: AppBar(

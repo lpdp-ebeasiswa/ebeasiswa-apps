@@ -1,0 +1,22 @@
+{
+
+    "taskClean": "clean assembleRelease",
+
+    "appIdFirebase": "1:828517383976:android:801bab9f460581b88a5a1d",
+    "appPath": "../build/app/outputs/apk/development/release/app-development-release.apk",
+    "groupPath": "qa",
+    "firebaseCLIPath": "/usr/local/bin/firebase",
+
+    "titleProcess": "Ebeasiswa Apps - Android Development (Deployment)",
+    "titleSuccess": "Ebeasiswa Apps - Android Development (Finished)",
+    "summary": "CICD Android Ebeasiswa Apps",
+    "text": "Ebeasiswa Apps Notification Android Development \n for see detail ebeasiswa apps project, make sure you have permission to join us",
+    "activityImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Logo_kementerian_keuangan_republik_indonesia.png/1200px-Logo_kementerian_keuangan_republik_indonesia.png",
+    "platformName": "Platform",
+    "platformValue": "android",
+    "actionType": "OpenUri",
+    "actionName": "View in Repository",
+    "actionOS": "default",
+    "actionUrl": "https://github.com/lpdp-ebeasiswa/ebeasiswa-apps",
+    "webhookUrl": "https://kemenkeu.webhook.office.com/webhookb2/b853fd11-85df-481f-96f4-beb58bbbaf3b@ed6fb366-8322-46f3-915e-c4d037a454a9/IncomingWebhook/a75a7ab6ef064e76ac58cff6e1d1c6ba/4820f8e8-5709-4f25-b3a4-df606422affc"   
+}

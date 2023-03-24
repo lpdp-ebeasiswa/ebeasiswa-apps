@@ -5,7 +5,7 @@ import '../login/login_view.dart';
 
 class OnboaringController extends GetxController {
   late PageController pageController;
-  int pageIndex = 0;
+  var pageIndex = 0.obs;
 
   @override
   void onInit() {
@@ -21,9 +21,17 @@ class OnboaringController extends GetxController {
   }
 
   nextPage() {
-    pageIndex != 2
+    pageIndex.value != 2
         ? pageController.nextPage(
             duration: const Duration(milliseconds: 300), curve: Curves.ease)
         : Get.to(const LoginView());
+  }
+
+  previousPage(){
+    pageController.previousPage( duration: const Duration(milliseconds: 300), curve: Curves.ease);
+  }
+   
+  closePage(){
+    Get.off(const LoginView());
   }
 }

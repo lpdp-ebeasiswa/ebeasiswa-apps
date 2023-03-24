@@ -41,7 +41,7 @@ class VerifikasiAccountController extends GetxController {
     otpCode = codeRandmom.toString();
     twilioFlutter.sendSMS(
         toNumber: phone!, messageBody: '<#> kode anda $otpCode $appSignature');
-    print("code appSignature $appSignature Code OTP $otpCode");
+    debugPrint("code appSignature $appSignature Code OTP $otpCode");
   }
 
   Future listenForCode() async {
