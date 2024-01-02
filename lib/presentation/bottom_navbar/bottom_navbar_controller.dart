@@ -16,11 +16,11 @@ class EbeasiswaBottomNavbarController extends GetxController {
   final box = GetStorage();
 
   var selectedPages = <Widget>[
-    const HomeView(),
-    const ExpenditureView(),
+   // const HomeView(),
+    //const ExpenditureView(),
     const MessageNotificationView(),
-    const AccountView(),
-    const LogoutView(),
+    //const AccountView(),
+    //const LogoutView(),
   ].obs;
 
   int get index => selectedIndex.value;
@@ -29,7 +29,8 @@ class EbeasiswaBottomNavbarController extends GetxController {
   onTapBottomMenu(int currentIndex, BuildContext context) => {
         selectedIndex.value = currentIndex,
         selectedPage.value = selectedPages,
-        if (currentIndex == 4) {onBasicAlertPressed(context)},
+        debugPrint('page hal : $currentIndex'),
+       // if (currentIndex == 4) {onBasicAlertPressed(context)},
       };
 
   onBasicAlertPressed(context) {

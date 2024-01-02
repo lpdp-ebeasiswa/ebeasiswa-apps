@@ -24,16 +24,75 @@ class ApiClient {
     "X-CSRF-Token": "",
   };
 
-  Future<Map?> getList(String pathUrl) async {
-    try {
-      final fullUrl = "$env/$pathUrl";
-      debugPrint('clog full url : $fullUrl');
+  Future post(
+      {required pathUrl,
+      required Map<String,String> requestBody,
+      required String token}) async {
+    final fullUrl = env + pathUrl;
+    //const fullUrl = "http://localhost:8000/v1/api/login";
+    Map<String, String> headers = {};
+    if (token == '') {
+      headers = {
+        "Content-Type": "application/json"
+        //"X-CSRF-Token": "",
+      };
+    } else {
+      headers = {
+        "Authorization": "Bearer $token",
+        "Content-Type": "application/json"
+        //"X-CSRF-Token": "",
+      };
+    }
 
+    try {
+     
+      debugPrint('full url : $fullUrl , header : $headers, request : $requestBody');
       final response = await http.Client()
-          .get(Uri.parse(fullUrl))
+          .post(
+        Uri.parse(fullUrl),
+       headers: headers,
+        body: jsonEncode(requestBody),
+      )
           .timeout(const Duration(seconds: 10), onTimeout: () {
-        throw Get.snackbar(
-            "Request Timeout", "Connection time out, please try again");
+        debugPrint('Request Timeout');
+        return http.Response('Request Timeout', 408);
+      }).onError((error, stackTrace) {
+        debugPrint('invalid connection');
+        return http.Response('Internal Server Error', 500);
+      });
+      return payloadData.catchPayloadData(response);
+    } finally {
+      http.Client().close();
+    }
+  }
+
+  Future get({required pathUrl, required String token}) async {
+    final fullUrl = env + pathUrl;
+    Map<String, String> headers = {};
+    if (token == '') {
+      headers = {
+        "Content-Type": "application/json"
+        //"X-CSRF-Token": "",
+      };
+    } else {
+      headers = {
+        "Authorization": "Bearer $token",
+        "Content-Type": "application/json"
+        //"X-CSRF-Token": "",
+      };
+    }
+
+    try {
+      debugPrint('token : $token');
+      debugPrint('url : $fullUrl');
+      final response = await http.Client()
+          .get(Uri.parse(fullUrl), headers: headers)
+          .timeout(const Duration(seconds: 30), onTimeout: () {
+        debugPrint('Request Timeout');
+        return http.Response('Request Timeout', 408);
+      }).onError((error, stackTrace) {
+        debugPrint('invalid connection');
+        return http.Response('Internal Server Error', 500);
       });
       return payloadData.catchPayloadData(response);
     } finally {

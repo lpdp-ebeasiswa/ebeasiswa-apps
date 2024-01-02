@@ -2,8 +2,16 @@
 <resources>
     <color name="orange">#FF6C06</color>
     <color name="orange-glow">#FF8226</color>
-    <color name="white">#FFFFFF</color>
     <color name="sunglow">#FFC827</color>
     <color name="downy">#5DCEBD</color>
+    <color name="purplelow">#5667FD</color>
+    <color name="blackgrey">#364356</color>
+    <color name="redprimary">#FF0000</color>
+    <color name="whiteprimary">#FFFFFF</color>
+    <color name="blueprimary">#0000FF</color>
+    <color name="orangeprimary">#F7941D</color>
+    <color name="blackprimary">#000000</color>
+    <color name="greenprimary">#00A651</color>
+    <color name="purplesubmenuHome">#563898</color>
     
 </resources>

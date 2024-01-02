@@ -9,7 +9,7 @@ class ProfileController extends GetxController {
   var isLoading = true.obs;
   var isError = false.obs;
   var errmsg = "".obs;
-  ProfileServices profileServices = ProfileServices();
+  //ProfileServices profileServices = ProfileServices();
 
   final box = GetStorage();
   var statusVerifikasi = false.obs;
@@ -22,7 +22,7 @@ class ProfileController extends GetxController {
   void onInit() {
     super.onInit();
     storageVerifikasi();
-    onFetchProfile();
+    //onFetchProfile();
   }
 
   void storageVerifikasi() {
@@ -41,18 +41,18 @@ class ProfileController extends GetxController {
   //   }
   // }
 
-  Future<ProfileModel?> onFetchProfile() async {
-    isLoading(true);
-    try {
-      final data = await profileServices.profileServices();
-      profileModel = data;
-      isLoading(false);
-      isError(false);
-    } catch (e) {
-      isLoading(false);
-      isError(true);
-      throw Exception(e);
-    }
-    return null;
-  }
+  // Future<ProfileModel?> onFetchProfile() async {
+  //   isLoading(true);
+  //   try {
+  //     final data = await profileServices.profileServices();
+  //     profileModel = data;
+  //     isLoading(false);
+  //     isError(false);
+  //   } catch (e) {
+  //     isLoading(false);
+  //     isError(true);
+  //     throw Exception(e);
+  //   }
+  //   return null;
+  // }
 }

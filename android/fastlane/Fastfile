@@ -1,3 +1,4 @@
+#bundle exec fastlane android_dev
 default_platform(:android)
 releaseData = load_json(json_path: "app/release_data.json")
 data = load_json(json_path: "app/cicd_android.json")

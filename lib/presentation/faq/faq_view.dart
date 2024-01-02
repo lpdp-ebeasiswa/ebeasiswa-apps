@@ -38,7 +38,7 @@ class MainFaqView extends StatefulWidget {
 }
 
 class _MainFaqViewState extends State<MainFaqView> {
-  final c = Get.find<FaqController>();
+  final c = Get.put(FaqController());
   List items = [
     {"id": 0, "tab": "Semua"},
     {"id": 1, "tab": "Persiapan Keberangkatan"},

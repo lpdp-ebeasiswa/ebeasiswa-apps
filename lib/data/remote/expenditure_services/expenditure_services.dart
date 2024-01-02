@@ -1,30 +1,30 @@
-import 'dart:io';
+// import 'dart:io';
 
-import 'package:ebeasiswa/app/constant/baseurl.dart';
-import 'package:get/get.dart';
-import '../../../app/helper/api_client/api_client_helper.dart';
-import '../../model/expenditure/expenditure_model.dart';
-part '_expenditure_datasource.dart';
+// import 'package:ebeasiswa/app/constant/baseurl.dart';
+// import 'package:get/get.dart';
+// import '../../../app/helper/api_client/api_client_helper.dart';
+// import '../../model/expenditure/expenditure_model.dart';
+// part '_expenditure_datasource.dart';
 
-class ExpenditureServices {
-  final ExpenditureDataSource expenditureDataSource = ExpenditureDataSource();
+// class ExpenditureServices {
+//   final ExpenditureDataSource expenditureDataSource = ExpenditureDataSource();
 
-  Future expenditureListServices() async {
-    try {
-      final response = await expenditureDataSource.loadListExpenditureUser();
-      final validationResponse = response['data'];
-      if (validationResponse == []) {
-        Get.snackbar('Notification', 'Data is empty');
-      } else {
-        final List parsedResponse = response['data'] ?? [];
-        final data =
-            parsedResponse.map((e) => ExpenditureModel.fromJson(e)).toList();
-        return data;
-      }
-    } on SocketException {
-      Get.snackbar('Notification', 'Cant load services');
-    }
-    Get.snackbar('Notification', 'Cant load data');
-    return [];
-  }
-}
+//   Future expenditureListServices() async {
+//     try {
+//       final response = await expenditureDataSource.loadListExpenditureUser();
+//       final validationResponse = response['data'];
+//       if (validationResponse == []) {
+//         Get.snackbar('Notification', 'Data is empty');
+//       } else {
+//         final List parsedResponse = response['data'] ?? [];
+//         final data =
+//             parsedResponse.map((e) => ExpenditureModel.fromJson(e)).toList();
+//         return data;
+//       }
+//     } on SocketException {
+//       Get.snackbar('Notification', 'Cant load services');
+//     }
+//     Get.snackbar('Notification', 'Cant load data');
+//     return [];
+//   }
+// }

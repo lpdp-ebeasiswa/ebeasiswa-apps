@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../login/login_view.dart';
-import '../login_verification.dart/login_verification_view.dart';
+import '../login_verification/login_verification_view.dart';
 
 class OnboaringController extends GetxController {
   late PageController pageController;

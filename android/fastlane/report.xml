@@ -5,47 +5,47 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.0568468">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.0562269">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: load_json" time="0.0334386">
+      <testcase classname="fastlane.lanes" name="1: load_json" time="0.0063422">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: load_json" time="0.0055723">
+      <testcase classname="fastlane.lanes" name="2: load_json" time="0.003819">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: microsft_teams_message_card" time="4.8859014">
+      <testcase classname="fastlane.lanes" name="3: microsft_teams_message_card" time="4.4719748">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: flutter clean" time="4.1306694">
+      <testcase classname="fastlane.lanes" name="4: flutter clean" time="12.9512966">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: flutter pub get" time="11.0021235">
+      <testcase classname="fastlane.lanes" name="5: flutter pub get" time="18.8780696">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: flutter build apk --flavor development -t lib/app/config/main_development.dart" time="161.1424413">
+      <testcase classname="fastlane.lanes" name="6: flutter build apk --flavor development -t lib/app/config/main_development.dart" time="377.9273282">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="7: firebase_app_distribution" time="17.3371735">
+      <testcase classname="fastlane.lanes" name="7: firebase_app_distribution" time="20.7747558">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="8: microsft_teams_message_card" time="4.3872204">
+      <testcase classname="fastlane.lanes" name="8: microsft_teams_message_card" time="4.7785989">
         
       </testcase>
     

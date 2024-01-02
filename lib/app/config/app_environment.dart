@@ -12,7 +12,8 @@ class AppEnvironment {
     factory AppEnvironment.dev() {
     const env = AppEnvironment._(
       name: 'development',
-      baseUrl: 'http://103.176.78.112:8080',
+      //baseUrl: 'https://app1.cikiniproject.id:7777',
+      baseUrl: 'https://erispro1.cikiniproject.id',
     );
     instance = env;
 

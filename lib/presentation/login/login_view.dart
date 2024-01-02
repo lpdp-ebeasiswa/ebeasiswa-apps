@@ -1,4 +1,5 @@
 import 'package:ebeasiswa/gen/assets.gen.dart';
+import 'package:ebeasiswa/presentation/account/account_view.dart';
 import 'package:ebeasiswa/presentation/forgot_password/forgot_password_view.dart';
 import 'package:ebeasiswa/gen/colors.gen.dart';
 import 'package:ebeasiswa/presentation/login/login_controller.dart';
@@ -6,6 +7,11 @@ import 'package:ebeasiswa/presentation/registration/registration_view.dart';
 import 'package:ebeasiswa/presentation/verifikasi_account/send_code_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../bottom_navbar/bottom_navbar_view.dart';
+import '../login_verification/login_verification_view.dart';
+import '../master_screen/master_screen_blank_view.dart';
+import '../onboarding_disabilitas/onboarding_disabilitas_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -17,6 +23,10 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   final LoginController controller = Get.put(LoginController());
   final _formKey = GlobalKey<FormState>();
+  var email = TextEditingController();
+  var password = TextEditingController();
+
+  bool isloading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +93,7 @@ class _LoginViewState extends State<LoginView> {
                   padding:
                       const EdgeInsets.only(top: 20.0, left: 20, right: 20),
                   child: TextFormField(
-                    controller: controller.username.value,
+                    controller: email,
                     keyboardType: TextInputType.text,
                     onSaved: (String? value) {},
                     onChanged: (value) => controller.username.value,
@@ -96,7 +106,7 @@ class _LoginViewState extends State<LoginView> {
                     decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.email_rounded),
                       border: OutlineInputBorder(),
-                      hintText: 'cooper@example.com',
+                      hintText: 'masukan email kamu',
                       labelText: 'Email',
                     ),
                   ),
@@ -105,10 +115,10 @@ class _LoginViewState extends State<LoginView> {
                   padding:
                       const EdgeInsets.only(top: 20.0, left: 20, right: 20),
                   child: TextFormField(
-                    controller: controller.password.value,
+                    controller: password,
                     obscureText: controller.isPasswordVisible.value,
                     keyboardType: TextInputType.text,
-                    onChanged: (value) => controller.password.value,
+                    onChanged: (value) => password,
                     onSaved: (String? value) {},
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -159,19 +169,19 @@ class _LoginViewState extends State<LoginView> {
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 20.0),
-                        child: GestureDetector(
-                          onTap: () => {Get.to(ForgotPasswordView())},
-                          child: const Text(
-                            "Lupa password?",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                                color: Color(0xFFFF6C06)),
-                          ),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(right: 20.0),
+                      //   child: GestureDetector(
+                      //     onTap: () => {Get.to(ForgotPasswordView())},
+                      //     child: const Text(
+                      //       "Lupa password?",
+                      //       style: TextStyle(
+                      //           fontWeight: FontWeight.w500,
+                      //           fontSize: 14,
+                      //           color: Color(0xFFFF6C06)),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
@@ -190,15 +200,33 @@ class _LoginViewState extends State<LoginView> {
                                       borderRadius: BorderRadius.circular(8),
                                       side: const BorderSide(
                                           color: Color(0xFFFF6C06))))),
-                      onPressed: () {
+                      onPressed: () async {
+                        setState(() {
+                            isloading = true;
+                        });
+                        
+                         //Get.off(() => const LoginVerificationView(email: "colley.windya@gmail.com", password: "pass123",));
                         if (_formKey.currentState!.validate()) {
-                          controller.getAuth(ischeckedValue);
+                        String emails = email.text;
+                        String passwords = password.text;
+                       
+                        Get.off(() =>  LoginVerificationView(email: emails, password: passwords,));
+                       
                         }
+                        setState(() {
+                           isloading = false;
+                        });
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
-                        child: Text("Masuk".toUpperCase(),
-                            style: const TextStyle(fontSize: 14)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                          if(isloading)
+                       const Padding(padding:  EdgeInsets.only(right: 10), child:  SizedBox(height: 20, width: 20, child: CircularProgressIndicator(color: ColorName.whiteprimary,),),),
+                          Text(isloading ? "Mencoba masuk.." : "Masuk".toUpperCase(),
+                            style: const TextStyle(fontSize: 14))
+                        ]),
                       )),
                 ),
                 /*

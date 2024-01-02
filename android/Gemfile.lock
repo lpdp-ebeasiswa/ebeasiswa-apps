@@ -105,7 +105,7 @@ GEM
       xcodeproj (>= 1.13.0, < 2.0.0)
       xcpretty (~> 0.3.0)
       xcpretty-travis-formatter (>= 0.0.3)
-    fastlane-plugin-firebase_app_distribution (0.3.7)
+    fastlane-plugin-firebase_app_distribution (0.5.0)
     fastlane-plugin-git_tags (0.1.1)
     fastlane-plugin-load_json (0.0.1)
     fastlane-plugin-microsft_teams_message_card (0.1.01)

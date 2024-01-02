@@ -20,16 +20,36 @@ class $AssetsIconGen {
   AssetGenImage get checkBox =>
       const AssetGenImage('assets/icon/check_box.png');
 
+  /// File path: assets/icon/submenuHome.png
+  AssetGenImage get submenuHome =>
+      const AssetGenImage('assets/icon/submenuHome.png');
+
   /// File path: assets/icon/uncheck_box.png
   AssetGenImage get uncheckBox =>
       const AssetGenImage('assets/icon/uncheck_box.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [backgroundListApp, checkBox, uncheckBox];
+  List<AssetGenImage> get values =>
+      [backgroundListApp, checkBox, submenuHome, uncheckBox];
 }
 
 class $AssetsImageGen {
   const $AssetsImageGen();
+
+  /// File path: assets/image/avatar_profile_background.png
+  AssetGenImage get avatarProfileBackground =>
+      const AssetGenImage('assets/image/avatar_profile_background.png');
+
+  /// File path: assets/image/cpb_male.png
+  AssetGenImage get cpbMale => const AssetGenImage('assets/image/cpb_male.png');
+
+  /// File path: assets/image/home_menu_icon.png
+  AssetGenImage get homeMenuIcon =>
+      const AssetGenImage('assets/image/home_menu_icon.png');
+
+  /// File path: assets/image/home_menu_pk_icon.png
+  AssetGenImage get homeMenuPkIcon =>
+      const AssetGenImage('assets/image/home_menu_pk_icon.png');
 
   /// File path: assets/image/lpdp_appbar.png
   AssetGenImage get lpdpAppbar =>
@@ -99,8 +119,44 @@ class $AssetsImageGen {
   AssetGenImage get onboard2Logo =>
       const AssetGenImage('assets/image/onboard2_logo.png');
 
+  /// File path: assets/image/profile_camera_icon.png
+  AssetGenImage get profileCameraIcon =>
+      const AssetGenImage('assets/image/profile_camera_icon.png');
+
+  /// File path: assets/image/profile_faq.png
+  AssetGenImage get profileFaq =>
+      const AssetGenImage('assets/image/profile_faq.png');
+
+  /// File path: assets/image/profile_informasi_beasiswa.png
+  AssetGenImage get profileInformasiBeasiswa =>
+      const AssetGenImage('assets/image/profile_informasi_beasiswa.png');
+
+  /// File path: assets/image/profile_informasi_studi.png
+  AssetGenImage get profileInformasiStudi =>
+      const AssetGenImage('assets/image/profile_informasi_studi.png');
+
+  /// File path: assets/image/profile_informasi_umum.png
+  AssetGenImage get profileInformasiUmum =>
+      const AssetGenImage('assets/image/profile_informasi_umum.png');
+
+  /// File path: assets/image/profile_logout.png
+  AssetGenImage get profileLogout =>
+      const AssetGenImage('assets/image/profile_logout.png');
+
+  /// File path: assets/image/profile_tc.png
+  AssetGenImage get profileTc =>
+      const AssetGenImage('assets/image/profile_tc.png');
+
+  /// File path: assets/image/profile_ubah_password.png
+  AssetGenImage get profileUbahPassword =>
+      const AssetGenImage('assets/image/profile_ubah_password.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
+        avatarProfileBackground,
+        cpbMale,
+        homeMenuIcon,
+        homeMenuPkIcon,
         lpdpAppbar,
         lpdpBoard1,
         lpdpBoard2,
@@ -117,7 +173,15 @@ class $AssetsImageGen {
         lpdpRegistration,
         lpdpSendEmail,
         onboard1Logo,
-        onboard2Logo
+        onboard2Logo,
+        profileCameraIcon,
+        profileFaq,
+        profileInformasiBeasiswa,
+        profileInformasiStudi,
+        profileInformasiUmum,
+        profileLogout,
+        profileTc,
+        profileUbahPassword
       ];
 }
 

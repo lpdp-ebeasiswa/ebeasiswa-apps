@@ -4,87 +4,68 @@ import 'package:ebeasiswa/presentation/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../data/model/userProfil/user_profile_model.dart';
 import '../../gen/assets.gen.dart';
+import 'profile_header_controller.dart';
 
-class ProfileHeaderView extends GetView<LoginController> {
-  ProfileHeaderView({super.key});
+class ProfileHeaderView extends StatefulWidget {
+  const ProfileHeaderView({super.key, required this.userprofile});
+  final UserProfile userprofile;
+  @override
+  State<ProfileHeaderView> createState() => _ProfileHeaderViewState();
+}
 
-  final LoginController loginController = Get.put(LoginController());
-
+class _ProfileHeaderViewState extends State<ProfileHeaderView> {
   @override
   Widget build(BuildContext context) {
-    return Obx(() => (Padding(
-          padding:
-              const EdgeInsets.only(top: 20.0, left: 10, right: 10, bottom: 20),
-          child: Column(
+    return Padding(
+      padding: const EdgeInsets.only(top: 5.0, left: 10, right: 10, bottom: 20),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                '${loginController.isTime.value}, insan LPDP',
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: ColorName.orange),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              InkWell(
-                onTap: () => Get.to(const ProfileView()),
-                child: Card(
-                  color: Colors.white,
-                  elevation: 4.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
+              Row(
+                children: [
+                  Container(
+                      width: 60.0,
+                      height: 70.0,
+                      decoration: const BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: widget.userprofile.linkFoto != null
+                            ? CircleAvatar(
+                                radius: 30.0,
+                                backgroundImage:
+                                    NetworkImage(widget.userprofile.linkFoto!),
+                                backgroundColor: Colors.transparent,
+                              )
+                            : Assets.image.cpbMale.image(),
+                      )),
+                  const SizedBox(
+                    width: 10,
                   ),
-                  child: SizedBox(
-                    height: 100,
-                    width: Get.width * 0.9,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    loginController.username.value.text,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14,
-                                        color: Colors.black),
-                                  ),
-                                  const Text(
-                                    "amy.dutomo@gmail.com",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14,
-                                        color: Colors.black),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 50,
-                                width: 50,
-                                child: CircleAvatar(
-                                    child: Assets.image.lpdpLogo
-                                        .image(height: 40.0, width: 40.0)),
-                              ),
-                            ],
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 30.0, right: 30.0),
-                            child: Divider(
-                              thickness: 2,
-                            ),
-                          ),
-                        ]),
+                  SizedBox(
+                    width: 240,
+                    child: Text(
+                      'hai, ${widget.userprofile.namaLengkap}',
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: ColorName.orange),
+                    ),
                   ),
-                ),
+                ],
               ),
+              const Icon(Icons.notifications)
             ],
           ),
-        )));
+        ],
+      ),
+    );
   }
 }

@@ -1,8 +1,11 @@
 import 'package:ebeasiswa/presentation/onboarding/onboarding_view.dart';
+import 'package:ebeasiswa/presentation/onboarding_disabilitas/onboarding_disabilitas_view.dart';
 import 'package:ebeasiswa/presentation/splash_screen/splash_screen_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+
+import 'presentation/bottom_navbar/bottom_navbar_view.dart';
 
 class EbeasiswaApp extends StatelessWidget {
   const EbeasiswaApp({super.key});
@@ -29,7 +32,8 @@ class EbeasiswaApp extends StatelessWidget {
           );
         } else {
           return const GetMaterialApp(
-            home: OnBoardingView(),
+           home: OnBoardingView(),
+         // home:  EbeasiswaBottomNavbar(),
           );
         }
       },
